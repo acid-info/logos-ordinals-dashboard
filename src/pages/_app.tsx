@@ -35,19 +35,32 @@ export default function App({ Component, pageProps }: AppLayoutProps) {
       <Global
         styles={css`
           :root {
-            --lsd-text-secondary: 255, 255, 255;
+            --grey-900: #141414;
+            --grey-800: #1f1f1f;
+            --grey-700: #2b2b2b;
+            --grey-600: #373737;
+            --grey-500: #434343;
+            --grey-400: #4f4f4f;
+            --grey-300: #5b5b5b;
+            --grey-200: #676767;
+            --grey-100: #737373;
           }
 
           html,
           body {
-            background: white;
-            color: black;
+            background: rgb(var(--lsd-surface-primary));
             margin: 0;
             width: 100%;
             height: 100%;
+
             -webkit-font-smoothing: antialiased;
             -moz-osx-font-smoothing: grayscale;
-            font-family: serif;
+
+            font-family: 'Courier';
+          }
+
+          * {
+            box-sizing: border-box;
           }
 
           #__next {

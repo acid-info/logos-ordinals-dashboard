@@ -52,13 +52,30 @@ export const useLSDTheme = () => {
         },
       },
       palette: {
-        primary: '20, 0, 255',
+        primary: '0, 0, 0',
         secondary: '255, 255, 255',
+        surface: {
+          primary: '0, 0, 0',
+          secondary: '255, 255, 255',
+        },
+        text: {
+          primary: '255, 255, 255',
+          secondary: '0, 0, 0',
+          tertiary: '0, 0, 0, 0.34',
+        },
+        border: {
+          primary: '255, 255, 255',
+          secondary: '0, 0, 0',
+        },
+        icon: {
+          primary: '255, 255, 255',
+          secondary: '0, 0, 0',
+        },
       },
       spacing: [],
       typography: {},
       typographyGlobal: {
-        genericFontFamily: genericFontFamily,
+        genericFontFamily: genericFontFamily as any,
       },
     }
 

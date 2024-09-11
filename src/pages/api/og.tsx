@@ -23,8 +23,8 @@ export default async function handler(request: NextRequest) {
           width: '100%',
           height: '100%',
           justifyContent: 'flex-start',
-          backgroundColor: '#fff',
-          color: '#1400ff',
+          backgroundColor: '#000',
+          color: '#fff',
           position: 'relative',
           fontFamily: 'serif',
           padding: '39px 45px',
@@ -75,19 +75,7 @@ export default async function handler(request: NextRequest) {
               margin: '0 auto',
             }}
           >
-            <div>Acid is designing the future.</div>
-            <div>
-              The future is a second enlightenment of the digital world.
-            </div>
-            <img
-              src="https://new-acid-info.vercel.app/og/mark.svg"
-              width={'400px'}
-              height={'400px'}
-              alt="og-asset"
-              style={{
-                position: 'absolute',
-              }}
-            />
+            <div>Logos Ordinals</div>
           </div>
         </div>
       </div>
