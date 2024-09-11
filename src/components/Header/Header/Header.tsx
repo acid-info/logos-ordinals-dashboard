@@ -28,6 +28,7 @@ const Container = styled.header`
   width: 100%;
   align-items: center;
   justify-content: space-between;
+  position: relative;
 `
 
 const Logo = styled.img`
@@ -48,7 +49,7 @@ const Button = styled.button`
   height: 28px;
   font-weight: 400;
   font-size: 12px;
-  line-height: 1;
+  line-height: 16px;
   border: 1px solid rgb(var(--lsd-border-primary));
   background: transparent;
   color: rgb(var(--lsd-text-primary));

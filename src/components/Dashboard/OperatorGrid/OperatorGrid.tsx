@@ -152,7 +152,7 @@ const Header = styled.div`
 const Title = styled.h2`
   font-weight: 400;
   font-size: 24px;
-  line-height: 1;
+  line-height: 32px;
   margin: 0;
 `
 
@@ -172,7 +172,6 @@ const FilterDropdown = styled.div`
   color: rgb(var(--lsd-text-primary));
   font-weight: 400;
   font-size: 12px;
-  line-height: 1;
   padding-left: 12px;
   height: 28px;
   cursor: pointer;
@@ -212,13 +211,13 @@ const Stat = styled.div`
 const Label = styled.div`
   font-weight: 400;
   font-size: 14px;
-  line-height: 1;
+  line-height: 20px;
 `
 
 const Value = styled.div`
   font-weight: 400;
   font-size: 14px;
-  line-height: 1;
+  line-height: 20px;
   margin-top: 8px;
 `
 
@@ -246,7 +245,7 @@ const OperatorInfo = styled.div`
 const OperatorName = styled.div`
   font-weight: 400;
   font-size: 14px;
-  line-height: 1;
+  line-height: 20px;
 `
 
 const PointsPerHour = styled.div`
@@ -275,7 +274,7 @@ const ActionButton = styled.button<{ isStaked: boolean }>`
 
   font-weight: 400;
   font-size: 12px;
-  line-height: 1;
+  line-height: 16px;
   padding: 6px 12px;
 
   cursor: pointer;

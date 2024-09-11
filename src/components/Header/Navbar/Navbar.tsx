@@ -20,6 +20,9 @@ const Navbar: React.FC<NavbarProps> = () => {
 const Navigation = styled.ul`
   display: flex;
   align-items: center;
+  /* position: absolute;
+  left: 50%;
+  transform: translateX(-50%); */
   gap: 37px;
   list-style-type: none;
 
@@ -33,7 +36,7 @@ const Navigation = styled.ul`
 const NavItem = styled.li<{ active?: boolean }>`
   font-weight: 400;
   font-size: 14px;
-  line-height: 1;
+  line-height: 20px;
   cursor: pointer;
   padding: 4px 0;
 

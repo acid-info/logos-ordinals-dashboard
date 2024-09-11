@@ -80,7 +80,7 @@ const ProgressBar: React.FC<ProgressBarProps> = ({
 const StyledProgressBar = styled.section`
   font-weight: 400;
   font-size: 14px;
-  line-height: 1;
+  line-height: 20px;
 `
 
 const ProgressHeader = styled.div`
@@ -92,6 +92,8 @@ const EpochLabel = styled.span`
   background-color: rgb(var(--lsd-surface-secondary));
   color: rgb(var(--lsd-text-secondary));
   padding: 0 8px;
+  line-height: 20px;
+  font-size: 14px;
 `
 
 const EpochInfo = styled.div`
@@ -130,6 +132,8 @@ const ClaimPeriod = styled.span`
   padding: 0 8px;
   position: relative;
   top: -8px;
+  line-height: 20px;
+  font-size: 14px;
 `
 
 const VerticalBar = styled.div`

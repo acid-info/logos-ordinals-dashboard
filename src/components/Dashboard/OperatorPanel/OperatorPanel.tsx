@@ -79,7 +79,7 @@ const OperatorPanel: React.FC<OperatorPanelProps> = () => {
 const StyledPanel = styled.section`
   font-weight: 400;
   font-size: 14px;
-  line-height: 1;
+  line-height: 20px;
 `
 
 const OperatorImage = styled.img`
