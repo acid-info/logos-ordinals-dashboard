@@ -158,7 +158,7 @@ const Title = styled.h2`
 
 const Controls = styled.div`
   display: flex;
-  gap: 8px;
+  align-items: center;
 `
 
 const FilterDropdown = styled.div`
@@ -168,6 +168,7 @@ const FilterDropdown = styled.div`
   align-items: center;
   justify-content: space-between;
   border: 1px solid rgb(var(--lsd-border-primary));
+  border-right: none;
   color: rgb(var(--lsd-text-primary));
   font-weight: 400;
   font-size: 12px;
@@ -199,6 +200,7 @@ const Stats = styled.div`
   display: flex;
   justify-content: space-between;
   margin-bottom: 16px;
+  gap: 2px;
 `
 
 const Stat = styled.div`
@@ -222,12 +224,11 @@ const Value = styled.div`
 
 const Grid = styled.div`
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
   gap: 16px;
 `
 
 const OperatorCard = styled.div`
-  background-color: var(--grey-900);
   display: flex;
   flex-direction: column;
 `
@@ -239,7 +240,7 @@ const OperatorImage = styled.img`
 `
 
 const OperatorInfo = styled.div`
-  padding: 16px;
+  padding: 16px 0;
 `
 
 const OperatorName = styled.div`
@@ -257,7 +258,7 @@ const PointsPerHour = styled.div`
 
 const Actions = styled.div`
   display: flex;
-  padding: 16px;
+  padding: 16px 0;
 `
 
 const ActionButton = styled.button<{ isStaked: boolean }>`

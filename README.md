@@ -1,4 +1,4 @@
-# Logos NextJS Starter
+# Logos Ordinals
 
 ## How to Run Locally
 
