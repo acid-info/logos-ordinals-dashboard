@@ -1,4 +1,3 @@
-import { breakpoints } from '@/configs/ui.configs'
 import styled from '@emotion/styled'
 import React from 'react'
 
@@ -20,16 +19,20 @@ const Navbar: React.FC<NavbarProps> = () => {
 const Navigation = styled.ul`
   display: flex;
   align-items: center;
-  /* position: absolute;
+  position: absolute;
   left: 50%;
-  transform: translateX(-50%); */
+  transform: translateX(-50%);
   gap: 37px;
   list-style-type: none;
 
-  @media (max-width: ${breakpoints.md}px) {
+  @media (max-width: 1300px) {
     position: static;
     transform: none;
     flex-wrap: wrap;
+  }
+
+  @media (max-width: 768px) {
+    display: none;
   }
 `
 

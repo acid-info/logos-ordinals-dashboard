@@ -87,6 +87,13 @@ export default function App({ Component, pageProps }: AppLayoutProps) {
             padding: 0;
             word-break: keep-all;
           }
+
+          ul,
+          li {
+            margin: 0;
+            padding: 0;
+            list-style-type: none;
+          }
         `}
       />
       {getLayout(<Component {...pageProps} />)}

@@ -23,7 +23,7 @@ const Container = styled.div`
   max-width: ${uiConfigs.maxContainerWidth}px;
 
   margin: 0 auto;
-  padding: 24px;
+  padding: 24px 0;
 
   @media (max-width: ${breakpoints.md}px) {
     padding: 0 20px;

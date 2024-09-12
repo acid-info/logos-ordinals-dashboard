@@ -86,6 +86,11 @@ const StyledProgressBar = styled.section`
 const ProgressHeader = styled.div`
   display: flex;
   justify-content: space-between;
+
+  @media (max-width: 768px) {
+    flex-direction: column;
+    gap: 8px;
+  }
 `
 
 const EpochLabel = styled.span`
