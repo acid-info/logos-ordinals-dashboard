@@ -4,9 +4,9 @@ import { breakpoints, uiConfigs } from '@/configs/ui.configs'
 import styled from '@emotion/styled'
 import React, { PropsWithChildren } from 'react'
 
-interface DefaultLayoutProps {}
+interface ExploreLayoutProps {}
 
-const DefaultLayout: React.FC<DefaultLayoutProps> = (
+const ExploreLayout: React.FC<ExploreLayoutProps> = (
   props: PropsWithChildren,
 ) => {
   return (
@@ -32,4 +32,4 @@ const Container = styled.div`
   }
 `
 
-export default DefaultLayout
+export default ExploreLayout

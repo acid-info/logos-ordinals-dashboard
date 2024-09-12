@@ -1,17 +1,44 @@
 import styled from '@emotion/styled'
+import Link from 'next/link'
 import React from 'react'
 
 interface NavbarProps {}
 
+const items = [
+  {
+    label: 'Dashboard',
+    href: '/dashboard',
+  },
+  {
+    label: 'Explore',
+    href: '/explore',
+  },
+  {
+    label: 'Leaderboard',
+    href: '/leaderboard',
+  },
+  {
+    label: 'Docs',
+    href: '/docs',
+  },
+  {
+    label: 'Auction',
+    href: '/auction',
+  },
+  {
+    label: 'Roles',
+    href: '/roles',
+  },
+]
+
 const Navbar: React.FC<NavbarProps> = () => {
   return (
     <Navigation>
-      <NavItem active>Dashboard</NavItem>
-      <NavItem>Explore</NavItem>
-      <NavItem>Leaderboard</NavItem>
-      <NavItem>Docs</NavItem>
-      <NavItem>Auction</NavItem>
-      <NavItem>Roles</NavItem>
+      {items.map((item, index) => (
+        <Link href={item.href} key={'navbar-item-' + index}>
+          <NavItem key={index}>{item.label}</NavItem>
+        </Link>
+      ))}
     </Navigation>
   )
 }
@@ -40,8 +67,9 @@ const NavItem = styled.li<{ active?: boolean }>`
   font-weight: 400;
   font-size: 14px;
   line-height: 20px;
-  cursor: pointer;
+  color: rgb(var(--lsd-text-primary));
   padding: 4px 0;
+  cursor: pointer;
 
   ${(props) =>
     props.active &&

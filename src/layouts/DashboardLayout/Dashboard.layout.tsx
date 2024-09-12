@@ -1,3 +1,4 @@
+import { Footer } from '@/components/Footer'
 import { Header } from '@/components/Header/Header'
 import { breakpoints, uiConfigs } from '@/configs/ui.configs'
 import styled from '@emotion/styled'
@@ -12,6 +13,7 @@ const DashboardLayout: React.FC<DashboardLayoutProps> = (
     <Container>
       <Header />
       <main>{props.children}</main>
+      <Footer />
     </Container>
   )
 }

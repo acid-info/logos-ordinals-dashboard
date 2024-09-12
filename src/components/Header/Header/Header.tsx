@@ -1,4 +1,5 @@
 import styled from '@emotion/styled'
+import Link from 'next/link'
 import React from 'react'
 import { Navbar } from '../Navbar'
 
@@ -7,7 +8,9 @@ interface NavbarProps {}
 const Header: React.FC<NavbarProps> = () => {
   return (
     <Container>
-      <Logo src="/assets/logo.svg" alt="Logo" />
+      <Link href="/">
+        <Logo src="/assets/logo.svg" alt="Logo" />
+      </Link>
       <Navbar />
       <UserActions>
         <WalletButton>
