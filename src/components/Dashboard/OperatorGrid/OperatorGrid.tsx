@@ -1,5 +1,6 @@
 import { breakpoints } from '@/configs/ui.configs'
 import styled from '@emotion/styled'
+import Link from 'next/link'
 import React from 'react'
 
 interface Operator {
@@ -15,57 +16,57 @@ interface OperatorGridProps {}
 
 const operators: Operator[] = [
   {
-    id: '1234',
+    id: '1',
     image: '/dashboard/mock/operators/1.gif',
-    name: 'OP1234',
+    name: 'OP 1',
     pointsPerHour: 304,
     isStaked: false,
     isPinned: false,
   },
   {
-    id: '1235',
+    id: '2',
     image: '/dashboard/mock/operators/2.gif',
-    name: 'OP1235',
+    name: 'OP 2',
     pointsPerHour: 304,
     isStaked: true,
     isPinned: false,
   },
   {
-    id: '1236',
+    id: '3',
     image: '/dashboard/mock/operators/3.gif',
-    name: 'OP1236',
+    name: 'OP 3',
     pointsPerHour: 304,
     isStaked: true,
     isPinned: true,
   },
   {
-    id: '1237',
+    id: '4',
     image: '/dashboard/mock/operators/4.gif',
-    name: 'OP1237',
+    name: 'OP 4',
     pointsPerHour: 304,
     isStaked: true,
     isPinned: false,
   },
   {
-    id: '1238',
+    id: '5',
     image: '/dashboard/mock/operators/5.gif',
-    name: 'OP1238',
+    name: 'OP 5',
     pointsPerHour: 304,
     isStaked: true,
     isPinned: false,
   },
   {
-    id: '1239',
+    id: '6',
     image: '/dashboard/mock/operators/6.gif',
-    name: 'OP1239',
+    name: 'OP 6',
     pointsPerHour: 304,
     isStaked: true,
     isPinned: false,
   },
   {
-    id: '1240',
+    id: '7',
     image: '/dashboard/mock/operators/7.gif',
-    name: 'OP1240',
+    name: 'OP 7',
     pointsPerHour: 304,
     isStaked: true,
     isPinned: false,
@@ -108,7 +109,9 @@ const OperatorGrid: React.FC<OperatorGridProps> = () => {
       <Grid>
         {operators.map((operator) => (
           <OperatorCard key={operator.id}>
-            <OperatorImage src={operator.image} alt={operator.name} />
+            <Link href={`/operators/${operator.id}`} key={operator.id}>
+              <OperatorImage src={operator.image} alt={operator.name} />
+            </Link>
             <OperatorInfo>
               <OperatorName>{operator.name}</OperatorName>
               <PointsPerHour>
@@ -190,7 +193,8 @@ const IconButton = styled.button`
   display: flex;
   align-items: center;
   justify-content: center;
-  border: 1px solid rgb(var(--lsd-border-primary));
+  border: none;
+  border-left: 1px solid rgb(var(--lsd-border-primary));
   cursor: pointer;
   height: 28px;
 `
@@ -230,6 +234,12 @@ const Grid = styled.div`
 const OperatorCard = styled.div`
   display: flex;
   flex-direction: column;
+
+  color: rgb(var(--lsd-text-primary));
+
+  a {
+    display: flex;
+  }
 `
 
 const OperatorImage = styled.img`
@@ -251,13 +261,14 @@ const OperatorName = styled.div`
 const PointsPerHour = styled.div`
   display: flex;
   justify-content: space-between;
-  margin-top: 8px;
   align-items: center;
 `
 
 const Actions = styled.div`
   display: flex;
-  padding: 16px 0;
+  align-items: center;
+  border: 1px solid rgb(var(--lsd-border-primary));
+  border-radius: 0;
 `
 
 const ActionButton = styled.button<{ isStaked: boolean }>`
@@ -268,10 +279,7 @@ const ActionButton = styled.button<{ isStaked: boolean }>`
     props.isStaked
       ? 'rgb(var(--lsd-text-primary))'
       : 'rgb(var(--lsd-text-secondary))'};
-  border: 1px solid rgb(var(--lsd-border-primary));
-  border-right: none;
-  border-radius: 0;
-
+  border: none;
   font-weight: 400;
   font-size: 12px;
   line-height: 16px;

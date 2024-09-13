@@ -44,6 +44,9 @@ export default function App({ Component, pageProps }: AppLayoutProps) {
             --grey-300: #5b5b5b;
             --grey-200: #676767;
             --grey-100: #737373;
+
+            --orange: #fe740c;
+            --dark-orange: #321504;
           }
 
           html,

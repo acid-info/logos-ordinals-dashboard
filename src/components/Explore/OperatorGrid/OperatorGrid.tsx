@@ -57,7 +57,10 @@ const OperatorGrid: React.FC<OperatorGridProps> = () => {
   return (
     <StyledOperatorGrid>
       {operatorImages.map((operator, index) => (
-        <Link href={`/explore/${index + 1}`} key={'explore-operator-' + index}>
+        <Link
+          href={`/operators/${index + 1}`}
+          key={'explore-operator-' + index}
+        >
           <GridItem>
             <img
               key={index}

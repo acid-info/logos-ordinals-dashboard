@@ -26,14 +26,6 @@ const StyledExploreSection = styled.main`
     line-height: 48px;
     margin-top: 60px;
   }
-
-  @media (max-width: 991px) {
-    padding: 0 20px;
-
-    .section-title {
-      margin-top: 40px;
-    }
-  }
 `
 
 export default ExploreSection

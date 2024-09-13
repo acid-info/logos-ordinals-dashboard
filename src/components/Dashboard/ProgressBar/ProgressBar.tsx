@@ -62,7 +62,7 @@ const ProgressBar: React.FC<ProgressBarProps> = ({
       <ProgressFooter>
         <TimeRemaining>
           <Label>Time Remaining</Label>
-          <Value color="#fe740c" backgroundColor="#321504">
+          <Value color="var(--orange)" backgroundColor="var(--dark-orange)">
             {timeRemaining}
           </Value>
         </TimeRemaining>
@@ -162,7 +162,7 @@ const ProgressFooter = styled.div`
 `
 
 const TimeRemaining = styled.div`
-  border: 1px solid #321504;
+  border: 1px solid var(--dark-orange);
   display: flex;
   align-items: center;
   gap: 16px;
