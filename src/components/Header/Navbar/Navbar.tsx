@@ -1,5 +1,6 @@
 import styled from '@emotion/styled'
 import Link from 'next/link'
+import { useRouter } from 'next/router'
 import React from 'react'
 
 interface NavbarProps {}
@@ -32,10 +33,20 @@ const items = [
 ]
 
 const Navbar: React.FC<NavbarProps> = () => {
+  const router = useRouter()
+  const currentPath = router.pathname
+
+  const isActivePath = (path: string) => {
+    return currentPath.includes(path)
+  }
+
   return (
     <Navigation>
       {items.map((item, index) => (
         <Link href={item.href} key={'navbar-item-' + index}>
+          {isActivePath(item.href) && (
+            <img src={'/assets/navbar-arrow.svg'} alt="navbar-arrow" />
+          )}
           <NavItem key={index}>{item.label}</NavItem>
         </Link>
       ))}
@@ -51,6 +62,13 @@ const Navigation = styled.ul`
   transform: translateX(-50%);
   gap: 37px;
   list-style-type: none;
+
+  a {
+    display: flex;
+    align-items: center;
+    text-decoration: none;
+    gap: 6px;
+  }
 
   @media (max-width: 1300px) {
     position: static;
