@@ -97,6 +97,10 @@ export default function App({ Component, pageProps }: AppLayoutProps) {
             padding: 0;
             list-style-type: none;
           }
+
+          button {
+            padding: 0;
+          }
         `}
       />
       {getLayout(<Component {...pageProps} />)}
