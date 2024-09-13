@@ -1,5 +1,6 @@
 import { SEO } from '@/components/SEO'
 import { HomeContainer } from '@/containers/Home'
+import { HomeLayout } from '@/layouts/HomeLayout'
 
 export default function HomePage() {
   return (
@@ -8,4 +9,8 @@ export default function HomePage() {
       <HomeContainer />
     </>
   )
+}
+
+HomePage.getLayout = function getLayout(page: React.ReactNode) {
+  return <HomeLayout>{page}</HomeLayout>
 }

@@ -1,4 +1,4 @@
-import { breakpoints } from '@/configs/ui.configs'
+import { Onboarding } from '@/components/Home/Onboarding'
 import styled from '@emotion/styled'
 import React from 'react'
 
@@ -11,11 +11,11 @@ export const HomeContainer: React.FC<HomePageProps> = ({
   children,
   ...props
 }) => {
-  return <Container {...props}>Hello</Container>
+  return (
+    <Container {...props}>
+      <Onboarding />
+    </Container>
+  )
 }
 
-const Container = styled.div`
-  @media (max-width: ${breakpoints.lg}px) {
-    margin-inline: 10px;
-  }
-`
+const Container = styled.div``
