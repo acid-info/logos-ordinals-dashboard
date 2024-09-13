@@ -1,1 +1,1 @@
-export { default as Leaderboard } from './LeaderboardContainer'
+export { default as LeaderboardContainer } from './LeaderboardContainer'

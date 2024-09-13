@@ -5,7 +5,7 @@ import React from 'react'
 
 interface LeaderboardProps {}
 
-const Leaderboard: React.FC<LeaderboardProps> = () => {
+const LeaderboardContainer: React.FC<LeaderboardProps> = () => {
   return (
     <Container>
       <LeaderboardTabs />
@@ -15,14 +15,14 @@ const Leaderboard: React.FC<LeaderboardProps> = () => {
 }
 
 const Container = styled.div`
-  background-color: #000;
   display: flex;
   flex-direction: column;
   overflow: hidden;
-  padding: 28px 32px;
+  margin-top: 60px;
+
   @media (max-width: 991px) {
     padding: 0 20px;
   }
 `
 
-export default Leaderboard
+export default LeaderboardContainer

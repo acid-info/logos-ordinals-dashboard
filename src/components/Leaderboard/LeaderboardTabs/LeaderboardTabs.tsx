@@ -16,7 +16,6 @@ const TabsWrapper = styled.div`
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 16px;
-  margin-top: 32px;
   width: 100%;
 
   @media (max-width: 991px) {
