@@ -49,6 +49,14 @@ export default function App({ Component, pageProps }: AppLayoutProps) {
             --dark-orange: #321504;
           }
 
+          -ms-overflow-style: none;
+          scrollbar-width: none;
+
+          &::-webkit-scrollbar {
+            width: 0;
+            display: none;
+          }
+
           html,
           body {
             background: rgb(var(--lsd-surface-primary));
