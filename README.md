@@ -1,11 +1,15 @@
 # Logos Ordinals
 
+This is currently at the MVP stage of the project.
+
+Staging: [https://logos-ordinals-dashboard.vercel.app/](https://logos-ordinals-dashboard.vercel.app/)
+
 ## How to Run Locally
 
 1. Clone this repository
 
 ```bash
-$ git clone https://github.com/acid-info/logos-nextjs-starter.git
+$ git clone https://github.com/acid-info/logos-ordinals-dashboard.git
 ```
 
 2. Install the dependencies:
@@ -14,15 +18,7 @@ $ git clone https://github.com/acid-info/logos-nextjs-starter.git
 $ yarn install
 ```
 
-3. Set .env
-
-- Get Github Personal Access Token at [https://github.com/settings/tokens/new?scopes=repo](https://github.com/settings/tokens/new?scopes=repo)
-
-```
-NEXT_PUBLIC_SITE_URL=
-```
-
-4. Start the development server:
+3. Start the development server:
 
 ```bash
 $ yarn dev
