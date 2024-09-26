@@ -12,7 +12,9 @@ interface Operator {
   isPinned: boolean
 }
 
-interface OperatorGridProps {}
+interface OperatorGridProps {
+  isLoading: boolean
+}
 
 const operators: Operator[] = [
   {
@@ -73,7 +75,9 @@ const operators: Operator[] = [
   },
 ]
 
-const OperatorGrid: React.FC<OperatorGridProps> = () => {
+const OperatorGrid: React.FC<OperatorGridProps> = ({
+  isLoading,
+}: OperatorGridProps) => {
   return (
     <StyledOperatorGrid>
       <Header>
@@ -107,32 +111,38 @@ const OperatorGrid: React.FC<OperatorGridProps> = () => {
         </Stat>
       </Stats>
       <Grid>
-        {operators.map((operator) => (
-          <OperatorCard key={operator.id}>
-            <Link href={`/operators/${operator.id}`} key={operator.id}>
-              <OperatorImage src={operator.image} alt={operator.name} />
-            </Link>
-            <OperatorInfo>
-              <OperatorName>{operator.name}</OperatorName>
-              <PointsPerHour>
-                <Label>Per Hour</Label>
-                <Value>{operator.pointsPerHour} rp</Value>
-              </PointsPerHour>
-            </OperatorInfo>
-            <Actions>
-              <ActionButton isStaked={operator.isStaked}>
-                {operator.isStaked ? 'Unstake' : 'Stake'}
-              </ActionButton>
-              <IconButton>
-                {operator.isPinned ? (
-                  <img src="/assets/pinned.svg" alt="Pinned" />
-                ) : (
-                  <img src="/assets/unpinned.svg" alt="Unpinned" />
-                )}
-              </IconButton>
-            </Actions>
-          </OperatorCard>
-        ))}
+        {isLoading
+          ? Array.from({ length: 8 }).map((_, index) => (
+              <OperatorCard key={index}>
+                <Placeholder />
+              </OperatorCard>
+            ))
+          : operators.map((operator) => (
+              <OperatorCard key={operator.id}>
+                <Link href={`/operators/${operator.id}`} key={operator.id}>
+                  <OperatorImage src={operator.image} alt={operator.name} />
+                </Link>
+                <OperatorInfo>
+                  <OperatorName>{operator.name}</OperatorName>
+                  <PointsPerHour>
+                    <Label>Per Hour</Label>
+                    <Value>{operator.pointsPerHour} rp</Value>
+                  </PointsPerHour>
+                </OperatorInfo>
+                <Actions>
+                  <ActionButton isStaked={operator.isStaked}>
+                    {operator.isStaked ? 'Unstake' : 'Stake'}
+                  </ActionButton>
+                  <IconButton>
+                    {operator.isPinned ? (
+                      <img src="/assets/pinned.svg" alt="Pinned" />
+                    ) : (
+                      <img src="/assets/unpinned.svg" alt="Unpinned" />
+                    )}
+                  </IconButton>
+                </Actions>
+              </OperatorCard>
+            ))}
       </Grid>
     </StyledOperatorGrid>
   )
@@ -286,6 +296,14 @@ const ActionButton = styled.button<{ isStaked: boolean }>`
   padding: 6px 12px;
 
   cursor: pointer;
+`
+
+const Placeholder = styled.div`
+  width: 100%;
+  aspect-ratio: 1;
+  background-color: var(--grey-900);
+  border-radius: 8px;
+  opacity: 0.5;
 `
 
 export default OperatorGrid

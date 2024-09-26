@@ -4,6 +4,7 @@ import { ProgressBar } from '@/components/Dashboard/ProgressBar'
 import { breakpoints } from '@/configs/ui.configs'
 import styled from '@emotion/styled'
 import React from 'react'
+import useGetOperators from '../../../apis/operators/useGetOperators'
 
 export type DashboardPageProps = React.DetailedHTMLProps<
   React.HTMLAttributes<HTMLDivElement>,
@@ -14,6 +15,9 @@ const DashboardContainer: React.FC<DashboardPageProps> = ({
   children,
   ...props
 }) => {
+  const { data, isLoading } = useGetOperators()
+  console.log(data)
+
   return (
     <Container {...props}>
       <Wrapper>
@@ -22,7 +26,7 @@ const DashboardContainer: React.FC<DashboardPageProps> = ({
         </LeftColumn>
         <RightColumn>
           <ProgressBar progress={20} claimPosition={60} />
-          <OperatorGrid />
+          <OperatorGrid isLoading={isLoading} />
         </RightColumn>
       </Wrapper>
     </Container>
