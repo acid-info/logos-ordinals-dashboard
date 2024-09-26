@@ -4,12 +4,12 @@ import { localstored } from '@hookstate/localstored'
 
 export type ThemeState = {
   mode: 'light' | 'dark'
-  genericFontFamily: TypographyGenericFontFamily | 'Courier'
+  genericFontFamily: TypographyGenericFontFamily | 'Inter'
 }
 
 export const defaultThemeState: ThemeState = {
   mode: 'light',
-  genericFontFamily: 'Courier',
+  genericFontFamily: 'Inter',
 }
 
 const themeState =
@@ -23,7 +23,7 @@ const wrapThemeState = (state: State<ThemeState>) => ({
   get: () => state.value,
   setMode: (value: ThemeState['mode']) => state.mode.set(value),
   setGenericFontFamily: (value: ThemeState['genericFontFamily']) =>
-    state.genericFontFamily.set('Courier'),
+    state.genericFontFamily.set('Inter'),
   toggleMode: () =>
     state.mode.set(state.mode.get() === 'dark' ? 'light' : 'dark'),
 })

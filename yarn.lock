@@ -364,6 +364,11 @@
   dependencies:
     glob "10.3.10"
 
+"@next/font@^14.2.13":
+  version "14.2.13"
+  resolved "https://registry.yarnpkg.com/@next/font/-/font-14.2.13.tgz#cfe0903654e65b58e7b5cdc600399a45e028bbdb"
+  integrity sha512-xtleJ172yNVSVoQoMIwPHnM9zSPOzNB964mZMOFmRaLWgWMgmlhCVI42dlDSGc6d9nQ/WHCmCZaJMloS1HHGXg==
+
 "@next/mdx@^13.5.5":
   version "13.5.5"
   resolved "https://registry.yarnpkg.com/@next/mdx/-/mdx-13.5.5.tgz#ce1ff29ab424f2335a02ac6a662f56938c275b5d"

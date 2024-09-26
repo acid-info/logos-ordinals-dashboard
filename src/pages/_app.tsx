@@ -71,7 +71,7 @@ export default function App({ Component, pageProps }: AppLayoutProps) {
               -webkit-font-smoothing: antialiased;
               -moz-osx-font-smoothing: grayscale;
 
-              font-family: 'Courier';
+              font-family: 'Inter', sans-serif;
             }
 
             * {

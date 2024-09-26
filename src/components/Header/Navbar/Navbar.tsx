@@ -19,16 +19,16 @@ const items = [
     href: '/leaderboard',
   },
   {
+    label: 'Roles',
+    href: '/roles',
+  },
+  {
     label: 'Docs',
     href: '/docs',
   },
   {
-    label: 'Auction',
-    href: '/auction',
-  },
-  {
-    label: 'Roles',
-    href: '/roles',
+    label: 'Multipass',
+    href: '/multipass',
   },
 ]
 

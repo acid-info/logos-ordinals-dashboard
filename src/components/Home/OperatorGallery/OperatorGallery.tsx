@@ -32,7 +32,7 @@ const GalleryWrapper = styled.section`
   position: absolute;
   bottom: 0;
   overflow-x: auto;
-  width: 100%;
+  width: 100vw;
   display: flex;
   gap: 0 16px;
 

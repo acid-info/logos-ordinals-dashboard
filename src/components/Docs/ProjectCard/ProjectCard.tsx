@@ -34,7 +34,6 @@ const ProjectCard: React.FC<ProjectCardProps> = ({ project }) => {
 const CardWrapper = styled.article`
   display: flex;
   flex-direction: column;
-  font-family: Courier, sans-serif;
   font-weight: 400;
 
   @media (max-width: 991px) {

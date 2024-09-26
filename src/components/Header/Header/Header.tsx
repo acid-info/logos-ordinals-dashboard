@@ -19,7 +19,7 @@ const Header: React.FC<NavbarProps> = () => {
         </WalletButton>
         <PointsButton>
           <PointsValue>4,278</PointsValue>
-          <Icon src="/assets/stats-up.svg" alt="Points icon" />
+          <Icon src="/assets/star.png" alt="Points icon" />
         </PointsButton>
       </UserActions>
     </Container>
@@ -71,15 +71,12 @@ const WalletAddress = styled.span`
 
 const PointsButton = styled(Button)`
   width: 83px;
-  background-color: rgb(var(--lsd-surface-secondary));
-  color: rgb(var(--lsd-text-secondary));
 `
 
 const PointsValue = styled.span``
 
 const Icon = styled.img`
-  width: 14px;
-  height: 14px;
+  padding: 0;
 `
 
 export default Header

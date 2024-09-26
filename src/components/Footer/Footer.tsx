@@ -5,7 +5,7 @@ interface FooterProps {}
 
 const Footer: React.FC<FooterProps> = () => {
   return (
-    <StyledFooter>
+    <Container>
       <span className="logo">Logos Operators</span>
       <nav className="footer-nav">
         <a href="#terms">Terms of Use</a>
@@ -16,16 +16,22 @@ const Footer: React.FC<FooterProps> = () => {
       <span className="copyright">
         All right reserved ©{new Date().getFullYear()}
       </span>
-    </StyledFooter>
+    </Container>
   )
 }
 
-const StyledFooter = styled.footer`
+const Container = styled.footer`
   display: flex;
-  margin-top: 200px;
   width: 100%;
+  margin: 200px auto 0 auto;
+  max-width: 912px;
+  height: 48px;
+  padding: 16px;
+
+  background: rgba(20, 20, 20, 0.81);
   align-items: center;
   justify-content: space-between;
+  flex-shrink: 0;
   font-size: 12px;
   line-height: 16px;
   position: relative;
@@ -33,8 +39,8 @@ const StyledFooter = styled.footer`
   .footer-nav {
     position: absolute;
     left: 50%;
-    bottom: 0;
-    transform: translateX(-50%);
+    bottom: 50%;
+    transform: translate(-50%, 50%);
     display: flex;
     min-width: 240px;
     align-items: center;

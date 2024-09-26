@@ -112,7 +112,7 @@ const OperatorGrid: React.FC<OperatorGridProps> = ({
       </Stats>
       <Grid>
         {isLoading
-          ? Array.from({ length: 8 }).map((_, index) => (
+          ? Array.from({ length: 12 }).map((_, index) => (
               <OperatorCard key={index}>
                 <Placeholder />
               </OperatorCard>
