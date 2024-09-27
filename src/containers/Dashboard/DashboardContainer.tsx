@@ -11,12 +11,54 @@ export type DashboardPageProps = React.DetailedHTMLProps<
   HTMLDivElement
 >
 
+export interface Operator {
+  id: number
+  name: string
+  image_400_url: string
+}
+
+export interface Group {
+  id: number
+  name: string
+  operators: Operator[]
+}
+
+export interface ProcessedOperator {
+  id: string
+  image: string
+  name: string
+  pointsPerHour: number
+  isStaked: boolean
+  isPinned: boolean
+}
+
+function processOperators(data: Group[]): ProcessedOperator[] {
+  return data?.flatMap((group) =>
+    group.operators.map((operator) => ({
+      id: operator.id.toString(), // Convert ID to string
+      image: operator.image_400_url,
+      name: `OP ${operator.id}`,
+      pointsPerHour: Math.floor(Math.random() * 500), // Random value for points per hour
+      isStaked: false,
+      isPinned: false,
+    })),
+  )
+}
+
 const DashboardContainer: React.FC<DashboardPageProps> = ({
   children,
   ...props
 }) => {
   const { data, isLoading } = useGetOperators()
-  console.log(data)
+
+  const processedOperators = processOperators(data)
+
+  function getRandomSubset<T>(array: T[], count: number): T[] {
+    const shuffled = array?.sort(() => 0.5 - Math.random())
+    return shuffled?.slice(0, count)
+  }
+
+  const random20Operators = getRandomSubset(processedOperators, 20)
 
   return (
     <Container {...props}>
@@ -26,7 +68,7 @@ const DashboardContainer: React.FC<DashboardPageProps> = ({
         </LeftColumn>
         <RightColumn>
           <ProgressBar progress={20} claimPosition={60} />
-          <OperatorGrid isLoading={isLoading} />
+          <OperatorGrid data={random20Operators} isLoading={isLoading} />
         </RightColumn>
       </Wrapper>
     </Container>

@@ -1,22 +1,15 @@
 import { breakpoints } from '@/configs/ui.configs'
+import { ProcessedOperator } from '@/containers/Dashboard/DashboardContainer'
 import styled from '@emotion/styled'
 import Link from 'next/link'
 import React from 'react'
 
-interface Operator {
-  id: string
-  image: string
-  name: string
-  pointsPerHour: number
-  isStaked: boolean
-  isPinned: boolean
-}
-
 interface OperatorGridProps {
   isLoading: boolean
+  data: ProcessedOperator[]
 }
 
-const operators: Operator[] = [
+const operators: ProcessedOperator[] = [
   {
     id: '1',
     image: '/dashboard/mock/operators/1.gif',
@@ -77,6 +70,7 @@ const operators: Operator[] = [
 
 const OperatorGrid: React.FC<OperatorGridProps> = ({
   isLoading,
+  data,
 }: OperatorGridProps) => {
   return (
     <StyledOperatorGrid>
@@ -117,7 +111,7 @@ const OperatorGrid: React.FC<OperatorGridProps> = ({
                 <Placeholder />
               </OperatorCard>
             ))
-          : operators.map((operator) => (
+          : data.map((operator) => (
               <OperatorCard key={operator.id}>
                 <Link href={`/operators/${operator.id}`} key={operator.id}>
                   <OperatorImage src={operator.image} alt={operator.name} />
