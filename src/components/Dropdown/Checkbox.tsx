@@ -28,8 +28,8 @@ const StyledCheckbox = styled.span<{ isChecked: boolean }>`
     content: ${({ isChecked }) => (isChecked ? "'✓'" : "''")};
     color: black;
     position: absolute;
-    top: 0;
-    left: 3px;
+    top: -2px;
+    left: 2px;
     font-size: 14px;
   }
 `

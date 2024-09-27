@@ -1,5 +1,5 @@
 import styled from '@emotion/styled'
-import React, { useState } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import Checkbox from './Checkbox' // Import the CustomCheckbox
 
 interface DropdownProps {
@@ -15,6 +15,7 @@ const Dropdown: React.FC<DropdownProps> = ({
 }) => {
   const [selectedOptions, setSelectedOptions] = useState<string[]>([])
   const [isExpanded, setIsExpanded] = useState(false)
+  const dropdownRef = useRef<HTMLDivElement>(null)
 
   const handleSelect = (option: string) => {
     let newSelectedOptions = []
@@ -41,8 +42,28 @@ const Dropdown: React.FC<DropdownProps> = ({
     setIsExpanded(!isExpanded)
   }
 
+  const handleClickOutside = (event: MouseEvent) => {
+    if (
+      dropdownRef.current &&
+      !dropdownRef.current.contains(event.target as Node)
+    ) {
+      setIsExpanded(false)
+    }
+  }
+
+  useEffect(() => {
+    if (isExpanded) {
+      document.addEventListener('mousedown', handleClickOutside)
+    } else {
+      document.removeEventListener('mousedown', handleClickOutside)
+    }
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside)
+    }
+  }, [isExpanded])
+
   return (
-    <DropdownContainer>
+    <DropdownContainer ref={dropdownRef}>
       <DropdownHeader onClick={toggleDropdown}>
         <span>{title}</span>
         <Chevron isExpanded={isExpanded}>

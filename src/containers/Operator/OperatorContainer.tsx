@@ -1,5 +1,5 @@
 import { OperatorDetails } from '@/components/Operator/OperatorDetails'
-import { SimilarOperators } from '@/components/Operator/SimilarOperators'
+// import { SimilarOperators } from '@/components/Operator/SimilarOperators'
 import styled from '@emotion/styled'
 import { useRouter } from 'next/router'
 import React from 'react'
@@ -25,7 +25,7 @@ const ExploreOperator: React.FC<ExploreOperatorProps> = ({ id }) => {
         <img src={`/assets/chevron-left.svg`} alt="Share icon" />
       </GoBackButton>
       <OperatorDetails id={Number(id)} />
-      <SimilarOperators />
+      {/* <SimilarOperators /> */}
     </Container>
   )
 }
