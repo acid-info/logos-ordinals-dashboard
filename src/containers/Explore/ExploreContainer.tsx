@@ -8,7 +8,7 @@ interface ExploreSectionProps {}
 const ExploreSection: React.FC<ExploreSectionProps> = () => {
   return (
     <StyledExploreSection>
-      <h1 className="section-title">Operators</h1>
+      <h1 className="section-title">Explore Operators</h1>
       <OperatorFilter />
       <OperatorGrid />
     </StyledExploreSection>

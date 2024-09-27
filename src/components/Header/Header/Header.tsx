@@ -1,7 +1,6 @@
 import styled from '@emotion/styled'
 import Link from 'next/link'
 import React from 'react'
-import { Navbar } from '../Navbar'
 
 interface NavbarProps {}
 
@@ -11,7 +10,7 @@ const Header: React.FC<NavbarProps> = () => {
       <Link href="/">
         <Logo src="/assets/logo.svg" alt="Logo" />
       </Link>
-      <Navbar />
+      {/* <Navbar />
       <UserActions>
         <WalletButton>
           <WalletAddress>bc1qa...vehs9</WalletAddress>
@@ -21,7 +20,7 @@ const Header: React.FC<NavbarProps> = () => {
           <PointsValue>4,278</PointsValue>
           <Icon src="/assets/star.png" alt="Points icon" />
         </PointsButton>
-      </UserActions>
+      </UserActions> */}
     </Container>
   )
 }
