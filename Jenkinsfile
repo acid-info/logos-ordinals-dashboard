@@ -27,18 +27,6 @@ pipeline {
     stage('Build') {
       steps {
         script {
-          withCredentials([
-            string(
-              credentialsId: 'acid-info-github-token',
-              variable: 'NEXT_GITHUB_PERSONAL_ACCESS_TOKEN'
-            ),
-          ]) {
-            image = docker.build(
-              "${IMAGE_NAME}:${GIT_COMMIT.take(8)}",
-              ["--build-arg='NEXT_GITHUB_PERSONAL_ACCESS_TOKEN=${NEXT_GITHUB_PERSONAL_ACCESS_TOKEN}'",
-               "."].join(' ')
-            )
-          }
         }
       }
     }
