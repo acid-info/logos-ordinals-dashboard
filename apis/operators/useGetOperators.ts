@@ -1,5 +1,5 @@
 import { useQuery, useQueryClient } from '@tanstack/react-query'
-import { api } from '../../common/api'
+import operators from '../../data/operators.json'
 
 const useQueryOptions = {
   refetchOnWindowFocus: false,
@@ -8,7 +8,8 @@ const useQueryOptions = {
 }
 
 export const fetchData = async () => {
-  return await api.get('/operators').then((res) => res.data)
+  return operators
+  // return await api.get('/operators').then((res) => res.data)
 }
 
 const useGetOperators = () => {

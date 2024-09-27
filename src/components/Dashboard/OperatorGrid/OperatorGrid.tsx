@@ -9,65 +9,6 @@ interface OperatorGridProps {
   data: ProcessedOperator[]
 }
 
-const operators: ProcessedOperator[] = [
-  {
-    id: '1',
-    image: '/dashboard/mock/operators/1.gif',
-    name: 'OP 1',
-    pointsPerHour: 304,
-    isStaked: false,
-    isPinned: false,
-  },
-  {
-    id: '2',
-    image: '/dashboard/mock/operators/2.gif',
-    name: 'OP 2',
-    pointsPerHour: 304,
-    isStaked: true,
-    isPinned: false,
-  },
-  {
-    id: '3',
-    image: '/dashboard/mock/operators/3.gif',
-    name: 'OP 3',
-    pointsPerHour: 304,
-    isStaked: true,
-    isPinned: true,
-  },
-  {
-    id: '4',
-    image: '/dashboard/mock/operators/4.gif',
-    name: 'OP 4',
-    pointsPerHour: 304,
-    isStaked: true,
-    isPinned: false,
-  },
-  {
-    id: '5',
-    image: '/dashboard/mock/operators/5.gif',
-    name: 'OP 5',
-    pointsPerHour: 304,
-    isStaked: true,
-    isPinned: false,
-  },
-  {
-    id: '6',
-    image: '/dashboard/mock/operators/6.gif',
-    name: 'OP 6',
-    pointsPerHour: 304,
-    isStaked: true,
-    isPinned: false,
-  },
-  {
-    id: '7',
-    image: '/dashboard/mock/operators/7.gif',
-    name: 'OP 7',
-    pointsPerHour: 304,
-    isStaked: true,
-    isPinned: false,
-  },
-]
-
 const OperatorGrid: React.FC<OperatorGridProps> = ({
   isLoading,
   data,
@@ -111,7 +52,7 @@ const OperatorGrid: React.FC<OperatorGridProps> = ({
                 <Placeholder />
               </OperatorCard>
             ))
-          : data.map((operator) => (
+          : data?.map((operator) => (
               <OperatorCard key={operator.id}>
                 <Link href={`/operators/${operator.id}`} key={operator.id}>
                   <OperatorImage src={operator.image} alt={operator.name} />

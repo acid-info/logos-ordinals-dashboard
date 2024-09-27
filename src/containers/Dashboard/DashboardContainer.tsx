@@ -5,6 +5,7 @@ import { breakpoints } from '@/configs/ui.configs'
 import styled from '@emotion/styled'
 import React from 'react'
 import useGetOperators from '../../../apis/operators/useGetOperators'
+import { getRandomSubset, processOperators } from '../../../utils/operators'
 
 export type DashboardPageProps = React.DetailedHTMLProps<
   React.HTMLAttributes<HTMLDivElement>,
@@ -32,31 +33,13 @@ export interface ProcessedOperator {
   isPinned: boolean
 }
 
-function processOperators(data: Group[]): ProcessedOperator[] {
-  return data?.flatMap((group) =>
-    group.operators.map((operator) => ({
-      id: operator.id.toString(), // Convert ID to string
-      image: operator.image_400_url,
-      name: `OP ${operator.id}`,
-      pointsPerHour: Math.floor(Math.random() * 500), // Random value for points per hour
-      isStaked: false,
-      isPinned: false,
-    })),
-  )
-}
-
 const DashboardContainer: React.FC<DashboardPageProps> = ({
   children,
   ...props
 }) => {
   const { data, isLoading } = useGetOperators()
 
-  const processedOperators = processOperators(data)
-
-  function getRandomSubset<T>(array: T[], count: number): T[] {
-    const shuffled = array?.sort(() => 0.5 - Math.random())
-    return shuffled?.slice(0, count)
-  }
+  const processedOperators = processOperators(data as Group[])
 
   const random20Operators = getRandomSubset(processedOperators, 20)
 
