@@ -1,7 +1,9 @@
 import { breakpoints } from '@/configs/ui.configs'
 import styled from '@emotion/styled'
-
+import 'lazysizes'
 import React from 'react'
+import operators from '../../../../data/operators.json'
+import { findOperatorById, processOperators } from '../../../../utils/operators'
 
 interface OperatorDetailsProps {
   id: number
@@ -29,6 +31,11 @@ const operatorInfo = [
 const OperatorDetails: React.FC<OperatorDetailsProps> = ({
   id,
 }: OperatorDetailsProps) => {
+  const processedOperators = processOperators(operators as any, [])
+  const isIncripted = false
+
+  const operator = findOperatorById(processedOperators, id)
+
   const handleDownload = () => {
     window.open(`/dashboard/mock/operators/${id % 7}.gif`, '_blank')
   }
@@ -53,9 +60,11 @@ const OperatorDetails: React.FC<OperatorDetailsProps> = ({
     <Container>
       <OperatorImage>
         <img
-          src={`/dashboard/mock/operators/${id % 7}.gif`}
+          src={operator?.image}
+          data-src={operator?.gif}
           alt={`Operator ${id}`}
-          className="operator-img"
+          loading="lazy"
+          className="lazyload"
         />
         <ActionButtons>
           <Button onClick={handleShare}>Share</Button>
@@ -63,46 +72,48 @@ const OperatorDetails: React.FC<OperatorDetailsProps> = ({
         </ActionButtons>
       </OperatorImage>
       <OperatorInfo>
-        <OperatorTitle>Memetic</OperatorTitle>
-        <OperatorSubtitle>
+        <OperatorTitle>{operator?.name}</OperatorTitle>
+        <ArchetypeSection>
+          <span>Archetype</span>
+          <span>{operator?.archetype}</span>
+        </ArchetypeSection>
+        {/* <OperatorSubtitle>
           <span>Operator</span>
           <span className="id">#{id}</span>
-        </OperatorSubtitle>
+        </OperatorSubtitle> */}
         <AttributesFirstGrid>
           <AttributeItem>
-            <AttributeLabel>Count</AttributeLabel>
-            <AttributeValue>3</AttributeValue>
+            <AttributeLabel>Comp</AttributeLabel>
+            <AttributeValue>{operator?.comp}</AttributeValue>
           </AttributeItem>
           <AttributeItem>
-            <AttributeLabel>Body</AttributeLabel>
-            <AttributeValue>Purple</AttributeValue>
+            <AttributeLabel>Background</AttributeLabel>
+            <AttributeValue>{operator?.background}</AttributeValue>
           </AttributeItem>
         </AttributesFirstGrid>
         <AttributesSecondGrid>
           <AttributeItem>
-            <AttributeLabel>Head</AttributeLabel>
-            <AttributeValue>Woodsman</AttributeValue>
+            <AttributeLabel>Helmet</AttributeLabel>
+            <AttributeValue>{operator?.helmet}</AttributeValue>
           </AttributeItem>
           <AttributeItem>
-            <AttributeLabel>Eyes</AttributeLabel>
-            <AttributeValue>Patch</AttributeValue>
+            <AttributeLabel>Jacket</AttributeLabel>
+            <AttributeValue>{operator?.jacket}</AttributeValue>
           </AttributeItem>
           <AttributeItem>
-            <AttributeLabel>Earing</AttributeLabel>
+            <AttributeLabel>Skin</AttributeLabel>
             <AttributeValue>None</AttributeValue>
           </AttributeItem>
         </AttributesSecondGrid>
-        <ArchetypeSection>
-          <span>Archetype</span>
-          <span>Memetic</span>
-        </ArchetypeSection>
+
         <DetailsList>
-          {operatorInfo.map((info, index) => (
-            <DetailItem key={index}>
-              <DetailLabel>{info.trait}</DetailLabel>
-              <DetailValue>{info.value}</DetailValue>
-            </DetailItem>
-          ))}
+          {isIncripted &&
+            operatorInfo.map((info, index) => (
+              <DetailItem key={index}>
+                <DetailLabel>{info.trait}</DetailLabel>
+                <DetailValue>{info.value}</DetailValue>
+              </DetailItem>
+            ))}
         </DetailsList>
       </OperatorInfo>
     </Container>
@@ -127,6 +138,7 @@ const OperatorImage = styled.div`
   img {
     width: 100%;
     height: auto;
+    min-height: 400px;
   }
 
   grid-column: 1 / 13;
@@ -171,16 +183,16 @@ const OperatorTitle = styled.h1`
   margin: 0;
 `
 
-const OperatorSubtitle = styled.div`
-  display: flex;
-  gap: 16px;
-  font-size: 18px;
-  margin-top: 16px;
+// const OperatorSubtitle = styled.div`
+//   display: flex;
+//   gap: 16px;
+//   font-size: 18px;
+//   margin-top: 16px;
 
-  .id {
-    opacity: 0.5;
-  }
-`
+//   .id {
+//     opacity: 0.5;
+//   }
+// `
 
 const AttributesFirstGrid = styled.div`
   display: grid;
@@ -195,19 +207,19 @@ const AttributesSecondGrid = styled(AttributesFirstGrid)`
 `
 
 const AttributeItem = styled.div`
-  background-color: var(--dark-orange);
+  background-color: #320430;
   padding: 16px 8px;
 `
 
 const AttributeLabel = styled.div`
   font-size: 14px;
-  color: var(--orange);
+  color: #f29ae9;
 `
 
 const AttributeValue = styled.div`
   margin-top: 8px;
   font-size: 14px;
-  color: var(--orange);
+  color: #f29ae9;
 `
 
 const ArchetypeSection = styled.div`

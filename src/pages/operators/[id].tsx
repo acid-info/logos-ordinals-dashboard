@@ -1,6 +1,8 @@
 import { SEO } from '@/components/SEO'
 import { OperatorContainer } from '@/containers/Operator'
 import { OperatorInfoLayout } from '@/layouts/OperatorInfoLayout'
+import operators from '../../../data/operators.json'
+import { getAllIds } from '../../../utils/operators'
 
 const Page = ({ id }: any) => {
   return (
@@ -18,13 +20,14 @@ Page.getLayout = function getLayout(page: React.ReactNode) {
 export async function getStaticPaths() {
   const paths: any = []
 
-  // operator id from 1 to 1000
-  const operators = Array.from({ length: 1000 }, (_, i) => i + 1)
+  // get operators id from data
+  const operatorIds = getAllIds(operators)
 
-  operators.forEach((operator) => {
+  // create paths with operator id
+  operatorIds.forEach((id: any) => {
     paths.push({
       params: {
-        id: operator.toString(),
+        id: id.toString(),
       },
     })
   })
@@ -47,8 +50,7 @@ export async function getStaticProps({ params }: any) {
   } catch (error) {
     return {
       props: {
-        jobs: [],
-        issues: {},
+        id: [],
       },
     }
   }

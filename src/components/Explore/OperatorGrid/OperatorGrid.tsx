@@ -59,7 +59,7 @@ const OperatorGrid: React.FC<OperatorGridProps> = ({ data, isLoading }) => {
         if (index === itemsCount - 1) {
           return (
             <Link
-              href={`/operators/${index + 1}`}
+              href={`/operators/${operator.id}`}
               key={'explore-operator-' + index}
             >
               <GridItem ref={lastElementRef}>
@@ -77,7 +77,7 @@ const OperatorGrid: React.FC<OperatorGridProps> = ({ data, isLoading }) => {
         } else {
           return (
             <Link
-              href={`/operators/${index + 1}`}
+              href={`/operators/${operator.id}`}
               key={'explore-operator-' + index}
             >
               <GridItem>
