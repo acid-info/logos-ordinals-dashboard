@@ -21,7 +21,7 @@ export async function getStaticPaths() {
   const paths: any = []
 
   // get operators id from data
-  const operatorIds = getAllIds(operators)
+  const operatorIds = getAllIds(operators as any)
 
   // create paths with operator id
   operatorIds.forEach((id: any) => {
