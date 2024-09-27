@@ -16,6 +16,7 @@ export interface Operator {
   id: number
   name: string
   image_400_url: string
+  image_400_jpeg_url: string
 }
 
 export interface Group {
@@ -28,6 +29,7 @@ export interface ProcessedOperator {
   id: string
   image: string
   name: string
+  gif: string
   pointsPerHour: number
   isStaked: boolean
   isPinned: boolean
@@ -39,7 +41,7 @@ const DashboardContainer: React.FC<DashboardPageProps> = ({
 }) => {
   const { data, isLoading } = useGetOperators()
 
-  const processedOperators = processOperators(data as Group[])
+  const processedOperators = processOperators(data as Group[], [])
 
   const random20Operators = getRandomSubset(processedOperators, 20)
 

@@ -1,0 +1,11 @@
+export type Archetype =
+  | 'Alchemist'
+  | 'Artisan'
+  | 'Explorer'
+  | 'Illuminator'
+  | 'Magician'
+  | 'Memetic'
+  | 'Oracle'
+  | 'Outlaw'
+  | 'Philosopher'
+  | 'Polymath'

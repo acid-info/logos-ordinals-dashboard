@@ -1,6 +1,7 @@
 import { breakpoints } from '@/configs/ui.configs'
 import { ProcessedOperator } from '@/containers/Dashboard/DashboardContainer'
 import styled from '@emotion/styled'
+import 'lazysizes'
 import Link from 'next/link'
 import React, { useCallback, useEffect, useRef, useState } from 'react'
 
@@ -65,8 +66,10 @@ const OperatorGrid: React.FC<OperatorGridProps> = ({ data, isLoading }) => {
                 <img
                   key={index}
                   src={operator.image}
+                  data-src={operator.gif}
                   alt={`Operator ${index + 1}`}
                   loading="lazy"
+                  className="lazyload"
                 />
               </GridItem>
             </Link>
@@ -81,8 +84,10 @@ const OperatorGrid: React.FC<OperatorGridProps> = ({ data, isLoading }) => {
                 <img
                   key={index}
                   src={operator.image}
+                  data-src={operator.gif}
                   alt={`Operator ${index + 1}`}
                   loading="lazy"
+                  className="lazyload"
                 />
               </GridItem>
             </Link>
@@ -99,6 +104,13 @@ const GridContainer = styled.section`
   gap: 16px;
   margin-top: 16px;
 
+  img {
+    aspect-ratio: 1;
+    object-fit: cover;
+    width: 100%;
+    height: 100%;
+  }
+
   @media (max-width: ${breakpoints.md}px) {
     grid-template-columns: repeat(3, 1fr);
   }
@@ -106,19 +118,15 @@ const GridContainer = styled.section`
   @media (max-width: ${breakpoints.sm}px) {
     grid-template-columns: repeat(2, 1fr);
   }
-
-  img {
-    aspect-ratio: 1;
-    object-fit: contain;
-    width: 216px;
-  }
 `
-
 const GridItem = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
+  overflow: hidden;
   cursor: pointer;
+  background-color: var(--grey-900);
+  border-radius: 8px;
 `
 
 const Placeholder = styled.div`
