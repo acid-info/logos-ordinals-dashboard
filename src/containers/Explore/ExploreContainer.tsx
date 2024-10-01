@@ -53,6 +53,8 @@ const ExploreSection: React.FC<ExploreSectionProps> = () => {
     )
   })
 
+  const randomizedOperators = selectedOperators?.sort(() => Math.random() - 0.5)
+
   const handleFilterChange = (
     selectedOptions: string[],
     filterType: string,
@@ -105,8 +107,8 @@ const ExploreSection: React.FC<ExploreSectionProps> = () => {
         />
       </DropdownContainer>
       <OperatorGrid
-        key={selectedOperators?.join(',')}
-        data={selectedOperators as any}
+        key={randomizedOperators?.join(',')}
+        data={randomizedOperators as any}
         isLoading={isLoading}
       />
     </Container>
