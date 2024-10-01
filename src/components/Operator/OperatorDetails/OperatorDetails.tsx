@@ -4,6 +4,7 @@ import 'lazysizes'
 import React from 'react'
 import operators from '../../../../data/operators.json'
 import { findOperatorById, processOperators } from '../../../../utils/operators'
+import DownloadDropdown from './DownloadDropdown'
 
 interface OperatorDetailsProps {
   id: number
@@ -36,10 +37,6 @@ const OperatorDetails: React.FC<OperatorDetailsProps> = ({
 
   const operator = findOperatorById(processedOperators, id)
 
-  const handleDownload = () => {
-    window.open(`/dashboard/mock/operators/${id % 7}.gif`, '_blank')
-  }
-
   const handleShare = async () => {
     if (navigator.share) {
       try {
@@ -68,7 +65,7 @@ const OperatorDetails: React.FC<OperatorDetailsProps> = ({
         />
         <ActionButtons>
           <Button onClick={handleShare}>Share</Button>
-          <Button onClick={handleDownload}>Download</Button>
+          <DownloadDropdown operator={operator} />
         </ActionButtons>
       </OperatorImage>
       <OperatorInfo>
@@ -135,7 +132,7 @@ const Container = styled.section`
 const OperatorImage = styled.div`
   position: relative;
 
-  img {
+  & > img {
     width: 100%;
     height: auto;
     min-height: 400px;
@@ -158,17 +155,22 @@ const OperatorInfo = styled.div`
 
 const ActionButtons = styled.div`
   display: flex;
-  gap: -1px;
   margin-top: 16px;
 
-  button:first-of-type {
+  width: 100%;
+
+  & > * {
+    flex: 1;
+  }
+
+  * > button:first-of-type {
     border-right: none;
   }
 `
 
 const Button = styled.button`
   flex: 1;
-  padding: 10px 40px;
+  height: 40px;
   border: 1px solid #fff;
   background: transparent;
   color: #fff;

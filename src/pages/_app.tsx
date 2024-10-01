@@ -83,13 +83,13 @@ export default function App({ Component, pageProps }: AppLayoutProps) {
               margin-right: auto;
             }
 
-            a,
+            /* a,
             a:visited,
             a:hover,
             a:active,
             a:focus {
               color: black;
-            }
+            } */
 
             h1,
             h2,
