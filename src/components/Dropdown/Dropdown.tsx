@@ -5,12 +5,14 @@ import Checkbox from './Checkbox' // Import the CustomCheckbox
 interface DropdownProps {
   title: string
   options: string[]
-  onSelectionChange: (selectedOptions: any) => void
+  filterType: string
+  onSelectionChange: (selectedOptions: string[], filterType: string) => void
 }
 
 const Dropdown: React.FC<DropdownProps> = ({
   title,
   options,
+  filterType,
   onSelectionChange,
 }) => {
   const [selectedOptions, setSelectedOptions] = useState<string[]>([])
@@ -25,17 +27,17 @@ const Dropdown: React.FC<DropdownProps> = ({
       newSelectedOptions = [...selectedOptions, option]
     }
     setSelectedOptions(newSelectedOptions)
-    onSelectionChange(newSelectedOptions)
+    onSelectionChange(newSelectedOptions, filterType)
   }
 
   const selectAll = () => {
     setSelectedOptions(options)
-    onSelectionChange(options)
+    onSelectionChange(options, filterType)
   }
 
   const clearAll = () => {
     setSelectedOptions([])
-    onSelectionChange([])
+    onSelectionChange([], filterType)
   }
 
   const toggleDropdown = () => {
@@ -104,9 +106,11 @@ const DropdownHeader = styled.div<{ isExpanded: boolean }>`
   align-items: center;
   padding: 10px;
   cursor: pointer;
-  border: 1px solid white;
   background-color: ${({ isExpanded }) => (isExpanded ? 'white' : 'black')};
   color: ${({ isExpanded }) => (isExpanded ? 'black' : 'white')};
+
+  border: 1px solid white;
+  border-left: none;
 `
 
 const Chevron = styled.span<{ isExpanded: boolean }>`

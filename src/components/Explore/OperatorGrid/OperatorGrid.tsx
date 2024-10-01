@@ -14,6 +14,7 @@ const OFFSET = 18
 
 const OperatorGrid: React.FC<OperatorGridProps> = ({ data, isLoading }) => {
   const [itemsCount, setItemsCount] = useState(18)
+
   const observerRef = useRef<IntersectionObserver | null>(null)
   const lastElementRef = useRef<HTMLDivElement | null>(null)
 
