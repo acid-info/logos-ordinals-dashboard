@@ -7,7 +7,8 @@ interface Props {
 }
 
 function updateImageUrl(inputUrl: string): string {
-  const urlParts = inputUrl.split('/')
+  if (!inputUrl) return ''
+  const urlParts = inputUrl?.split('/')
 
   if (urlParts.length > 4 && urlParts[4] === '400') {
     urlParts[4] = '1024'
@@ -37,7 +38,7 @@ const DownloadDropdown = ({ operator }: Props) => {
         </ChevronIconWrapper>
       </DropdownButton>
       <DropdownContent isOpen={isOpen}>
-        <DropdownItem href={operator.gif} download>
+        <DropdownItem href={operator?.gif} download>
           <Left>
             <Icon>
               <Image
@@ -51,7 +52,7 @@ const DownloadDropdown = ({ operator }: Props) => {
           </Left>
           <FileType>.gif</FileType>
         </DropdownItem>
-        <DropdownItem href={updateImageUrl(operator.gif)} download>
+        <DropdownItem href={updateImageUrl(operator?.gif)} download>
           <Left>
             <Icon>
               <Image
@@ -65,7 +66,7 @@ const DownloadDropdown = ({ operator }: Props) => {
           </Left>
           <FileType>.gif</FileType>
         </DropdownItem>
-        <DropdownItem href={operator.image} download>
+        <DropdownItem href={operator?.image} download>
           <Left>
             <Icon>
               <Image
@@ -79,7 +80,7 @@ const DownloadDropdown = ({ operator }: Props) => {
           </Left>
           <FileType>.jpeg</FileType>
         </DropdownItem>
-        <DropdownItem href={updateImageUrl(operator.image)} download>
+        <DropdownItem href={updateImageUrl(operator?.image)} download>
           <Left>
             <Icon>
               <Image

@@ -18,7 +18,6 @@ const OperatorGrid: React.FC<OperatorGridProps> = ({ data, isLoading }) => {
   const observerRef = useRef<IntersectionObserver | null>(null)
   const lastElementRef = useRef<HTMLDivElement | null>(null)
 
-  // Infinite scroll logic
   const handleObserver = useCallback(
     (entries: IntersectionObserverEntry[]) => {
       const target = entries[0]
@@ -67,7 +66,7 @@ const OperatorGrid: React.FC<OperatorGridProps> = ({ data, isLoading }) => {
                 <img
                   key={index}
                   src={operator.image}
-                  data-src={operator.gif}
+                  data-src={operator?.gif}
                   alt={`Operator ${index + 1}`}
                   loading="lazy"
                   className="lazyload"
@@ -78,14 +77,14 @@ const OperatorGrid: React.FC<OperatorGridProps> = ({ data, isLoading }) => {
         } else {
           return (
             <Link
-              href={`/operators/${operator.id}`}
+              href={`/operators/${operator?.id}`}
               key={'explore-operator-' + index}
             >
               <GridItem>
                 <img
                   key={index}
-                  src={operator.image}
-                  data-src={operator.gif}
+                  src={operator?.image}
+                  data-src={operator?.gif}
                   alt={`Operator ${index + 1}`}
                   loading="lazy"
                   className="lazyload"
