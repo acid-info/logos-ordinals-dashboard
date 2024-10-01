@@ -135,6 +135,15 @@ const DropdownButton = styled.button<{ isOpen: boolean }>`
     line-height: 20px;
     letter-spacing: 0.14px;
   }
+
+  &:hover {
+    background-color: white;
+    color: black;
+
+    img {
+      filter: invert(100%);
+    }
+  }
 `
 
 const ChevronIconWrapper = styled.div<{ isOpen: boolean }>`

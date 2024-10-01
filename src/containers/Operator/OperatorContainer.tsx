@@ -12,13 +12,15 @@ const ExploreOperator: React.FC<ExploreOperatorProps> = ({ id }) => {
   const router = useRouter()
 
   const handleGoBack = () => {
-    // if router has history, go back, else go to home
-    if (router?.back) {
-      router.back()
-    } else {
-      router.push('/')
-    }
+    router.push('/')
+    // // if router has history, go back, else go to home
+    // if (router?.back) {
+    //   router.back()
+    // } else {
+    //   router.push('/')
+    // }
   }
+
   return (
     <Container>
       <GoBackButton aria-label="Share" onClick={handleGoBack}>

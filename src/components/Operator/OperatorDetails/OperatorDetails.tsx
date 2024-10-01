@@ -88,7 +88,7 @@ const OperatorDetails: React.FC<OperatorDetailsProps> = ({
             <AttributeValue>{operator?.background}</AttributeValue>
           </AttributeItem>
         </AttributesFirstGrid>
-        <AttributesSecondGrid>
+        <AttributesFirstGrid>
           <AttributeItem>
             <AttributeLabel>Helmet</AttributeLabel>
             <AttributeValue>{operator?.helmet}</AttributeValue>
@@ -97,11 +97,13 @@ const OperatorDetails: React.FC<OperatorDetailsProps> = ({
             <AttributeLabel>Jacket</AttributeLabel>
             <AttributeValue>{operator?.jacket}</AttributeValue>
           </AttributeItem>
+        </AttributesFirstGrid>
+        <AttributesFullGrid>
           <AttributeItem>
             <AttributeLabel>Skin</AttributeLabel>
             <AttributeValue>None</AttributeValue>
           </AttributeItem>
-        </AttributesSecondGrid>
+        </AttributesFullGrid>
 
         <DetailsList>
           {isIncripted &&
@@ -176,6 +178,11 @@ const Button = styled.button`
   color: #fff;
   font-size: 14px;
   cursor: pointer;
+
+  &:hover {
+    background-color: white;
+    color: black;
+  }
 `
 
 const OperatorTitle = styled.h1`
@@ -200,11 +207,11 @@ const AttributesFirstGrid = styled.div`
   display: grid;
   grid-template-columns: repeat(2, 1fr);
   gap: 2px;
-  margin-top: 24px;
+  margin-top: 2px;
 `
 
-const AttributesSecondGrid = styled(AttributesFirstGrid)`
-  grid-template-columns: repeat(3, 1fr);
+const AttributesFullGrid = styled(AttributesFirstGrid)`
+  grid-template-columns: 1fr;
   margin-top: 2px;
 `
 
@@ -230,6 +237,7 @@ const ArchetypeSection = styled.div`
   background-color: var(--grey-900);
   padding: 16px 8px;
   margin-top: 24px;
+  margin-bottom: 24px;
 `
 
 const DetailsList = styled.div`

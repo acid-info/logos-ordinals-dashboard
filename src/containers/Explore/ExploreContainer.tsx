@@ -131,7 +131,9 @@ const DropdownContainer = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  margin-top: 70px;
+
+  max-width: 911px;
+  margin: 70px auto 0 auto;
 
   & > div:first-of-type {
     border-left: 1px solid white;

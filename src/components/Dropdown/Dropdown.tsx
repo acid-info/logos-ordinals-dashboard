@@ -106,11 +106,21 @@ const DropdownHeader = styled.div<{ isExpanded: boolean }>`
   align-items: center;
   padding: 10px;
   cursor: pointer;
-  background-color: ${({ isExpanded }) => (isExpanded ? 'white' : 'black')};
-  color: ${({ isExpanded }) => (isExpanded ? 'black' : 'white')};
 
   border: 1px solid white;
   border-left: none;
+
+  background-color: ${({ isExpanded }) => (isExpanded ? 'white' : 'black')};
+  color: ${({ isExpanded }) => (isExpanded ? 'black' : 'white')};
+
+  &:hover {
+    background-color: white;
+    color: black;
+
+    img {
+      filter: invert(100%);
+    }
+  }
 `
 
 const Chevron = styled.span<{ isExpanded: boolean }>`
