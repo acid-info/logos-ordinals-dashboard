@@ -8,13 +8,24 @@ const Footer: React.FC<FooterProps> = () => {
     <Container>
       <span className="logo">Logos Operators</span>
       <nav className="footer-nav">
-        <a href="#terms">Terms of Use</a>
-        <a href="#privacy">Privacy Policy</a>
-        <a href="#discord">Discord</a>
-        <a href="#manifesto">Manifesto</a>
+        <a href="https://logos.co/terms" target="_blank">
+          Terms of Use
+        </a>
+        <a href="https://logos.co/privacy-policy" target="_blank">
+          Privacy Policy
+        </a>
+        <a href="https://discord.gg/logosnetwork" target="_blank">
+          Discord
+        </a>
+        <a href="https://logos.co/manifesto" target="_blank">
+          Manifesto
+        </a>
       </nav>
-      <span className="copyright">
-        All right reserved ©{new Date().getFullYear()}
+      <span className="ift">
+        Built by{' '}
+        <a href="https://free.technology/" target="_blank">
+          IFT
+        </a>
       </span>
     </Container>
   )
@@ -50,6 +61,11 @@ const Container = styled.footer`
   .footer-nav a {
     color: inherit;
     text-decoration: none;
+  }
+
+  .ift a {
+    color: inherit;
+    text-decoration: underline;
   }
 
   @media (max-width: 991px) {

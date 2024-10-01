@@ -7,29 +7,30 @@ interface NavbarProps {}
 
 const items = [
   {
-    label: 'Dashboard',
-    href: '/dashboard',
-  },
-  {
     label: 'Explore',
-    href: '/explore',
+    href: '/',
   },
   {
-    label: 'Leaderboard',
-    href: '/leaderboard',
+    label: 'Dashboard [soon]',
+    href: '/dashboard',
+    isDisabled: true,
   },
-  {
-    label: 'Roles',
-    href: '/roles',
-  },
-  {
-    label: 'Docs',
-    href: '/docs',
-  },
-  {
-    label: 'Multipass',
-    href: '/multipass',
-  },
+  // {
+  //   label: 'Leaderboard',
+  //   href: '/leaderboard',
+  // },
+  // {
+  //   label: 'Roles',
+  //   href: '/roles',
+  // },
+  // {
+  //   label: 'Docs',
+  //   href: '/docs',
+  // },
+  // {
+  //   label: 'Multipass',
+  //   href: '/multipass',
+  // },
 ]
 
 const Navbar: React.FC<NavbarProps> = () => {
@@ -37,19 +38,26 @@ const Navbar: React.FC<NavbarProps> = () => {
   const currentPath = router.pathname
 
   const isActivePath = (path: string) => {
-    return currentPath.includes(path)
+    return path !== '/dashboard'
+    // return currentPath.includes(path)
   }
 
   return (
     <Navigation>
-      {items.map((item, index) => (
-        <Link href={item.href} key={'navbar-item-' + index}>
-          {isActivePath(item.href) && (
-            <img src={'/assets/navbar-arrow.svg'} alt="navbar-arrow" />
-          )}
-          <NavItem key={index}>{item.label}</NavItem>
-        </Link>
-      ))}
+      {items.map((item, index) =>
+        item?.isDisabled === true ? (
+          <NavItem isDisabled key={index} active={isActivePath(item.href)}>
+            {item.label}
+          </NavItem>
+        ) : (
+          <Link href={item.href} key={'navbar-item-' + index}>
+            {isActivePath(item.href) && (
+              <img src={'/assets/navbar-arrow.svg'} alt="navbar-arrow" />
+            )}
+            <NavItem key={index}>{item.label}</NavItem>
+          </Link>
+        ),
+      )}
     </Navigation>
   )
 }
@@ -81,13 +89,16 @@ const Navigation = styled.ul`
   }
 `
 
-const NavItem = styled.li<{ active?: boolean }>`
+const NavItem = styled.li<{ active?: boolean; isDisabled?: boolean }>`
   font-weight: 400;
   font-size: 14px;
   line-height: 20px;
   color: rgb(var(--lsd-text-primary));
   padding: 4px 0;
   cursor: pointer;
+
+  pointer-events: ${(props) => props.isDisabled && 'none'};
+  opacity: ${(props) => props.isDisabled && 0.4};
 
   ${(props) =>
     props.active &&

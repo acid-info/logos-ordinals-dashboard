@@ -34,7 +34,7 @@ const ExploreSection: React.FC<ExploreSectionProps> = () => {
 
   return (
     <Container>
-      <h1 className="section-title">Explore Operators</h1>
+      <h1 className="section-title">Operators</h1>
       <DropdownContainer>
         <Dropdown
           title="Archetype"
@@ -61,7 +61,7 @@ const Container = styled.main`
     text-align: center;
     font-size: 40px;
     line-height: 48px;
-    margin-top: 60px;
+    margin-top: 70px;
   }
 `
 

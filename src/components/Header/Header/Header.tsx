@@ -1,6 +1,7 @@
 import styled from '@emotion/styled'
 import Link from 'next/link'
 import React from 'react'
+import { Navbar } from '../Navbar'
 
 interface NavbarProps {}
 
@@ -10,17 +11,27 @@ const Header: React.FC<NavbarProps> = () => {
       <Link href="/">
         <Logo src="/assets/logo.svg" alt="Logo" />
       </Link>
-      {/* <Navbar />
+      <Navbar />
       <UserActions>
-        <WalletButton>
+        <Link
+          href="https://discord.com/invite/logosnetwork"
+          passHref
+          target="_blank"
+        >
+          <SocialButton>
+            <span>Join our Discord</span>
+            <Icon src="/icons/discord-white.svg" alt="Discord" />
+          </SocialButton>
+        </Link>
+        {/* <WalletButton>
           <WalletAddress>bc1qa...vehs9</WalletAddress>
           <Icon src="/assets/btc.svg" alt="Wallet icon" />
         </WalletButton>
         <PointsButton>
           <PointsValue>4,278</PointsValue>
           <Icon src="/assets/star.png" alt="Points icon" />
-        </PointsButton>
-      </UserActions> */}
+        </PointsButton> */}
+      </UserActions>
     </Container>
   )
 }
@@ -58,21 +69,31 @@ const Button = styled.button`
   cursor: pointer;
 `
 
-const WalletButton = styled(Button)`
-  width: 140px;
+const SocialButton = styled(Button)`
+  width: 142px;
+  box-sizing: border-box;
+  gap: 12px;
+
+  span {
+    white-space: nowrap;
+  }
 `
 
-const WalletAddress = styled.span`
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
-`
+// const WalletButton = styled(Button)`
+//   width: 140px;
+// `
 
-const PointsButton = styled(Button)`
-  width: 83px;
-`
+// const WalletAddress = styled.span`
+//   overflow: hidden;
+//   text-overflow: ellipsis;
+//   white-space: nowrap;
+// `
 
-const PointsValue = styled.span``
+// const PointsButton = styled(Button)`
+//   width: 83px;
+// `
+
+// const PointsValue = styled.span``
 
 const Icon = styled.img`
   padding: 0;
