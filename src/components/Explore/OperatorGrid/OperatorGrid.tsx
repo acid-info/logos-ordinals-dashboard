@@ -126,14 +126,12 @@ const GridItem = styled.div`
   overflow: hidden;
   cursor: pointer;
   background-color: var(--grey-900);
-  border-radius: 8px;
 `
 
 const Placeholder = styled.div`
   width: 100%;
   aspect-ratio: 1;
   background-color: var(--grey-900);
-  border-radius: 8px;
   opacity: 0.5;
 `
 

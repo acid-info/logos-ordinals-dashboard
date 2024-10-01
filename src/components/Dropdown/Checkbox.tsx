@@ -1,10 +1,33 @@
 import styled from '@emotion/styled'
 
-const CustomCheckboxWrapper = styled.label`
+interface CustomCheckboxProps {
+  checked: boolean
+  onChange: () => void
+  label: string
+}
+
+const Checkbox: React.FC<CustomCheckboxProps> = ({
+  checked,
+  onChange,
+  label,
+}) => (
+  <Container>
+    <HiddenCheckbox type="checkbox" checked={checked} onChange={onChange} />
+    <StyledCheckbox isChecked={checked} />
+    <LabelText>{label}</LabelText>
+  </Container>
+)
+
+const Container = styled.label`
   display: flex;
   align-items: center;
   cursor: pointer;
-  margin-bottom: 10px;
+  padding: 10px 16px 10px 11px;
+  border-bottom: 1px solid white;
+
+  &:last-of-type {
+    border-bottom: none;
+  }
 `
 
 const HiddenCheckbox = styled.input`
@@ -20,7 +43,7 @@ const StyledCheckbox = styled.span<{ isChecked: boolean }>`
   width: 18px;
   height: 18px;
   background-color: ${({ isChecked }) => (isChecked ? 'white' : 'black')};
-  border: 2px solid white;
+  border: 1px solid white;
   position: relative;
   margin-right: 10px;
 
@@ -37,23 +60,5 @@ const StyledCheckbox = styled.span<{ isChecked: boolean }>`
 const LabelText = styled.span`
   color: white;
 `
-
-interface CustomCheckboxProps {
-  checked: boolean
-  onChange: () => void
-  label: string
-}
-
-const Checkbox: React.FC<CustomCheckboxProps> = ({
-  checked,
-  onChange,
-  label,
-}) => (
-  <CustomCheckboxWrapper>
-    <HiddenCheckbox type="checkbox" checked={checked} onChange={onChange} />
-    <StyledCheckbox isChecked={checked} />
-    <LabelText>{label}</LabelText>
-  </CustomCheckboxWrapper>
-)
 
 export default Checkbox

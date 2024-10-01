@@ -64,7 +64,7 @@ const Dropdown: React.FC<DropdownProps> = ({
 
   return (
     <DropdownContainer ref={dropdownRef}>
-      <DropdownHeader onClick={toggleDropdown}>
+      <DropdownHeader onClick={toggleDropdown} isExpanded={isExpanded}>
         <span>{title}</span>
         <Chevron isExpanded={isExpanded}>
           <img src="/assets/chevron-down.svg" alt="chevron down" />
@@ -98,15 +98,15 @@ const DropdownContainer = styled.div`
   width: 200px;
 `
 
-const DropdownHeader = styled.div`
+const DropdownHeader = styled.div<{ isExpanded: boolean }>`
   display: flex;
   justify-content: space-between;
   align-items: center;
   padding: 10px;
   cursor: pointer;
   border: 1px solid white;
-  background-color: black;
-  color: white;
+  background-color: ${({ isExpanded }) => (isExpanded ? 'white' : 'black')};
+  color: ${({ isExpanded }) => (isExpanded ? 'black' : 'white')};
 `
 
 const Chevron = styled.span<{ isExpanded: boolean }>`
@@ -124,27 +124,25 @@ const DropdownContent = styled.div`
   background-color: black;
   border: 1px solid white;
   z-index: 10;
-  padding: 10px;
+
   box-sizing: border-box;
 `
 
 const ButtonContainer = styled.div`
   display: flex;
-  margin-top: 10px;
+  height: 40px;
 `
 
 const Button = styled.button`
   background-color: transparent;
-  border: 1px solid white;
+  border-top: 1px solid white;
   width: 100%;
+  padding: 10px 16px;
   color: white;
-  padding: 5px;
   cursor: pointer;
-  transition: background-color 0.3s;
 
-  &:hover {
-    background-color: white;
-    color: black;
+  &:first-of-type {
+    border-right: 1px solid white;
   }
 `
 
