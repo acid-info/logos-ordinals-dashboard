@@ -6,8 +6,16 @@ interface FooterProps {}
 const Footer: React.FC<FooterProps> = () => {
   return (
     <Container>
-      <span className="logo">Logos Operators</span>
-      <nav className="footer-nav">
+      <FirstRow>
+        <span className="logo">Logos Operators</span>
+        <span className="ift">
+          Built by{' '}
+          <a href="https://free.technology/" target="_blank">
+            IFT
+          </a>
+        </span>
+      </FirstRow>
+      <div className="footer-nav">
         <a href="https://logos.co/terms" target="_blank">
           Terms of Use
         </a>
@@ -20,13 +28,7 @@ const Footer: React.FC<FooterProps> = () => {
         <a href="https://logos.co/manifesto" target="_blank">
           Manifesto
         </a>
-      </nav>
-      <span className="ift">
-        Built by{' '}
-        <a href="https://free.technology/" target="_blank">
-          IFT
-        </a>
-      </span>
+      </div>
     </Container>
   )
 }
@@ -68,9 +70,29 @@ const Container = styled.footer`
     text-decoration: underline;
   }
 
-  @media (max-width: 991px) {
+  @media (max-width: 768px) {
+    flex-direction: column-reverse;
     max-width: 100%;
-    margin-top: 40px;
+    margin-top: 200px;
+    margin-bottom: 16px;
+    height: auto;
+
+    .footer-nav {
+      position: relative;
+      left: unset;
+      bottom: unset;
+      transform: unset;
+    }
+  }
+`
+
+const FirstRow = styled.div`
+  display: flex;
+  width: 100%;
+  justify-content: space-between;
+
+  @media (max-width: 768px) {
+    margin-top: 31px;
   }
 `
 

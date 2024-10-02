@@ -42,11 +42,19 @@ const Container = styled.header`
   align-items: center;
   justify-content: space-between;
   position: relative;
+
+  @media (max-width: 768px) {
+    margin-top: 24px;
+  }
 `
 
 const Logo = styled.img`
   object-fit: contain;
   width: 89px;
+
+  @media (max-width: 768px) {
+    width: 74px;
+  }
 `
 
 const UserActions = styled.div`

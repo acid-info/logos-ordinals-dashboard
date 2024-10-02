@@ -97,7 +97,11 @@ const Dropdown: React.FC<DropdownProps> = ({
 const DropdownContainer = styled.div`
   position: relative;
   display: inline-block;
-  width: 200px;
+  width: 150px;
+
+  @media (max-width: 768px) {
+    width: 100%;
+  }
 `
 
 const DropdownHeader = styled.div<{ isExpanded: boolean }>`
@@ -109,11 +113,9 @@ const DropdownHeader = styled.div<{ isExpanded: boolean }>`
   line-height: 20px;
   cursor: pointer;
 
-  border: 1px solid white;
-  border-left: none;
-
   background-color: ${({ isExpanded }) => (isExpanded ? 'white' : 'black')};
   color: ${({ isExpanded }) => (isExpanded ? 'black' : 'white')};
+  outline: 1px solid white;
 
   &:hover {
     background-color: white;

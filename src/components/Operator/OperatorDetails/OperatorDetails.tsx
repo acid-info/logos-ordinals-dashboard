@@ -105,7 +105,7 @@ const OperatorDetails: React.FC<OperatorDetailsProps> = ({
           </AttributeItem>
         </AttributesFullGrid>
 
-        <DetailsList>
+        {/* <DetailsList>
           {isIncripted &&
             operatorInfo.map((info, index) => (
               <DetailItem key={index}>
@@ -113,7 +113,7 @@ const OperatorDetails: React.FC<OperatorDetailsProps> = ({
                 <DetailValue>{info.value}</DetailValue>
               </DetailItem>
             ))}
-        </DetailsList>
+        </DetailsList> */}
       </OperatorInfo>
     </Container>
   )
@@ -125,9 +125,8 @@ const Container = styled.section`
   gap: 0 16px;
   width: 100%;
 
-  @media (max-width: ${breakpoints.md}px) {
+  @media (max-width: ${breakpoints.sm}px) {
     grid-template-columns: repeat(1, 1fr);
-    margin-top: 40px;
   }
 `
 
@@ -137,12 +136,12 @@ const OperatorImage = styled.div`
   & > img {
     width: 100%;
     height: auto;
-    min-height: 400px;
+    aspect-ratio: 1 / 1;
   }
 
   grid-column: 1 / 13;
 
-  @media (max-width: ${breakpoints.md}px) {
+  @media (max-width: ${breakpoints.sm}px) {
     grid-column: 1 / 2;
   }
 `
@@ -150,7 +149,7 @@ const OperatorImage = styled.div`
 const OperatorInfo = styled.div`
   grid-column: 15 / 25;
 
-  @media (max-width: ${breakpoints.md}px) {
+  @media (max-width: ${breakpoints.sm}px) {
     grid-column: 1 / 2;
   }
 `
@@ -190,6 +189,14 @@ const OperatorTitle = styled.h1`
   font-weight: 400;
   line-height: 40px;
   margin: 0;
+
+  @media (max-width: ${breakpoints.sm}px) {
+    margin-top: 48px;
+    font-size: 20px;
+    font-weight: 400;
+    line-height: 28px;
+    letter-spacing: 0.2px;
+  }
 `
 
 // const OperatorSubtitle = styled.div`
@@ -238,28 +245,37 @@ const ArchetypeSection = styled.div`
   padding: 16px 8px;
   margin-top: 24px;
   margin-bottom: 24px;
-`
 
-const DetailsList = styled.div`
-  display: flex;
-  flex-direction: column;
-  gap: 2px;
-  margin-top: 24px;
-`
-
-const DetailItem = styled.div`
-  display: flex;
-  justify-content: space-between;
-  background-color: var(--grey-900);
-  padding: 16px 8px;
-`
-
-const DetailLabel = styled.span`
   font-size: 14px;
+  line-height: 20px;
+  letter-spacing: 0.14px;
+
+  @media (max-width: ${breakpoints.sm}px) {
+    margin-top: 16px;
+    margin-bottom: 16px;
+  }
 `
 
-const DetailValue = styled.span`
-  font-size: 14px;
-`
+// const DetailsList = styled.div`
+//   display: flex;
+//   flex-direction: column;
+//   gap: 2px;
+//   margin-top: 24px;
+// `
+
+// const DetailItem = styled.div`
+//   display: flex;
+//   justify-content: space-between;
+//   background-color: var(--grey-900);
+//   padding: 16px 8px;
+// `
+
+// const DetailLabel = styled.span`
+//   font-size: 14px;
+// `
+
+// const DetailValue = styled.span`
+//   font-size: 14px;
+// `
 
 export default OperatorDetails

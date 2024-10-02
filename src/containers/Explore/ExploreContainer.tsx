@@ -126,6 +126,16 @@ const Container = styled.main`
     font-size: 40px;
     line-height: 48px;
     margin-top: 70px;
+    letter-spacing: 0.4px;
+  }
+
+  @media (max-width: 768px) {
+    .section-title {
+      margin-top: 60px;
+      font-size: 32px;
+      line-height: 40px;
+      letter-spacing: 0.32px;
+    }
   }
 `
 
@@ -135,10 +145,19 @@ const DropdownContainer = styled.div`
   align-items: center;
 
   max-width: 911px;
+  flex-wrap: wrap;
   margin: 70px auto 0 auto;
 
-  & > div:first-of-type {
+  @media (max-width: 768px) {
+    display: grid;
+    width: 100%;
+
     border-left: 1px solid white;
+    border-right: 1px solid white;
+
+    margin: 60px auto 0 auto;
+
+    grid-template-columns: repeat(2, 1fr);
   }
 `
 
