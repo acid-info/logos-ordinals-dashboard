@@ -26,30 +26,33 @@ pipeline {
   stages {
     stage('Build') {
       steps {
-        script { {
-            image = docker.build(
-              "${IMAGE_NAME}:${GIT_COMMIT.take(8)}".join(' ')
-            )
-          }
+        script {
+          image = docker.build(
+            "${IMAGE_NAME}:${env.GIT_COMMIT.take(8)}"
+          )
         }
       }
     }
 
     stage('Push') {
-      steps { script {
-        withDockerRegistry([credentialsId: 'dockerhub-statusteam-auto', url: '']) {
-          image.push()
+      steps {
+        script {
+          withDockerRegistry([credentialsId: 'dockerhub-statusteam-auto', url: '']) {
+            image.push()
+          }
         }
-      } }
+      }
     }
 
     stage('Deploy') {
       when { expression { params.IMAGE_TAG != '' } }
-      steps { script {
-        withDockerRegistry([credentialsId: 'dockerhub-statusteam-auto', url: '']) {
-          image.push(params.IMAGE_TAG)
+      steps {
+        script {
+          withDockerRegistry([credentialsId: 'dockerhub-statusteam-auto', url: '']) {
+            image.push(params.IMAGE_TAG)
+          }
         }
-      } }
+      }
     }
   }
 
