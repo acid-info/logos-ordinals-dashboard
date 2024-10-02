@@ -105,6 +105,8 @@ const DropdownHeader = styled.div<{ isExpanded: boolean }>`
   justify-content: space-between;
   align-items: center;
   padding: 10px;
+  font-size: 14px;
+  line-height: 20px;
   cursor: pointer;
 
   border: 1px solid white;
@@ -151,7 +153,9 @@ const Button = styled.button`
   background-color: transparent;
   border-top: 1px solid white;
   width: 100%;
-  padding: 10px 16px;
+  font-size: 12px;
+  line-height: 16px;
+  white-space: nowrap;
   color: white;
   cursor: pointer;
 

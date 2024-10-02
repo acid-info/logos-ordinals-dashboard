@@ -59,6 +59,8 @@ const StyledCheckbox = styled.span<{ isChecked: boolean }>`
 
 const LabelText = styled.span`
   color: white;
+  font-size: 12px;
+  line-height: 16px;
 `
 
 export default Checkbox
