@@ -1,6 +1,6 @@
 export const siteConfigs = {
   title: 'Logos Ordinals',
-  description: 'Acid is designing the future.',
+  description: 'Explore the Logos Operator Collection',
   keywords: [],
   xHandle: 'logos_network',
 }
