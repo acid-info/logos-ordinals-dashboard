@@ -24,17 +24,12 @@ pipeline {
   }
 
   environment {
-    IMAGE_NAME = 'acid-info-private/logos-ordinals-dashboard'
     NEXT_PUBLIC_SITE_URL = "https://${env.JOB_BASE_NAME}"
   }
 
   stages {
     stage('Build') {
       steps {
-        script {
-          image = docker.build(
-            "${DOCKER_REGISTRY}/${IMAGE_NAME}:${GIT_COMMIT.take(8)}",
-          )
         }
       }
     }
