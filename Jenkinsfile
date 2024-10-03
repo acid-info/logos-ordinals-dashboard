@@ -7,6 +7,11 @@ pipeline {
       defaultValue: params.IMAGE_TAG ?: '',
       description: 'Optional Docker image tag to push.'
     )
+    string(
+      name: 'DOCKER_REGISTRY',
+      description: 'Docker registry ',
+      defaultValue: params.DOCKER_REGISTRY ?: 'harbor.status.im',
+    )
   }
 
   options {
@@ -19,7 +24,7 @@ pipeline {
   }
 
   environment {
-    IMAGE_NAME = 'statusteam/logos-dashboard'
+    IMAGE_NAME = 'acid-info-private/logos-ordinals-dashboard'
     NEXT_PUBLIC_SITE_URL = "https://${env.JOB_BASE_NAME}"
   }
 
@@ -28,7 +33,7 @@ pipeline {
       steps {
         script {
           image = docker.build(
-            "${IMAGE_NAME}:${env.GIT_COMMIT.take(8)}"
+            "${DOCKER_REGISTRY}/${IMAGE_NAME}:${GIT_COMMIT.take(8)}",
           )
         }
       }
@@ -37,7 +42,7 @@ pipeline {
     stage('Push') {
       steps {
         script {
-          withDockerRegistry([credentialsId: 'dockerhub-statusteam-auto', url: '']) {
+          withDockerRegistry([credentialsId: 'harbor-acid-info-private-robot', url: 'https://${DOCKER_REGISTRY}']) {
             image.push()
           }
         }
@@ -48,7 +53,7 @@ pipeline {
       when { expression { params.IMAGE_TAG != '' } }
       steps {
         script {
-          withDockerRegistry([credentialsId: 'dockerhub-statusteam-auto', url: '']) {
+          withDockerRegistry([credentialsId: 'harbor-acid-info-private-robot', url: 'https://${DOCKER_REGISTRY}']) {
             image.push(params.IMAGE_TAG)
           }
         }
