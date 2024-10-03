@@ -13,7 +13,9 @@ const Checkbox: React.FC<CustomCheckboxProps> = ({
 }) => (
   <Container>
     <HiddenCheckbox type="checkbox" checked={checked} onChange={onChange} />
-    <StyledCheckbox isChecked={checked} />
+    <StyledCheckbox isChecked={checked}>
+      {checked && <img src="/assets/check.svg" alt="checkmark" />}
+    </StyledCheckbox>
     <LabelText>{label}</LabelText>
   </Container>
 )
@@ -39,22 +41,15 @@ const HiddenCheckbox = styled.input`
 `
 
 const StyledCheckbox = styled.span<{ isChecked: boolean }>`
-  display: inline-block;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid white;
   width: 18px;
   height: 18px;
   background-color: ${({ isChecked }) => (isChecked ? 'white' : 'black')};
-  border: 1px solid white;
   position: relative;
   margin-right: 10px;
-
-  &::after {
-    content: ${({ isChecked }) => (isChecked ? "'✓'" : "''")};
-    color: black;
-    position: absolute;
-    top: -2px;
-    left: 2px;
-    font-size: 14px;
-  }
 `
 
 const LabelText = styled.span`

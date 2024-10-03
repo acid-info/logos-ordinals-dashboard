@@ -74,6 +74,7 @@ const ExploreSection: React.FC<ExploreSectionProps> = () => {
           options={ARCHETYPE}
           onSelectionChange={handleFilterChange}
           filterType="archetype"
+          prefill={ARCHETYPE}
         />
         <Dropdown
           title="Comp"

@@ -7,6 +7,7 @@ interface DropdownProps {
   options: string[]
   filterType: string
   onSelectionChange: (selectedOptions: string[], filterType: string) => void
+  prefill?: string[]
 }
 
 const Dropdown: React.FC<DropdownProps> = ({
@@ -14,10 +15,19 @@ const Dropdown: React.FC<DropdownProps> = ({
   options,
   filterType,
   onSelectionChange,
+  prefill = [],
 }) => {
   const [selectedOptions, setSelectedOptions] = useState<string[]>([])
   const [isExpanded, setIsExpanded] = useState(false)
+
   const dropdownRef = useRef<HTMLDivElement>(null)
+
+  // If prefill is provided, set the selected options to the prefill
+  useEffect(() => {
+    if (prefill?.length) {
+      setSelectedOptions(prefill)
+    }
+  }, [prefill])
 
   const handleSelect = (option: string) => {
     let newSelectedOptions = []
