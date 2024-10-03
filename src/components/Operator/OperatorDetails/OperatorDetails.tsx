@@ -57,7 +57,7 @@ const OperatorDetails: React.FC<OperatorDetailsProps> = ({
 
   const handleShare = () => {
     const text = encodeURIComponent(
-      `I am ${operator?.name}. An Operator of the Parallel Society called Logos.\n\nJoin me and explore the collection at https://dashboard.logos.co`,
+      `I am a/an ${operator?.name}, an Operator forging Parallel Societies with Logos.\n\nEnter the portal and explore the collection at https://dashboard.logos.co`,
     )
 
     const twitterUrl = `https://x.com/intent/post?text=${text}`
@@ -65,7 +65,7 @@ const OperatorDetails: React.FC<OperatorDetailsProps> = ({
     // Open a new window with specific dimensions
     window.open(
       twitterUrl,
-      'Share to Twitter',
+      'Share on X',
       'width=600,height=400,scrollbars=yes,resizable=yes',
     )
   }
