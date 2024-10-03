@@ -10,47 +10,64 @@ interface OperatorDetailsProps {
   id: number
 }
 
-const operatorInfo = [
-  { trait: 'Inscription ID', value: '84783..ai0' },
-  { trait: 'Inscription Number', value: '123987' },
-  { trait: 'Owner', value: 'bc1qa...vehs9' },
-  { trait: 'Content', value: 'Link' },
-  { trait: 'Content Type', value: 'image/png' },
-  { trait: 'Created', value: '2/14/2023, 11:01:50 PM' },
-  { trait: 'Genesis Transaction', value: '88244...8da' },
-  { trait: 'Genesis Transaction BlockHeight', value: '776604' },
-  { trait: 'Sat Rarity', value: 'COMMON' },
-  { trait: 'Sat Number', value: '1737591324951162' },
-  { trait: 'Sat Name', value: 'bnskqioxomx' },
-  { trait: 'Sat BlockTime', value: '11/14/2018, 9:52:23 AM' },
-  { trait: 'Sat BlockHeight', value: '550073' },
-  { trait: 'Location', value: '7133b...1:0' },
-  { trait: 'Location BlockHeight', value: 'bc1qa...vehs9' },
-  { trait: 'Output', value: '7133b...b:1' },
-]
+// const operatorInfo = [
+//   { trait: 'Inscription ID', value: '84783..ai0' },
+//   { trait: 'Inscription Number', value: '123987' },
+//   { trait: 'Owner', value: 'bc1qa...vehs9' },
+//   { trait: 'Content', value: 'Link' },
+//   { trait: 'Content Type', value: 'image/png' },
+//   { trait: 'Created', value: '2/14/2023, 11:01:50 PM' },
+//   { trait: 'Genesis Transaction', value: '88244...8da' },
+//   { trait: 'Genesis Transaction BlockHeight', value: '776604' },
+//   { trait: 'Sat Rarity', value: 'COMMON' },
+//   { trait: 'Sat Number', value: '1737591324951162' },
+//   { trait: 'Sat Name', value: 'bnskqioxomx' },
+//   { trait: 'Sat BlockTime', value: '11/14/2018, 9:52:23 AM' },
+//   { trait: 'Sat BlockHeight', value: '550073' },
+//   { trait: 'Location', value: '7133b...1:0' },
+//   { trait: 'Location BlockHeight', value: 'bc1qa...vehs9' },
+//   { trait: 'Output', value: '7133b...b:1' },
+// ]
 
 const OperatorDetails: React.FC<OperatorDetailsProps> = ({
   id,
 }: OperatorDetailsProps) => {
+  // const router = useRouter()
+
   const processedOperators = processOperators(operators as any, [])
-  const isIncripted = false
+  // const isIncripted = false
 
   const operator = findOperatorById(processedOperators, id)
 
-  const handleShare = async () => {
-    if (navigator.share) {
-      try {
-        await navigator.share({
-          title: 'Logos Operator',
-          text: 'Check out this Logos Operator!',
-          url: window.location.href,
-        })
-      } catch (error) {
-        console.error('Error sharing:', error)
-      }
-    } else {
-      alert('Web Share API is not supported in this browser.')
-    }
+  // const handleShare = async () => {
+  //   if (navigator.share) {
+  //     try {
+  //       await navigator.share({
+  //         title: 'Logos Operator',
+  //         text: 'Check out this Logos Operator!',
+  //         url: window.location.href,
+  //       })
+  //     } catch (error) {
+  //       console.error('Error sharing:', error)
+  //     }
+  //   } else {
+  //     alert('Web Share API is not supported in this browser.')
+  //   }
+  // }
+
+  const handleShare = () => {
+    const text = encodeURIComponent(
+      `I am ${operator?.name}. An Operator of the Parallel Society called Logos.\n\nJoin me and explore the collection at https://dashboard.logos.co`,
+    )
+
+    const twitterUrl = `https://x.com/intent/post?text=${text}`
+
+    // Open a new window with specific dimensions
+    window.open(
+      twitterUrl,
+      'Share to Twitter',
+      'width=600,height=400,scrollbars=yes,resizable=yes',
+    )
   }
 
   return (
