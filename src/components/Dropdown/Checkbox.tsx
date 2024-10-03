@@ -37,6 +37,8 @@ const HiddenCheckbox = styled.input`
   opacity: 0;
   height: 0;
   width: 0;
+  width: 14px;
+  height: 14px;
   cursor: pointer;
 `
 
@@ -45,9 +47,10 @@ const StyledCheckbox = styled.span<{ isChecked: boolean }>`
   align-items: center;
   justify-content: center;
   border: 1px solid white;
-  width: 18px;
-  height: 18px;
+  width: 14px;
+  height: 14px;
   background-color: ${({ isChecked }) => (isChecked ? 'white' : 'black')};
+  flex-shrink: 0;
   position: relative;
   margin-right: 10px;
 `
