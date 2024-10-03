@@ -1,7 +1,9 @@
 import { Dropdown } from '@/components/Dropdown'
 import { OperatorGrid } from '@/components/Explore/OperatorGrid'
+import { defaultFilterState } from '@/states/filterState'
 import styled from '@emotion/styled'
-import React, { useState } from 'react'
+import { hookstate, useHookstate } from '@hookstate/core'
+import React from 'react'
 import useGetOperators from '../../../apis/operators/useGetOperators'
 import {
   ARCHETYPE,
@@ -11,31 +13,22 @@ import {
   JACKET,
   SKIN,
 } from '../../../constants/operators'
-import { Archetype } from '../../../types/operators'
 import { processOperators, shuffleOperators } from '../../../utils/operators'
 
 interface ExploreSectionProps {}
 
+const globalState = hookstate(defaultFilterState)
+
 const ExploreSection: React.FC<ExploreSectionProps> = () => {
   const { data, isLoading } = useGetOperators()
 
-  const [filter, setFilter] = useState<{
-    archetype: Archetype[]
-    comp: string[]
-    skin: string[]
-    helmet: string[]
-    jacket: string[]
-    background: string[]
-  }>({
-    archetype: [],
-    comp: [],
-    skin: [],
-    helmet: [],
-    jacket: [],
-    background: [],
-  })
+  const state = useHookstate(globalState)
+  const filter = state.get()
 
-  const processedOperators = processOperators(data as any, filter.archetype)
+  const processedOperators = processOperators(
+    data as any,
+    filter.archetype.slice(),
+  )
 
   const selectedOperators = processedOperators?.filter((operator) => {
     // filter by comp, skin, helmet, jacket, background
@@ -59,10 +52,7 @@ const ExploreSection: React.FC<ExploreSectionProps> = () => {
     selectedOptions: string[],
     filterType: string,
   ) => {
-    setFilter((prevFilter) => ({
-      ...prevFilter,
-      [filterType]: selectedOptions,
-    }))
+    ;(state[filterType as keyof typeof filter] as any).set(selectedOptions)
   }
 
   return (
@@ -74,42 +64,42 @@ const ExploreSection: React.FC<ExploreSectionProps> = () => {
           options={ARCHETYPE}
           onSelectionChange={handleFilterChange}
           filterType="archetype"
-          prefill={ARCHETYPE}
+          prefill={filter.archetype.slice()}
         />
         <Dropdown
           title="Comp"
           options={COMP}
           onSelectionChange={handleFilterChange}
           filterType="comp"
-          prefill={COMP}
+          prefill={filter.comp.slice()}
         />
         <Dropdown
           title="Skin"
           options={SKIN}
           onSelectionChange={handleFilterChange}
           filterType="skin"
-          prefill={SKIN}
+          prefill={filter.skin.slice()}
         />
         <Dropdown
           title="Helmet"
           options={HELMET}
           onSelectionChange={handleFilterChange}
           filterType="helmet"
-          prefill={HELMET}
+          prefill={filter.helmet.slice()}
         />
         <Dropdown
           title="Jacket"
           options={JACKET}
           onSelectionChange={handleFilterChange}
           filterType="jacket"
-          prefill={JACKET}
+          prefill={filter.jacket.slice()}
         />
         <Dropdown
           title="Background"
           options={BACKGROUND}
           onSelectionChange={handleFilterChange}
           filterType="background"
-          prefill={BACKGROUND}
+          prefill={filter.background.slice()}
         />
       </DropdownContainer>
       <OperatorGrid
