@@ -12,7 +12,7 @@ import {
   SKIN,
 } from '../../../constants/operators'
 import { Archetype } from '../../../types/operators'
-import { processOperators } from '../../../utils/operators'
+import { processOperators, shuffleOperators } from '../../../utils/operators'
 
 interface ExploreSectionProps {}
 
@@ -53,7 +53,7 @@ const ExploreSection: React.FC<ExploreSectionProps> = () => {
     )
   })
 
-  const randomizedOperators = selectedOperators?.sort(() => Math.random() - 0.5)
+  const randomizedOperators = shuffleOperators(selectedOperators)
 
   const handleFilterChange = (
     selectedOptions: string[],
