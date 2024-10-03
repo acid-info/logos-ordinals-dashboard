@@ -23,14 +23,14 @@ export const COMP = [
 
 export const BACKGROUND = [
   '[CAMOED]',
-  'Cypress',
   '[CYPHERED]',
+  '[REDACTED]',
+  'Cypress',
   'LimeWire',
   'Mariana',
   'Marooned',
   'Nightfall',
   'Phantom',
-  '[REDACTED]',
   'Rust',
   'Sanguine',
   'Sulphur',
@@ -40,32 +40,32 @@ export const BACKGROUND = [
 export const SKIN = [
   '[CAMOED]',
   '[CYPHERED]',
+  '[REDACTED]',
   'IC1',
   'IC2',
   'IC3',
   'IC4',
   'IC6',
-  '[REDACTED]',
 ]
 
 export const HELMET = [
-  'Aurora crested helm',
   '[CAMOED]',
-  'Celestial crested helm',
   '[CYPHERED]',
-  'Ethereal crested helm',
   '[REDACTED]',
+  'Aurora crested helm',
+  'Celestial crested helm',
+  'Ethereal crested helm',
   'Regal crested helm',
   'Verdant crested helm',
 ]
 
 export const JACKET = [
-  'Amethyst frock coat',
   '[CAMOED]',
-  'Carmine frock coat',
   '[CYPHERED]',
+  '[REDACTED]',
+  'Amethyst frock coat',
+  'Carmine frock coat',
   'Cobalt frock coat',
   'Emerald frock coat',
-  '[REDACTED]',
   'Sulphur frock coat',
 ]

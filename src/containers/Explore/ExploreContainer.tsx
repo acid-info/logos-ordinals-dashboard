@@ -113,7 +113,7 @@ const ExploreSection: React.FC<ExploreSectionProps> = () => {
         />
       </DropdownContainer>
       <OperatorGrid
-        key={randomizedOperators?.join(',')}
+        key={JSON.stringify(filter)}
         data={randomizedOperators as any}
         isLoading={isLoading}
       />
