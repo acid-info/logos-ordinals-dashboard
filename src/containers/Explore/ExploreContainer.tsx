@@ -81,30 +81,35 @@ const ExploreSection: React.FC<ExploreSectionProps> = () => {
           options={COMP}
           onSelectionChange={handleFilterChange}
           filterType="comp"
+          prefill={COMP}
         />
         <Dropdown
           title="Skin"
           options={SKIN}
           onSelectionChange={handleFilterChange}
           filterType="skin"
+          prefill={SKIN}
         />
         <Dropdown
           title="Helmet"
           options={HELMET}
           onSelectionChange={handleFilterChange}
           filterType="helmet"
+          prefill={HELMET}
         />
         <Dropdown
           title="Jacket"
           options={JACKET}
           onSelectionChange={handleFilterChange}
           filterType="jacket"
+          prefill={JACKET}
         />
         <Dropdown
           title="Background"
           options={BACKGROUND}
           onSelectionChange={handleFilterChange}
           filterType="background"
+          prefill={BACKGROUND}
         />
       </DropdownContainer>
       <OperatorGrid
