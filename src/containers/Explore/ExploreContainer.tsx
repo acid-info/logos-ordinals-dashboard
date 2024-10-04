@@ -3,7 +3,7 @@ import { OperatorGrid } from '@/components/Explore/OperatorGrid'
 import { defaultFilterState } from '@/states/filterState'
 import styled from '@emotion/styled'
 import { hookstate, useHookstate } from '@hookstate/core'
-import React from 'react'
+import React, { useMemo } from 'react'
 import useGetOperators from '../../../apis/operators/useGetOperators'
 import {
   ARCHETYPE,
@@ -17,7 +17,9 @@ import { processOperators, shuffleOperators } from '../../../utils/operators'
 
 interface ExploreSectionProps {}
 
-const globalState = hookstate(defaultFilterState)
+const globalState = hookstate(() =>
+  JSON.parse(JSON.stringify(defaultFilterState)),
+)
 
 const ExploreSection: React.FC<ExploreSectionProps> = () => {
   const { data, isLoading } = useGetOperators()
@@ -30,21 +32,14 @@ const ExploreSection: React.FC<ExploreSectionProps> = () => {
     filter.archetype.slice(),
   )
 
-  const selectedOperators = processedOperators?.filter((operator) => {
-    // filter by comp, skin, helmet, jacket, background
-    return (
-      (filter.comp.length === 0 ||
-        filter.comp.includes(operator.comp as string)) &&
-      (filter.skin.length === 0 ||
-        filter.skin.includes(operator.skin as string)) &&
-      (filter.helmet.length === 0 ||
-        filter.helmet.includes(operator.helmet as string)) &&
-      (filter.jacket.length === 0 ||
-        filter.jacket.includes(operator.jacket as string)) &&
-      (filter.background.length === 0 ||
-        filter.background.includes(operator.background as string))
-    )
-  })
+  const selectedOperators = useMemo(() => {
+    const filterCopied = JSON.parse(JSON.stringify(filter))
+
+    return processedOperators
+      ?.filter((op) => filterCopied.comp.includes(op.comp))
+      ?.filter((op) => filterCopied.skin.includes(op.skin))
+      ?.filter((op) => filterCopied.background.includes(op.background))
+  }, [processedOperators, filter])
 
   const randomizedOperators = shuffleOperators(selectedOperators)
 
@@ -52,7 +47,8 @@ const ExploreSection: React.FC<ExploreSectionProps> = () => {
     selectedOptions: string[],
     filterType: string,
   ) => {
-    ;(state[filterType as keyof typeof filter] as any).set(selectedOptions)
+    // @ts-ignore
+    state[filterType].set(selectedOptions)
   }
 
   return (

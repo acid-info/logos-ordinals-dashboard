@@ -84,14 +84,16 @@ const Dropdown: React.FC<DropdownProps> = ({
       </DropdownHeader>
       {isExpanded && (
         <DropdownContent>
-          {options.map((option, index) => (
-            <Checkbox
-              key={index}
-              checked={selectedOptions.includes(option)}
-              onChange={() => handleSelect(option)}
-              label={option}
-            />
-          ))}
+          <ScrollDiv>
+            {options.map((option, index) => (
+              <Checkbox
+                key={index}
+                checked={selectedOptions.includes(option)}
+                onChange={() => handleSelect(option)}
+                label={option}
+              />
+            ))}
+          </ScrollDiv>
           <ButtonContainer>
             <Button onClick={selectAll}>Select All</Button>
             <Button onClick={clearAll}>Clear</Button>
@@ -173,6 +175,22 @@ const Button = styled.button`
 
   &:first-of-type {
     border-right: 1px solid white;
+  }
+`
+
+const ScrollDiv = styled.div`
+  max-height: 400px;
+  overflow-y: auto;
+  overflow-x: hidden;
+  box-sizing: border-box;
+
+  // white scrollbar
+  &::-webkit-scrollbar {
+    width: 10px;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background-color: white;
   }
 `
 

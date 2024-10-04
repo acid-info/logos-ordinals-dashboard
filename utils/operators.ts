@@ -78,3 +78,23 @@ export function shuffleOperators(
   }
   return array
 }
+
+export function extractUniqueValues(data: any, field: string) {
+  if (!data || !field) {
+    return []
+  }
+  const uniqueValues = new Set()
+
+  function traverse(item: any) {
+    if (item[field]) {
+      uniqueValues.add(item[field])
+    }
+    if (item.operators && Array.isArray(item.operators)) {
+      item.operators?.forEach(traverse)
+    }
+  }
+
+  data.forEach(traverse)
+
+  return Array.from(uniqueValues)
+}
