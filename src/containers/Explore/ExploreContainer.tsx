@@ -39,6 +39,8 @@ const ExploreSection: React.FC<ExploreSectionProps> = () => {
       ?.filter((op) => filterCopied.comp.includes(op.comp))
       ?.filter((op) => filterCopied.skin.includes(op.skin))
       ?.filter((op) => filterCopied.background.includes(op.background))
+      ?.filter((op) => filterCopied.helmet.includes(op.helmet))
+      ?.filter((op) => filterCopied.jacket.includes(op.jacket))
   }, [processedOperators, filter])
 
   const randomizedOperators = shuffleOperators(selectedOperators)
