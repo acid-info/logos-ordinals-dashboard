@@ -60,6 +60,10 @@ const Logo = styled.img`
 const UserActions = styled.div`
   display: flex;
   align-items: center;
+
+  a {
+    text-decoration: none;
+  }
 `
 
 const Button = styled.button`
