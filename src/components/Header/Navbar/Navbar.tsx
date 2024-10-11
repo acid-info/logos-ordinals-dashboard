@@ -68,7 +68,7 @@ const Navigation = styled.ul`
   position: absolute;
   left: 50%;
   transform: translateX(-50%);
-  gap: 37px;
+  gap: 41px;
   list-style-type: none;
 
   a {

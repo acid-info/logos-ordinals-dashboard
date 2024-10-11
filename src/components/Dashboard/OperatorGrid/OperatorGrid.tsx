@@ -18,13 +18,14 @@ const OperatorGrid: React.FC<OperatorGridProps> = ({
       <Header>
         <Title>Operators</Title>
         <Controls>
-          <FilterDropdown>
-            <p>Filter</p>
-            <img src="/assets/chevron-down.svg" alt="chevron down" />
-          </FilterDropdown>
-          <IconButton>
-            <img src="/assets/plus.svg" alt="Settings" />
-          </IconButton>
+          <PlusIcon>
+            <img
+              src="/assets/plus.svg"
+              width={10}
+              height={10}
+              alt="Add Operator"
+            />
+          </PlusIcon>
         </Controls>
       </Header>
       <Stats>
@@ -34,14 +35,14 @@ const OperatorGrid: React.FC<OperatorGridProps> = ({
         </Stat>
         <Stat>
           <Label>Staked</Label>
+          <Value>6</Value>
+        </Stat>
+        <Stat>
+          <Label>Unstaked</Label>
           <Value>1</Value>
         </Stat>
         <Stat>
-          <Label>Total Points</Label>
-          <Value>4,278</Value>
-        </Stat>
-        <Stat>
-          <Label>Points/Hr</Label>
+          <Label>XP/Block</Label>
           <Value>912</Value>
         </Stat>
       </Stats>
@@ -83,7 +84,7 @@ const OperatorGrid: React.FC<OperatorGridProps> = ({
   )
 }
 const StyledOperatorGrid = styled.section`
-  margin-top: 94px;
+  margin-top: 116px;
 
   @media (max-width: ${breakpoints.md}px) {
     margin-top: 40px;
@@ -109,24 +110,16 @@ const Controls = styled.div`
   align-items: center;
 `
 
-const FilterDropdown = styled.div`
-  background-color: transparent;
-  width: 128px;
+const PlusIcon = styled.button`
   display: flex;
   align-items: center;
-  justify-content: space-between;
+  justify-content: center;
+
   border: 1px solid rgb(var(--lsd-border-primary));
-  border-right: none;
-  color: rgb(var(--lsd-text-primary));
-  font-weight: 400;
-  font-size: 12px;
-  padding-left: 12px;
+  background-color: transparent;
+  width: 28px;
   height: 28px;
   cursor: pointer;
-
-  img {
-    padding: 8px;
-  }
 `
 
 const IconButton = styled.button`
@@ -172,7 +165,7 @@ const Value = styled.div`
 
 const Grid = styled.div`
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(158px, 1fr));
   gap: 16px;
 `
 
@@ -201,6 +194,13 @@ const OperatorName = styled.div`
   font-weight: 400;
   font-size: 14px;
   line-height: 20px;
+  // 1 line of text
+  display: -webkit-inline-box;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  line-clamp: 1;
+  -webkit-line-clamp: 1;
 `
 
 const PointsPerHour = styled.div`
@@ -219,16 +219,21 @@ const Actions = styled.div`
 const ActionButton = styled.button<{ isStaked: boolean }>`
   flex: 1;
   background-color: ${(props) =>
-    props.isStaked ? 'transparent' : 'rgb(var(--lsd-surface-secondary))'};
+    props.isStaked ? 'rgb(var(--lsd-surface-secondary))' : 'transparent'};
   color: ${(props) =>
     props.isStaked
-      ? 'rgb(var(--lsd-text-primary))'
-      : 'rgb(var(--lsd-text-secondary))'};
+      ? 'rgb(var(--lsd-text-secondary))'
+      : 'rgb(var(--lsd-text-primary))'};
   border: none;
   font-weight: 400;
   font-size: 12px;
   line-height: 16px;
   padding: 6px 12px;
+
+  &:hover {
+    background-color: rgb(var(--lsd-surface-secondary));
+    color: rgb(var(--lsd-text-secondary));
+  }
 
   cursor: pointer;
 `

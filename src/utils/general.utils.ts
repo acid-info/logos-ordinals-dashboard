@@ -9,3 +9,16 @@ export function arrayIncludesAnyElementFromOtherArray<T>(a: T[], b: T[]) {
 
   return a.some((el) => b.includes(el))
 }
+
+export function numberWithCommas(x: number) {
+  return x?.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',')
+}
+
+// truncates a string to first 5 and last 5, appends an ellipsis in the middle
+export function truncateString(str: string, length = 10) {
+  if (str.length <= length) {
+    return str
+  }
+
+  return `${str.slice(0, 5)}...${str.slice(-5)}`
+}

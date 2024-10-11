@@ -1,3 +1,5 @@
+import { Collapse } from '@/components/common/Collapse'
+import { truncateString } from '@/utils/general.utils'
 import styled from '@emotion/styled'
 import React from 'react'
 
@@ -6,23 +8,19 @@ interface OperatorPanelProps {}
 const TEMP_BADGES = [
   {
     id: 1,
-    image: '/dashboard/badges/badge-1.svg',
+    image: '/dashboard/badges/1-year-streak.svg',
   },
   {
     id: 2,
-    image: '/dashboard/badges/badge-2.svg',
+    image: '/dashboard/badges/10-day-streak.svg',
   },
   {
     id: 3,
-    image: '/dashboard/badges/badge-3.svg',
+    image: '/dashboard/badges/100-days-streak.svg',
   },
   {
     id: 4,
-    image: '/dashboard/badges/badge-4.svg',
-  },
-  {
-    id: 5,
-    image: '/dashboard/badges/badge-5.svg',
+    image: '/dashboard/badges/badege-placeholder.svg',
   },
 ]
 
@@ -35,8 +33,7 @@ const OperatorPanel: React.FC<OperatorPanelProps> = () => {
           alt="Operator"
         />
         <OperatorInfo>
-          <OperatorType>Operator</OperatorType>
-          <OperatorName>Memetic #1234</OperatorName>
+          <OperatorType>Quantum Recursive Memetic </OperatorType>
         </OperatorInfo>
       </Profile>
       <InfoRow>
@@ -46,16 +43,30 @@ const OperatorPanel: React.FC<OperatorPanelProps> = () => {
 
       <CallSignContainer>
         <InfoRow>
+          <Label>Wallet</Label>
+          <Value>{truncateString('bc1qaa13nskasjovehs9')}</Value>
+          <ActionButton>
+            <img src="/assets/file-copy.svg" alt="Copy wallet address" />
+          </ActionButton>
+        </InfoRow>
+        <InfoRow>
           <Label>Callsign</Label>
           <Value>RagingBull</Value>
+          <ActionButton>
+            <img src="/assets/edit.svg" alt="Edit callsign" />
+          </ActionButton>
         </InfoRow>
-      </CallSignContainer>
-
-      <ProfileInfo>
+        <InfoRow>
+          <Label>Role</Label>
+          <Value>Operator</Value>
+        </InfoRow>
         <InfoRow>
           <Label>OP Number</Label>
           <Value>#214</Value>
         </InfoRow>
+      </CallSignContainer>
+
+      <ProfileInfo>
         <BadgesSection>
           <BadgeTitle>
             <Label>Badges</Label>
@@ -72,6 +83,11 @@ const OperatorPanel: React.FC<OperatorPanelProps> = () => {
           </BadgeList>
         </BadgesSection>
       </ProfileInfo>
+
+      <Collapse
+        header="Refer Operators +100 XP"
+        content={truncateString('445f5slk1as4645sdf54')}
+      />
     </StyledPanel>
   )
 }
@@ -90,20 +106,12 @@ const OperatorImage = styled.img`
 
 const OperatorInfo = styled.div`
   display: flex;
-  justify-content: space-between;
+  justify-content: center;
   padding: 16px 8px;
   margin-bottom: 2px;
 `
 
 const OperatorType = styled.span``
-
-const OperatorName = styled.span``
-
-const InfoColumn = styled.div`
-  display: flex;
-  flex-direction: column;
-  gap: 2px;
-`
 
 const InfoRow = styled.div`
   display: flex;
@@ -129,10 +137,13 @@ const CallSignContainer = styled.div`
   margin-bottom: 2px;
 `
 
-const Label = styled.span``
+const Label = styled.span`
+  width: 87px;
+`
 
 const Value = styled.span`
   text-align: right;
+  width: 155px;
 `
 
 const BadgesSection = styled.div`
@@ -159,14 +170,23 @@ const BadgeIcon = styled.img`
 const BadgeList = styled.div`
   display: flex;
   flex-wrap: wrap;
-  gap: 8px;
+  gap: 16px;
 `
 
 const Badge = styled.img`
-  width: 45px;
-  height: 42px;
+  width: 52px;
+  height: 52px;
   object-fit: contain;
+`
+
+const ActionButton = styled.button`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: none;
+  background-color: transparent;
   cursor: pointer;
+  margin-left: 18px;
 `
 
 export default OperatorPanel

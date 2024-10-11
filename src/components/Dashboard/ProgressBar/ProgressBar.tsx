@@ -1,3 +1,4 @@
+import { numberWithCommas } from '@/utils/general.utils'
 import styled from '@emotion/styled'
 import React, { useEffect, useState } from 'react'
 
@@ -56,22 +57,30 @@ const ProgressBar: React.FC<ProgressBarProps> = ({
         </ClaimPeriodWrapper>
       </ProgressTrack>
       <ProgressStats>
-        <Stat>Staking Rate: 100%</Stat>
-        <Stat>Bonus Reward: 20%</Stat>
+        <Stat>Current Rate: 100%</Stat>
+        <Stat>XP Bonus: +20%</Stat>
       </ProgressStats>
       <ProgressFooter>
         <TimeRemaining>
           <Label>Time Remaining</Label>
           <Value color="var(--orange)" backgroundColor="var(--dark-orange)">
-            {timeRemaining}
+            {`${numberWithCommas(1026)} blocks`}
           </Value>
         </TimeRemaining>
-        <EarnedReward>
-          <Label>Earned Epoch 1</Label>
-          <Value color="#F29AE9" backgroundColor="#320430">
-            200.12
-          </Value>
-        </EarnedReward>
+        <PointsRow>
+          <EarnedReward>
+            <Label>Total Points</Label>
+            <Value color="#F29AE9" backgroundColor="#320430">
+              {`${numberWithCommas(40278)}`}
+            </Value>
+          </EarnedReward>
+          <EarnedReward>
+            <Label>Epoch 1 XP</Label>
+            <Value color="#F29AE9" backgroundColor="#320430">
+              {`${numberWithCommas(5020)}`}
+            </Value>
+          </EarnedReward>
+        </PointsRow>
       </ProgressFooter>
     </StyledProgressBar>
   )
@@ -99,6 +108,8 @@ const EpochLabel = styled.span`
   padding: 0 8px;
   line-height: 20px;
   font-size: 14px;
+  width: 72px;
+  text-align: center;
 `
 
 const EpochInfo = styled.div`
@@ -111,7 +122,7 @@ const NextEpoch = styled.span``
 const ProgressTrack = styled.div`
   position: relative;
   height: 8px;
-  margin: 14px 0;
+  margin: 16px 0;
   border-bottom: 1px solid rgb(var(--lsd-border-primary));
   border-right: 1px solid rgb(var(--lsd-border-primary));
 `
@@ -165,19 +176,18 @@ const TimeRemaining = styled.div`
   border: 1px solid var(--dark-orange);
   display: flex;
   align-items: center;
-  gap: 16px;
 `
 
 const EarnedReward = styled.div`
   border: 1px solid #320430;
   display: flex;
   align-items: center;
-  gap: 16px;
 `
 
 const Label = styled.div`
   font-size: 12px;
   padding: 8px 16px;
+  line-height: 16px;
 `
 
 const Value = styled.div<{ color: string; backgroundColor: string }>`
@@ -185,6 +195,12 @@ const Value = styled.div<{ color: string; backgroundColor: string }>`
   color: ${(props) => props.color};
   background-color: ${(props) => props.backgroundColor};
   padding: 8px 16px;
+  line-height: 16px;
+  letter-spacing: 0.12px;
+`
+
+const PointsRow = styled.div`
+  display: flex;
 `
 
 export default ProgressBar
