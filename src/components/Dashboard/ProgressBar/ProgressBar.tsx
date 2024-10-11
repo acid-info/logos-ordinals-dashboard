@@ -1,61 +1,38 @@
 import { numberWithCommas } from '@/utils/general.utils'
 import styled from '@emotion/styled'
-import React, { useEffect, useState } from 'react'
+import React from 'react'
 
 interface ProgressBarProps {
   progress: number // Current progress of the epoch
-  claimPosition: number // Position where "claim period" should appear
+  claimPosition: number // Position from the right where the claim xp tag should be placed
 }
 
 const ProgressBar: React.FC<ProgressBarProps> = ({
   progress = 0,
-  claimPosition = 60,
+  claimPosition = 76,
 }) => {
-  const [timeRemaining, setTimeRemaining] = useState<string>('...')
-
-  useEffect(() => {
-    const dueDate = new Date('2024-12-31T23:59:59Z')
-
-    const updateRemainingTime = () => {
-      const now = new Date()
-      const timeDifference = dueDate.getTime() - now.getTime()
-
-      if (timeDifference <= 0) {
-        setTimeRemaining('Expired')
-        return
-      }
-
-      const seconds = Math.floor((timeDifference / 1000) % 60)
-      const minutes = Math.floor((timeDifference / 1000 / 60) % 60)
-      const hours = Math.floor((timeDifference / 1000 / 60 / 60) % 24)
-      const days = Math.floor(timeDifference / 1000 / 60 / 60 / 24) % 30
-      const months = Math.floor(timeDifference / 1000 / 60 / 60 / 24 / 30)
-
-      setTimeRemaining(
-        `${months}mo, ${days}days, ${hours}hrs, ${minutes}min, ${seconds}sec`,
-      )
-    }
-
-    const intervalId = setInterval(updateRemainingTime, 1000)
-
-    return () => clearInterval(intervalId)
-  }, [])
-
   return (
-    <StyledProgressBar>
+    <Container>
       <ProgressHeader>
         <EpochLabel>epoch 1</EpochLabel>
-        <EpochInfo>
-          <NextEpoch>epoch 2</NextEpoch>
-        </EpochInfo>
+        <NextEpoch>epoch 2</NextEpoch>
       </ProgressHeader>
-      <ProgressTrack>
-        <ProgressFill width={progress} />
-        <ClaimPeriodWrapper position={claimPosition}>
-          <ClaimPeriod>claim period</ClaimPeriod>
-          <VerticalBar />
-        </ClaimPeriodWrapper>
-      </ProgressTrack>
+      <ProgressRow>
+        <ProgressTrack>
+          <ProgressFill width={progress} />
+          <ClaimPeriodWrapper>
+            <ClaimPeriod position={claimPosition}>claim xp</ClaimPeriod>
+            <VerticalBar />
+          </ClaimPeriodWrapper>
+        </ProgressTrack>
+        <Epoch2Wrapper>
+          <EpochBars>
+            {[...Array(22)].map((_, index) => (
+              <EpochBar key={index} />
+            ))}
+          </EpochBars>
+        </Epoch2Wrapper>
+      </ProgressRow>
       <ProgressStats>
         <Stat>Current Rate: 100%</Stat>
         <Stat>XP Bonus: +20%</Stat>
@@ -82,14 +59,21 @@ const ProgressBar: React.FC<ProgressBarProps> = ({
           </EarnedReward>
         </PointsRow>
       </ProgressFooter>
-    </StyledProgressBar>
+    </Container>
   )
 }
 
-const StyledProgressBar = styled.section`
+const Container = styled.section`
   font-weight: 400;
   font-size: 14px;
   line-height: 20px;
+`
+
+const ProgressRow = styled.div`
+  display: flex;
+  gap: 8px;
+
+  align-items: baseline;
 `
 
 const ProgressHeader = styled.div`
@@ -112,19 +96,23 @@ const EpochLabel = styled.span`
   text-align: center;
 `
 
-const EpochInfo = styled.div`
-  display: flex;
-  gap: 8px;
+const NextEpoch = styled.span`
+  width: 76px;
+  background-color: rgb(var(--lsd-surface-secondary));
+  color: rgb(var(--lsd-text-secondary));
+  text-align: center;
+  padding: 0 8px;
 `
-
-const NextEpoch = styled.span``
 
 const ProgressTrack = styled.div`
   position: relative;
   height: 8px;
   margin: 16px 0;
+  width: calc(100% - 83px);
   border-bottom: 1px solid rgb(var(--lsd-border-primary));
   border-right: 1px solid rgb(var(--lsd-border-primary));
+  display: flex;
+  align-items: center;
 `
 
 const ProgressFill = styled.div<{ width: number }>`
@@ -133,30 +121,51 @@ const ProgressFill = styled.div<{ width: number }>`
   background-color: rgb(var(--lsd-surface-secondary));
 `
 
-const ClaimPeriodWrapper = styled.div<{ position: number }>`
+const ClaimPeriodWrapper = styled.div`
   position: absolute;
-  top: -14px;
-
-  left: ${(props) => props.position}%;
+  top: -20px;
+  right: 0;
   display: flex;
   flex-direction: column;
 `
 
-const ClaimPeriod = styled.span`
+const ClaimPeriod = styled.span<{ position: number }>`
   background-color: rgb(var(--lsd-surface-secondary));
   color: rgb(var(--lsd-text-secondary));
   padding: 0 8px;
   position: relative;
-  top: -8px;
   line-height: 20px;
   font-size: 14px;
+  width: ${(props) => props.position}px;
+  text-align: center;
+  top: -16px;
 `
 
 const VerticalBar = styled.div`
   width: 1px;
   height: 8px;
   background-color: white;
-  z-index: 1;
+  position: absolute;
+  bottom: -8px; /* Align vertical bar at the bottom of progress bar */
+`
+
+const Epoch2Wrapper = styled.div`
+  margin-left: auto;
+  width: 76px;
+  display: flex;
+  flex-direction: column;
+`
+
+const EpochBars = styled.div`
+  display: flex;
+  gap: 2.75px;
+`
+
+// vertical bar, 1px width 6px height, white => inside EpochBars
+const EpochBar = styled.div`
+  width: 1px;
+  height: 6px;
+  background-color: white;
 `
 
 const ProgressStats = styled.div`

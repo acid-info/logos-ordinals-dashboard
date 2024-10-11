@@ -64,7 +64,7 @@ const DashboardContainer: React.FC<DashboardPageProps> = ({
           <OperatorPanel />
         </LeftColumn>
         <RightColumn>
-          <ProgressBar progress={20} claimPosition={60} />
+          <ProgressBar progress={30} claimPosition={76} />
           <OperatorGrid data={random20Operators} isLoading={isLoading} />
         </RightColumn>
       </Wrapper>
