@@ -1,3 +1,4 @@
+import { breakpoints } from '@/configs/ui.configs'
 import styled from '@emotion/styled'
 import React from 'react'
 
@@ -70,7 +71,7 @@ const Container = styled.footer`
     text-decoration: underline;
   }
 
-  @media (max-width: 768px) {
+  @media (max-width: ${breakpoints.sm}px) {
     flex-direction: column-reverse;
     max-width: 100%;
     margin-top: 200px;
@@ -79,9 +80,13 @@ const Container = styled.footer`
 
     .footer-nav {
       position: relative;
+      width: 100%;
       left: unset;
       bottom: unset;
       transform: unset;
+      gap: unset;
+      display: flex;
+      justify-content: space-between;
     }
   }
 `

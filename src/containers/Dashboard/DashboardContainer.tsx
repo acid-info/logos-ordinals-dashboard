@@ -61,10 +61,15 @@ const DashboardContainer: React.FC<DashboardPageProps> = ({
     <Container {...props}>
       <Wrapper>
         <LeftColumn>
+          <MobileProgressBar>
+            <ProgressBar progress={30} claimPosition={76} />
+          </MobileProgressBar>
           <OperatorPanel />
         </LeftColumn>
         <RightColumn>
-          <ProgressBar progress={30} claimPosition={76} />
+          <DesktopProgressBar>
+            <ProgressBar progress={30} claimPosition={76} />
+          </DesktopProgressBar>
           <OperatorGrid data={random20Operators} isLoading={isLoading} />
         </RightColumn>
       </Wrapper>
@@ -74,11 +79,7 @@ const DashboardContainer: React.FC<DashboardPageProps> = ({
 
 export default DashboardContainer
 
-const Container = styled.div`
-  @media (max-width: ${breakpoints.lg}px) {
-    margin-inline: 10px;
-  }
-`
+const Container = styled.div``
 
 const Wrapper = styled.div`
   display: grid;
@@ -88,16 +89,17 @@ const Wrapper = styled.div`
   margin-top: 80px;
   width: 100%;
 
-  @media (max-width: ${breakpoints.md}px) {
-    grid-template-columns: 1fr;
-    margin-top: 40px;
+  @media (max-width: ${breakpoints.sm}px) {
+    display: flex;
+    flex-direction: column;
+    margin-top: 70px;
   }
 `
 
 const LeftColumn = styled.section`
   grid-column: 1 / 6;
 
-  @media (max-width: ${breakpoints.md}px) {
+  @media (max-width: ${breakpoints.sm}px) {
     grid-column: 1 / 2;
   }
 `
@@ -105,7 +107,24 @@ const LeftColumn = styled.section`
 const RightColumn = styled.section`
   grid-column: 8 / 23;
 
-  @media (max-width: ${breakpoints.md}px) {
+  @media (max-width: ${breakpoints.sm}px) {
     grid-column: 1 / 2;
+  }
+`
+
+const DesktopProgressBar = styled.div`
+  display: none;
+
+  @media (min-width: ${breakpoints.sm}px) {
+    display: block;
+  }
+`
+
+const MobileProgressBar = styled.div`
+  display: block;
+  margin-bottom: 70px;
+
+  @media (min-width: ${breakpoints.sm}px) {
+    display: none;
   }
 `

@@ -17,6 +17,6 @@ export const Container = styled.div`
   position: relative;
 
   @media (max-width: ${breakpoints.md}px) {
-    padding: 0 20px;
+    padding: 0 15px;
   }
 `

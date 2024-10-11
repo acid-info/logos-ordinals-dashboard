@@ -1,3 +1,4 @@
+import { breakpoints } from '@/configs/ui.configs'
 import { numberWithCommas } from '@/utils/general.utils'
 import styled from '@emotion/styled'
 import React from 'react'
@@ -15,7 +16,7 @@ const ProgressBar: React.FC<ProgressBarProps> = ({
     <Container>
       <ProgressHeader>
         <EpochLabel>epoch 1</EpochLabel>
-        <NextEpoch>epoch 2</NextEpoch>
+        <EpochLabel>epoch 2</EpochLabel>
       </ProgressHeader>
       <ProgressRow>
         <ProgressTrack>
@@ -79,11 +80,6 @@ const ProgressRow = styled.div`
 const ProgressHeader = styled.div`
   display: flex;
   justify-content: space-between;
-
-  @media (max-width: 768px) {
-    flex-direction: column;
-    gap: 8px;
-  }
 `
 
 const EpochLabel = styled.span`
@@ -92,16 +88,15 @@ const EpochLabel = styled.span`
   padding: 0 8px;
   line-height: 20px;
   font-size: 14px;
-  width: 72px;
-  text-align: center;
-`
-
-const NextEpoch = styled.span`
   width: 76px;
-  background-color: rgb(var(--lsd-surface-secondary));
-  color: rgb(var(--lsd-text-secondary));
   text-align: center;
-  padding: 0 8px;
+
+  @media (max-width: ${breakpoints.sm}px) {
+    width: 68px;
+    padding: 2px 7px;
+    font-size: 12px;
+    line-height: 16px;
+  }
 `
 
 const ProgressTrack = styled.div`
@@ -129,15 +124,9 @@ const ClaimPeriodWrapper = styled.div`
   flex-direction: column;
 `
 
-const ClaimPeriod = styled.span<{ position: number }>`
-  background-color: rgb(var(--lsd-surface-secondary));
-  color: rgb(var(--lsd-text-secondary));
-  padding: 0 8px;
+const ClaimPeriod = styled(EpochLabel)<{ position: number }>`
   position: relative;
-  line-height: 20px;
-  font-size: 14px;
   width: ${(props) => props.position}px;
-  text-align: center;
   top: -16px;
 `
 
@@ -179,6 +168,14 @@ const Stat = styled.span``
 const ProgressFooter = styled.div`
   display: flex;
   gap: 16px;
+
+  @media (max-width: ${breakpoints.sm}px) {
+    overflow-x: auto;
+
+    // hide scroll bar
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+  }
 `
 
 const TimeRemaining = styled.div`
@@ -197,6 +194,7 @@ const Label = styled.div`
   font-size: 12px;
   padding: 8px 16px;
   line-height: 16px;
+  white-space: nowrap;
 `
 
 const Value = styled.div<{ color: string; backgroundColor: string }>`
@@ -206,6 +204,7 @@ const Value = styled.div<{ color: string; backgroundColor: string }>`
   padding: 8px 16px;
   line-height: 16px;
   letter-spacing: 0.12px;
+  white-space: nowrap;
 `
 
 const PointsRow = styled.div`

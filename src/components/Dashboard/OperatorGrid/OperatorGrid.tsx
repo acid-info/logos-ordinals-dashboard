@@ -87,7 +87,7 @@ const StyledOperatorGrid = styled.section`
   margin-top: 116px;
 
   @media (max-width: ${breakpoints.md}px) {
-    margin-top: 40px;
+    margin-top: 70px;
   }
 `
 
@@ -142,6 +142,12 @@ const Stats = styled.div`
   justify-content: space-between;
   margin-bottom: 16px;
   gap: 2px;
+
+  @media (max-width: ${breakpoints.sm}px) {
+    display: grid;
+
+    grid-template-columns: repeat(2, 1fr);
+  }
 `
 
 const Stat = styled.div`
@@ -167,6 +173,11 @@ const Grid = styled.div`
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(158px, 1fr));
   gap: 16px;
+
+  @media (max-width: ${breakpoints.sm}px) {
+    // 2 columns
+    grid-template-columns: repeat(2, 1fr);
+  }
 `
 
 const OperatorCard = styled.div`

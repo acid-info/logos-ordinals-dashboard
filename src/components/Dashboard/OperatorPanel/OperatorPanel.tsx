@@ -1,4 +1,5 @@
 import { Collapse } from '@/components/common/Collapse'
+import { breakpoints } from '@/configs/ui.configs'
 import { truncateString } from '@/utils/general.utils'
 import styled from '@emotion/styled'
 import React from 'react'
@@ -33,9 +34,10 @@ const OperatorPanel: React.FC<OperatorPanelProps> = () => {
           alt="Operator"
         />
         <OperatorInfo>
-          <OperatorType>Quantum Recursive Memetic </OperatorType>
+          <OperatorType>Quantum Recursive Memetic</OperatorType>
         </OperatorInfo>
       </Profile>
+
       <InfoRow>
         <Label>Archetype</Label>
         <Value>Memetic</Value>
@@ -93,15 +95,29 @@ const OperatorPanel: React.FC<OperatorPanelProps> = () => {
 }
 
 const StyledPanel = styled.section`
-  font-weight: 400;
   font-size: 14px;
   line-height: 20px;
+`
+
+const Profile = styled.div`
+  background-color: var(--grey-900);
+  padding: 8px;
+  margin-bottom: 2px;
+
+  @media (max-width: ${breakpoints.sm}px) {
+    display: flex;
+    gap: 16px;
+  }
 `
 
 const OperatorImage = styled.img`
   width: 100%;
   aspect-ratio: 1;
   object-fit: cover;
+
+  @media (max-width: ${breakpoints.sm}px) {
+    width: 90px;
+  }
 `
 
 const OperatorInfo = styled.div`
@@ -109,21 +125,27 @@ const OperatorInfo = styled.div`
   justify-content: center;
   padding: 16px 8px;
   margin-bottom: 2px;
+
+  @media (max-width: ${breakpoints.sm}px) {
+    width: 100%;
+    padding: 0;
+    margin-bottom: 0;
+    align-items: center;
+  }
 `
 
-const OperatorType = styled.span``
+const OperatorType = styled.span`
+  @media (max-width: ${breakpoints.sm}px) {
+    text-align: center;
+  }
+`
 
 const InfoRow = styled.div`
   display: flex;
   justify-content: space-between;
   padding: 16px 8px;
-  background-color: var(--grey-900);
-`
-
-const Profile = styled.div`
-  background-color: var(--grey-900);
-  padding: 8px;
   margin-bottom: 2px;
+  background-color: var(--grey-900);
 `
 
 const ProfileInfo = styled.div`
@@ -135,6 +157,10 @@ const ProfileInfo = styled.div`
 const CallSignContainer = styled.div`
   margin-top: 24px;
   margin-bottom: 2px;
+
+  @media (max-width: ${breakpoints.sm}px) {
+    margin-top: 2px;
+  }
 `
 
 const Label = styled.span`
@@ -144,6 +170,10 @@ const Label = styled.span`
 const Value = styled.span`
   text-align: right;
   width: 155px;
+
+  @media (max-width: ${breakpoints.sm}px) {
+    width: auto;
+  }
 `
 
 const BadgesSection = styled.div`
