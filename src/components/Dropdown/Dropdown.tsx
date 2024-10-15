@@ -1,4 +1,6 @@
+import { defaultFilterState } from '@/states/filterState'
 import styled from '@emotion/styled'
+import { hookstate, useHookstate } from '@hookstate/core'
 import React, { useEffect, useRef, useState } from 'react'
 import Checkbox from './Checkbox' // Import the CustomCheckbox
 
@@ -10,6 +12,10 @@ interface DropdownProps {
   prefill?: string[]
 }
 
+const globalState = hookstate(() =>
+  JSON.parse(JSON.stringify(defaultFilterState)),
+)
+
 const Dropdown: React.FC<DropdownProps> = ({
   title,
   options,
@@ -17,17 +23,34 @@ const Dropdown: React.FC<DropdownProps> = ({
   onSelectionChange,
   prefill = [],
 }) => {
+  const [updated, setUpdated] = useState(false)
   const [selectedOptions, setSelectedOptions] = useState<string[]>([])
   const [isExpanded, setIsExpanded] = useState(false)
 
   const dropdownRef = useRef<HTMLDivElement>(null)
 
-  // If prefill is provided, set the selected options to the prefill
+  const state = useHookstate(globalState)
+  const defualtState = state.get()
+
+  useEffect(() => {
+    if (defualtState[filterType]?.length === selectedOptions?.length) {
+      setUpdated(false)
+    }
+  }, [defualtState, selectedOptions])
+
   useEffect(() => {
     if (prefill?.length) {
       setSelectedOptions(prefill)
     }
   }, [prefill])
+
+  const handleUpdate = (selected: string[]) => {
+    if (selected?.length !== options?.length) {
+      setUpdated(true)
+    } else {
+      setUpdated(false)
+    }
+  }
 
   const handleSelect = (option: string) => {
     let newSelectedOptions = []
@@ -38,16 +61,22 @@ const Dropdown: React.FC<DropdownProps> = ({
     }
     setSelectedOptions(newSelectedOptions)
     onSelectionChange(newSelectedOptions, filterType)
+
+    handleUpdate(newSelectedOptions)
   }
 
   const selectAll = () => {
     setSelectedOptions(options)
     onSelectionChange(options, filterType)
+
+    setUpdated(false)
   }
 
   const clearAll = () => {
     setSelectedOptions([])
     onSelectionChange([], filterType)
+
+    setUpdated(true)
   }
 
   const toggleDropdown = () => {
@@ -77,7 +106,10 @@ const Dropdown: React.FC<DropdownProps> = ({
   return (
     <DropdownContainer ref={dropdownRef}>
       <DropdownHeader onClick={toggleDropdown} isExpanded={isExpanded}>
-        <span>{title}</span>
+        <TitleContainer>
+          {updated && <Dot isExpanded={isExpanded} />}
+          <span>{title}</span>
+        </TitleContainer>
         <Chevron isExpanded={isExpanded}>
           <img src="/assets/chevron-down.svg" alt="chevron down" />
         </Chevron>
@@ -192,6 +224,19 @@ const ScrollDiv = styled.div`
   &::-webkit-scrollbar-thumb {
     background-color: white;
   }
+`
+
+const Dot = styled.div<{ isExpanded: boolean }>`
+  width: 4px;
+  height: 4px;
+  border-radius: 50%;
+  background-color: ${({ isExpanded }) => (isExpanded ? 'black' : 'white')};
+`
+
+const TitleContainer = styled.div`
+  display: flex;
+  align-items: center;
+  gap: 14px;
 `
 
 export default Dropdown

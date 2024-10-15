@@ -30,8 +30,8 @@ const filterOptions: FilterOption[] = [
 interface OperatorFilterProps {}
 
 const OperatorFilter: React.FC<OperatorFilterProps> = () => {
-  // checkbox based on filterOptions
   const [checked, setChecked] = useState<number | null>(null)
+
   return (
     <Container>
       {filterOptions.map((option, index) => (

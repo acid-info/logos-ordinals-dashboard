@@ -53,6 +53,10 @@ const ExploreSection: React.FC<ExploreSectionProps> = () => {
     state[filterType].set(selectedOptions)
   }
 
+  const handleResetAll = () => {
+    state.set(defaultFilterState)
+  }
+
   return (
     <Container>
       <h1 className="section-title">Operators</h1>
@@ -99,6 +103,9 @@ const ExploreSection: React.FC<ExploreSectionProps> = () => {
           filterType="background"
           prefill={filter.background.slice()}
         />
+        <ResetAll onClick={handleResetAll}>
+          Reset All <img src="/assets/close-black.svg" />
+        </ResetAll>
       </DropdownContainer>
       <OperatorGrid
         key={JSON.stringify(filter)}
@@ -137,6 +144,7 @@ const DropdownContainer = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
+  position: relative;
 
   max-width: 911px;
   flex-wrap: wrap;
@@ -152,6 +160,25 @@ const DropdownContainer = styled.div`
     margin: 60px auto 0 auto;
 
     grid-template-columns: repeat(2, 1fr);
+  }
+`
+
+const ResetAll = styled.button`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: white;
+  color: black;
+  border: none;
+  height: 42px;
+  padding: 10px 14px 10px 18px;
+  gap: 14px;
+  position: absolute;
+  right: -136px;
+  cursor: pointer;
+
+  @media (max-width: 1190px) {
+    display: none;
   }
 `
 
