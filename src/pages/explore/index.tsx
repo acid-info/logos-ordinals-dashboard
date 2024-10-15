@@ -7,7 +7,7 @@ type PageProps = {}
 export default function ExplorePage(props: PageProps) {
   return (
     <>
-      <SEO />
+      <SEO pagePath="/explore" />
       <ExploreContainer />
     </>
   )

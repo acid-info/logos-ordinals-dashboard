@@ -6,7 +6,7 @@ type PageProps = {}
 export default function LeaderboardPage(props: PageProps) {
   return (
     <>
-      <SEO />
+      <SEO pagePath="/leaderboard" />
       <LeaderboardContainer />
     </>
   )
