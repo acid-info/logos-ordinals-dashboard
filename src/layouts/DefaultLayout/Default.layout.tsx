@@ -2,6 +2,7 @@ import { BackgroundGradient } from '@/components/BackgroundGradient'
 import { Footer } from '@/components/Footer'
 import { Header } from '@/components/Header/Header'
 import { Container, Layout } from '@/components/StyledComponents'
+
 import React, { PropsWithChildren } from 'react'
 
 interface DefaultLayoutProps {}

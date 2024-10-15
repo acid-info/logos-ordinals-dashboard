@@ -1,6 +1,7 @@
 import { Header } from '@/components/Header/Header'
 import { Container, Layout } from '@/components/StyledComponents'
 import { breakpoints } from '@/configs/ui.configs'
+
 import styled from '@emotion/styled'
 import React, { PropsWithChildren } from 'react'
 
