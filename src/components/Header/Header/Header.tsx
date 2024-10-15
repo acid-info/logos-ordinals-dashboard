@@ -1,3 +1,5 @@
+import HamburguerMenu from '@/components/HamburgerMenu/HamburgerMenu'
+import { breakpoints } from '@/configs/ui.configs'
 import styled from '@emotion/styled'
 import Link from 'next/link'
 import React from 'react'
@@ -11,7 +13,9 @@ const Header: React.FC<NavbarProps> = () => {
       <Link href="/">
         <Logo src="/assets/logo.svg" alt="Logo" />
       </Link>
-      <Navbar />
+      <DesktopNavbar>
+        <Navbar />
+      </DesktopNavbar>
       <UserActions>
         <Link
           href="https://discord.com/invite/logosnetwork"
@@ -23,6 +27,7 @@ const Header: React.FC<NavbarProps> = () => {
             <Icon src="/icons/discord-white.svg" alt="Discord" />
           </SocialButton>
         </Link>
+        <HamburguerMenu />
         {/* <WalletButton>
           <WalletAddress>bc1qa...vehs9</WalletAddress>
           <Icon src="/assets/btc.svg" alt="Wallet icon" />
@@ -60,6 +65,7 @@ const Logo = styled.img`
 const UserActions = styled.div`
   display: flex;
   align-items: center;
+  gap: 8px;
 
   a {
     text-decoration: none;
@@ -88,6 +94,16 @@ const SocialButton = styled(Button)`
 
   span {
     white-space: nowrap;
+  }
+`
+
+const DesktopNavbar = styled.div`
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+
+  @media (max-width: ${breakpoints.sm}px) {
+    display: none;
   }
 `
 

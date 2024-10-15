@@ -1,3 +1,4 @@
+import { breakpoints } from '@/configs/ui.configs'
 import styled from '@emotion/styled'
 import Link from 'next/link'
 import { useRouter } from 'next/router'
@@ -5,7 +6,7 @@ import React from 'react'
 
 interface NavbarProps {}
 
-const items = [
+export const navItems = [
   {
     label: 'Countdown',
     href: '/countdown',
@@ -49,7 +50,7 @@ const Navbar: React.FC<NavbarProps> = () => {
 
   return (
     <Navigation>
-      {items.map((item, index) =>
+      {navItems.map((item, index) =>
         item?.isDisabled === true ? (
           <NavItemContainer key={index}>
             <NavItem isDisabled active={isActivePath(item.href)}>
@@ -73,9 +74,7 @@ const Navbar: React.FC<NavbarProps> = () => {
 const Navigation = styled.ul`
   display: flex;
   align-items: center;
-  position: absolute;
-  left: 50%;
-  transform: translateX(-50%);
+
   gap: 41px;
   list-style-type: none;
 
@@ -93,7 +92,13 @@ const Navigation = styled.ul`
   }
 
   @media (max-width: 768px) {
-    display: none;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    position: relative;
+    left: unset;
+    transform: none;
+    gap: 10px;
   }
 `
 
@@ -115,6 +120,11 @@ const NavItem = styled.li<{ active?: boolean; isDisabled?: boolean }>`
       margin-right: 6px;
     }
   `}
+
+  @media (max-width: ${breakpoints.sm}px) {
+    font-size: 12px;
+    line-height: 16px;
+  }
 `
 
 const NavItemContainer = styled.div`
