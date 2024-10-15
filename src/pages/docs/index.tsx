@@ -6,7 +6,7 @@ type PageProps = {}
 export default function DocsPage(props: PageProps) {
   return (
     <>
-      <SEO />
+      <SEO pagePath="/docs" />
       <DocsContainer />
     </>
   )

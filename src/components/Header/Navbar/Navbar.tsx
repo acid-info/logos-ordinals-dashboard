@@ -7,13 +7,18 @@ interface NavbarProps {}
 
 const items = [
   {
+    label: 'Countdown',
+    href: '/countdown',
+  },
+  {
     label: 'Explore',
     href: '/',
   },
   {
-    label: 'Dashboard [soon]',
+    label: 'Dashboard',
     href: '/dashboard',
     isDisabled: true,
+    isSoon: true,
   },
   // {
   //   label: 'Leaderboard',
@@ -38,7 +43,7 @@ const Navbar: React.FC<NavbarProps> = () => {
   const currentPath = router.pathname
 
   const isActivePath = (path: string) => {
-    return path !== '/dashboard'
+    return currentPath === path
     // return currentPath.includes(path)
   }
 
@@ -46,9 +51,12 @@ const Navbar: React.FC<NavbarProps> = () => {
     <Navigation>
       {items.map((item, index) =>
         item?.isDisabled === true ? (
-          <NavItem isDisabled key={index} active={isActivePath(item.href)}>
-            {item.label}
-          </NavItem>
+          <NavItemContainer key={index}>
+            <NavItem isDisabled active={isActivePath(item.href)}>
+              {item.label}
+            </NavItem>
+            {item?.isSoon && <SoonText>Soon</SoonText>}
+          </NavItemContainer>
         ) : (
           <Link href={item.href} key={'navbar-item-' + index}>
             {isActivePath(item.href) && (
@@ -90,7 +98,6 @@ const Navigation = styled.ul`
 `
 
 const NavItem = styled.li<{ active?: boolean; isDisabled?: boolean }>`
-  font-weight: 400;
   font-size: 14px;
   line-height: 20px;
   color: rgb(var(--lsd-text-primary));
@@ -108,6 +115,26 @@ const NavItem = styled.li<{ active?: boolean; isDisabled?: boolean }>`
       margin-right: 6px;
     }
   `}
+`
+
+const NavItemContainer = styled.div`
+  display: flex;
+  align-items: center;
+  gap: 6px;
+`
+
+const SoonText = styled.span`
+  display: flex;
+  padding: 3px 6px;
+  justify-content: center;
+  align-items: center;
+
+  color: #f29ae9;
+  text-align: center;
+  font-size: 12px;
+  font-weight: 400;
+  line-height: 16px;
+  letter-spacing: 0.12px;
 `
 
 export default Navbar
