@@ -3,7 +3,7 @@ import { OperatorGrid } from '@/components/Explore/OperatorGrid'
 import { defaultFilterState } from '@/states/filterState'
 import styled from '@emotion/styled'
 import { hookstate, useHookstate } from '@hookstate/core'
-import React, { useMemo } from 'react'
+import React, { useCallback, useMemo } from 'react'
 import useGetOperators from '../../../apis/operators/useGetOperators'
 import {
   ARCHETYPE,
@@ -53,9 +53,9 @@ const ExploreSection: React.FC<ExploreSectionProps> = () => {
     state[filterType].set(selectedOptions)
   }
 
-  const handleResetAll = () => {
-    state.set(defaultFilterState)
-  }
+  const handleResetAll = useCallback(() => {
+    state.set(JSON.parse(JSON.stringify(defaultFilterState)))
+  }, [filter])
 
   return (
     <Container>

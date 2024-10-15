@@ -30,11 +30,14 @@ const Dropdown: React.FC<DropdownProps> = ({
   const dropdownRef = useRef<HTMLDivElement>(null)
 
   const state = useHookstate(globalState)
+
   const defualtState = state.get()
 
   useEffect(() => {
     if (defualtState[filterType]?.length === selectedOptions?.length) {
       setUpdated(false)
+    } else {
+      setUpdated(true)
     }
   }, [defualtState, selectedOptions])
 

@@ -12,6 +12,10 @@ const Button = styled.button`
   border: 1px solid rgb(var(--lsd-border-primary));
   background: transparent;
   cursor: pointer;
+
+  @media (min-width: ${breakpoints.sm}px) {
+    display: none;
+  }
 `
 
 const HamburguerMenuContainer = styled.div`
