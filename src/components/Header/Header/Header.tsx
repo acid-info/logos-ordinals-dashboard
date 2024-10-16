@@ -18,6 +18,15 @@ const Header: React.FC<NavbarProps> = () => {
       </DesktopNavbar>
       <UserActions>
         <Link
+          href="https://app.gitbook.com/o/JaXLyutHsCMnV7ROVSHw/s/Q0TLtn9WN6DR3Lzv4Gcs/logos-operators/pillars-and-contributions"
+          passHref
+          target="_blank"
+        >
+          <GitbookButton>
+            <span>Gitbook</span>
+          </GitbookButton>
+        </Link>
+        <Link
           href="https://discord.com/invite/logosnetwork"
           passHref
           target="_blank"
@@ -125,6 +134,28 @@ const DesktopNavbar = styled.div`
 
 const Icon = styled.img`
   padding: 0;
+`
+
+const GitbookButton = styled.button`
+  display: flex;
+  padding: 6px 12px;
+  justify-content: center;
+  align-items: center;
+  gap: 8px;
+  border: 1px solid rgb(var(--lsd-border-primary));
+  background: transparent;
+  border-radius: 32px;
+
+  font-size: 12px;
+  line-height: 16px;
+  letter-spacing: 0.12px;
+
+  color: white;
+  cursor: pointer;
+
+  @media (max-width: ${breakpoints.sm}px) {
+    display: none;
+  }
 `
 
 export default Header

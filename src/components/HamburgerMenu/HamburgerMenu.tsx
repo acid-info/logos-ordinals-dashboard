@@ -1,5 +1,6 @@
 import { breakpoints } from '@/configs/ui.configs'
 import styled from '@emotion/styled'
+import Link from 'next/link'
 import { useState } from 'react'
 import Navbar from '../Header/Navbar/Navbar'
 
@@ -35,6 +36,27 @@ const HamburguerMenuContainer = styled.div`
   gap: 24px;
 `
 
+const GitbookButton = styled.button`
+  display: flex;
+  padding: 10px 12px;
+  justify-content: center;
+  align-items: center;
+  gap: 8px;
+  border: 1px solid rgb(var(--lsd-border-primary));
+  background: transparent;
+  border-radius: 32px;
+  width: 100%;
+  height: 40px;
+
+  font-size: 12px;
+  line-height: 16px;
+  letter-spacing: 0.12px;
+  margin-top: 24px;
+
+  color: white;
+  cursor: pointer;
+`
+
 const HamburguerMenu = () => {
   const [isOpen, setIsOpen] = useState(false)
 
@@ -49,6 +71,13 @@ const HamburguerMenu = () => {
       {isOpen && (
         <HamburguerMenuContainer>
           <Navbar />
+          <Link
+            href="https://app.gitbook.com/o/JaXLyutHsCMnV7ROVSHw/s/Q0TLtn9WN6DR3Lzv4Gcs/logos-operators/pillars-and-contributions"
+            passHref
+            target="_blank"
+          >
+            <GitbookButton>Gitbook</GitbookButton>
+          </Link>
         </HamburguerMenuContainer>
       )}
     </>
