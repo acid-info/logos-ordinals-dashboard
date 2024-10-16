@@ -11,7 +11,7 @@ export const Container = styled.div`
   overflow: hidden;
   max-width: ${uiConfigs.maxContainerWidth}px;
   margin: 0 auto;
-  padding: 24px 0;
+  padding: 8px 0 24px 0;
 
   z-index: 1;
   position: relative;
