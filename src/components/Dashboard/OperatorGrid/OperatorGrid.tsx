@@ -1,8 +1,8 @@
 import { breakpoints } from '@/configs/ui.configs'
 import { ProcessedOperator } from '@/containers/Dashboard/DashboardContainer'
 import styled from '@emotion/styled'
-import Link from 'next/link'
 import React from 'react'
+import OperatorCard from './OperatorCard'
 
 interface OperatorGridProps {
   isLoading: boolean
@@ -14,7 +14,7 @@ const OperatorGrid: React.FC<OperatorGridProps> = ({
   data,
 }: OperatorGridProps) => {
   return (
-    <StyledOperatorGrid>
+    <Container>
       <Header>
         <Title>Operators</Title>
         <Controls>
@@ -49,41 +49,19 @@ const OperatorGrid: React.FC<OperatorGridProps> = ({
       <Grid>
         {isLoading
           ? Array.from({ length: 12 }).map((_, index) => (
-              <OperatorCard key={index}>
+              <PlaceholderCard key={index}>
                 <Placeholder />
-              </OperatorCard>
+              </PlaceholderCard>
             ))
           : data?.map((operator) => (
-              <OperatorCard key={operator.id}>
-                <Link href={`/operators/${operator.id}`} key={operator.id}>
-                  <OperatorImage src={operator.image} alt={operator.name} />
-                </Link>
-                <OperatorInfo>
-                  <OperatorName>{operator.name}</OperatorName>
-                  <PointsPerHour>
-                    <Label>Per Hour</Label>
-                    <Value>{operator.pointsPerHour} rp</Value>
-                  </PointsPerHour>
-                </OperatorInfo>
-                <Actions>
-                  <ActionButton isStaked={operator.isStaked}>
-                    {operator.isStaked ? 'Unstake' : 'Stake'}
-                  </ActionButton>
-                  <IconButton>
-                    {operator.isPinned ? (
-                      <img src="/assets/pinned.svg" alt="Pinned" />
-                    ) : (
-                      <img src="/assets/unpinned.svg" alt="Unpinned" />
-                    )}
-                  </IconButton>
-                </Actions>
-              </OperatorCard>
+              <OperatorCard key={operator.id} operator={operator} />
             ))}
       </Grid>
-    </StyledOperatorGrid>
+    </Container>
   )
 }
-const StyledOperatorGrid = styled.section`
+
+const Container = styled.section`
   margin-top: 116px;
 
   @media (max-width: ${breakpoints.md}px) {
@@ -120,21 +98,6 @@ const PlusIcon = styled.button`
   width: 28px;
   height: 28px;
   cursor: pointer;
-`
-
-const IconButton = styled.button`
-  background-color: transparent;
-  border-left: none;
-  width: 28px;
-  height: 28px;
-  padding: 0;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  border: none;
-  border-left: 1px solid rgb(var(--lsd-border-primary));
-  cursor: pointer;
-  height: 28px;
 `
 
 const Stats = styled.div`
@@ -180,7 +143,7 @@ const Grid = styled.div`
   }
 `
 
-const OperatorCard = styled.div`
+const PlaceholderCard = styled.div`
   display: flex;
   flex-direction: column;
 
@@ -189,64 +152,6 @@ const OperatorCard = styled.div`
   a {
     display: flex;
   }
-`
-
-const OperatorImage = styled.img`
-  width: 100%;
-  aspect-ratio: 1;
-  object-fit: cover;
-`
-
-const OperatorInfo = styled.div`
-  padding: 16px 0;
-`
-
-const OperatorName = styled.div`
-  font-weight: 400;
-  font-size: 14px;
-  line-height: 20px;
-  // 1 line of text
-  display: -webkit-inline-box;
-  -webkit-box-orient: vertical;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  line-clamp: 1;
-  -webkit-line-clamp: 1;
-`
-
-const PointsPerHour = styled.div`
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-`
-
-const Actions = styled.div`
-  display: flex;
-  align-items: center;
-  border: 1px solid rgb(var(--lsd-border-primary));
-  border-radius: 0;
-`
-
-const ActionButton = styled.button<{ isStaked: boolean }>`
-  flex: 1;
-  background-color: ${(props) =>
-    props.isStaked ? 'rgb(var(--lsd-surface-secondary))' : 'transparent'};
-  color: ${(props) =>
-    props.isStaked
-      ? 'rgb(var(--lsd-text-secondary))'
-      : 'rgb(var(--lsd-text-primary))'};
-  border: none;
-  font-weight: 400;
-  font-size: 12px;
-  line-height: 16px;
-  padding: 6px 12px;
-
-  &:hover {
-    background-color: rgb(var(--lsd-surface-secondary));
-    color: rgb(var(--lsd-text-secondary));
-  }
-
-  cursor: pointer;
 `
 
 const Placeholder = styled.div`

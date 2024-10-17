@@ -3,6 +3,9 @@ import { breakpoints } from '@/configs/ui.configs'
 import { truncateString } from '@/utils/general.utils'
 import styled from '@emotion/styled'
 import React from 'react'
+import useGetCurrentBTCBlock from '../../../../apis/general/useGetCurrentBTCBlock'
+import useGetEpochs from '../../../../apis/general/useGetEpochs'
+import useGetPillars from '../../../../apis/general/useGetPillars'
 
 interface OperatorPanelProps {}
 
@@ -26,6 +29,14 @@ const TEMP_BADGES = [
 ]
 
 const OperatorPanel: React.FC<OperatorPanelProps> = () => {
+  const { data: currentBlock } = useGetCurrentBTCBlock()
+  const { data: epochs } = useGetEpochs()
+  const { data: pillars } = useGetPillars()
+
+  console.log('currentBlock', currentBlock)
+  console.log('epochs', epochs)
+  console.log('pillars', pillars)
+
   return (
     <StyledPanel>
       <Profile>
