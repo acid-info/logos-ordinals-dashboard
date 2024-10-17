@@ -1,8 +1,8 @@
 import { Dropdown } from '@/components/Dropdown'
 import { OperatorGrid } from '@/components/Explore/OperatorGrid'
-import { defaultFilterState } from '@/states/filterState'
+import { defaultFilterState, FilterState } from '@/states/filterState'
 import styled from '@emotion/styled'
-import { hookstate, useHookstate } from '@hookstate/core'
+import { atom, useAtom } from 'jotai'
 import React, { useCallback, useMemo } from 'react'
 import useGetOperators from '../../../apis/operators/useGetOperators'
 import {
@@ -17,15 +17,12 @@ import { processOperators, shuffleOperators } from '../../../utils/operators'
 
 interface ExploreSectionProps {}
 
-const globalState = hookstate(() =>
-  JSON.parse(JSON.stringify(defaultFilterState)),
-)
+const filterAtom = atom<FilterState>(defaultFilterState)
 
 const ExploreSection: React.FC<ExploreSectionProps> = () => {
   const { data, isLoading } = useGetOperators()
 
-  const state = useHookstate(globalState)
-  const filter = state.get()
+  const [filter, setFilter] = useAtom(filterAtom)
 
   const processedOperators = processOperators(
     data as any,
@@ -47,15 +44,17 @@ const ExploreSection: React.FC<ExploreSectionProps> = () => {
 
   const handleFilterChange = (
     selectedOptions: string[],
-    filterType: string,
+    filterType: keyof typeof filter,
   ) => {
-    // @ts-ignore
-    state[filterType].set(selectedOptions)
+    setFilter((prev) => ({
+      ...prev,
+      [filterType]: selectedOptions,
+    }))
   }
 
   const handleResetAll = useCallback(() => {
-    state.set(JSON.parse(JSON.stringify(defaultFilterState)))
-  }, [filter])
+    setFilter(JSON.parse(JSON.stringify(defaultFilterState)))
+  }, [setFilter])
 
   return (
     <Container>
@@ -104,7 +103,7 @@ const ExploreSection: React.FC<ExploreSectionProps> = () => {
           prefill={filter.background.slice()}
         />
         <ResetAll onClick={handleResetAll}>
-          Reset All <img src="/assets/close-black.svg" />
+          Reset All <img src="/assets/close-black.svg" alt="close-black" />
         </ResetAll>
       </DropdownContainer>
       <OperatorGrid

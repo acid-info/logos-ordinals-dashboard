@@ -33,7 +33,7 @@ const useThemeCssVars = (theme: Theme, colorMode: string) =>
   )
 
 export const useLSDTheme = () => {
-  const { genericFontFamily, mode } = useThemeState().get()
+  const { genericFontFamily, mode } = useThemeState()
 
   const themes = useMemo(() => {
     const options: CreateThemeProps = {

@@ -1,5 +1,4 @@
-import { hookstate, State, useHookstate } from '@hookstate/core'
-import { localstored } from '@hookstate/localstored'
+import { atom, useAtom } from 'jotai'
 import {
   ARCHETYPE,
   BACKGROUND,
@@ -28,17 +27,20 @@ export const defaultFilterState: FilterState = {
   background: BACKGROUND,
 }
 
-const filterState =
-  typeof window === 'undefined'
-    ? hookstate(defaultFilterState)
-    : hookstate<FilterState>(defaultFilterState, localstored({ key: 'filter' }))
+const filterAtom = atom<FilterState>(defaultFilterState)
 
-const wrapFilterState = (state: State<FilterState>) => ({
-  filter: { ...state.value },
-  get: () => state.value,
-  setFilter: (value: FilterState) => state.set(value),
+const wrapFilterState = (
+  filter: FilterState,
+  setFilter: (value: FilterState) => void,
+) => ({
+  filter,
+  get: () => filter,
+  setFilter: (value: FilterState) => setFilter(value),
 })
 
-export const useFilterState = () => wrapFilterState(useHookstate(filterState))
+export const useFilterState = () => {
+  const [filter, setFilter] = useAtom(filterAtom)
+  return wrapFilterState(filter, setFilter)
+}
 
 export default useFilterState

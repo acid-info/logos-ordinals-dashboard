@@ -267,16 +267,6 @@
   resolved "https://registry.yarnpkg.com/@eslint/js/-/js-8.51.0.tgz#6d419c240cfb2b66da37df230f7e7eef801c32fa"
   integrity sha512-HxjQ8Qn+4SI3/AFv6sOrDB+g6PpUTDwSJiQqOrnneEk8L71161srI9gjzzZvYVbzHiVg/BvcH95+cK/zfIt4pg==
 
-"@hookstate/core@^4.0.1":
-  version "4.0.1"
-  resolved "https://registry.yarnpkg.com/@hookstate/core/-/core-4.0.1.tgz#6744380e96ce13fe3488c926c1cbae93bbea0ff6"
-  integrity sha512-Uh2D8Z0z/pqOJ7t+SfC+2sj13JQcB4yFhtL+T1choCaBxTSlgOS/CKRBohgJ4cjTKoxOmTT8uSQysu3gUjX+Gw==
-
-"@hookstate/localstored@^4.0.2":
-  version "4.0.2"
-  resolved "https://registry.yarnpkg.com/@hookstate/localstored/-/localstored-4.0.2.tgz#6f0ef6b71baa4c28e5e8835431585500eb6a9532"
-  integrity sha512-81dbUH6xnwbePby21NQN8zrmjvMA8tOYeOOLZXqRmRGKnhtcokjTJoRNMZugpC9P3/NnacllBZ5ZUt43nmrKkA==
-
 "@humanwhocodes/config-array@^0.11.11":
   version "0.11.11"
   resolved "https://registry.yarnpkg.com/@humanwhocodes/config-array/-/config-array-0.11.11.tgz#88a04c570dbbc7dd943e4712429c3df09bc32844"
@@ -363,11 +353,6 @@
   integrity sha512-QkM01VPhwcupezVevy9Uyl1rmpg2PimhMjkb+ySmnPgSKUUM/PGGRQxdFgMpHv/JzQoC8kRySgKeM441GiizcA==
   dependencies:
     glob "10.3.10"
-
-"@next/font@^14.2.13":
-  version "14.2.13"
-  resolved "https://registry.yarnpkg.com/@next/font/-/font-14.2.13.tgz#cfe0903654e65b58e7b5cdc600399a45e028bbdb"
-  integrity sha512-xtleJ172yNVSVoQoMIwPHnM9zSPOzNB964mZMOFmRaLWgWMgmlhCVI42dlDSGc6d9nQ/WHCmCZaJMloS1HHGXg==
 
 "@next/mdx@^13.5.5":
   version "13.5.5"
@@ -2561,6 +2546,11 @@ jackspeak@^2.3.5:
     "@isaacs/cliui" "^8.0.2"
   optionalDependencies:
     "@pkgjs/parseargs" "^0.11.0"
+
+jotai@^2.10.1:
+  version "2.10.1"
+  resolved "https://registry.yarnpkg.com/jotai/-/jotai-2.10.1.tgz#8d5598d06fa295110de0914f10bd1d10ea229723"
+  integrity sha512-4FycO+BOTl2auLyF2Chvi6KTDqdsdDDtpaL/WHQMs8f3KS1E3loiUShQzAzFA/sMU5cJ0hz/RT1xum9YbG/zaA==
 
 js-cookie@^2.2.1:
   version "2.2.1"

@@ -1,20 +1,21 @@
 import { defaultFilterState } from '@/states/filterState'
 import styled from '@emotion/styled'
-import { hookstate, useHookstate } from '@hookstate/core'
+import { atom, useAtom } from 'jotai'
 import React, { useEffect, useRef, useState } from 'react'
-import Checkbox from './Checkbox' // Import the CustomCheckbox
+import Checkbox from './Checkbox'
 
 interface DropdownProps {
   title: string
   options: string[]
-  filterType: string
-  onSelectionChange: (selectedOptions: string[], filterType: string) => void
+  filterType: keyof typeof defaultFilterState
+  onSelectionChange: (
+    selectedOptions: string[],
+    filterType: keyof typeof defaultFilterState,
+  ) => void
   prefill?: string[]
 }
 
-const globalState = hookstate(() =>
-  JSON.parse(JSON.stringify(defaultFilterState)),
-)
+const filterAtom = atom(defaultFilterState)
 
 const Dropdown: React.FC<DropdownProps> = ({
   title,
@@ -29,17 +30,17 @@ const Dropdown: React.FC<DropdownProps> = ({
 
   const dropdownRef = useRef<HTMLDivElement>(null)
 
-  const state = useHookstate(globalState)
+  const [filter, setFilter] = useAtom(filterAtom)
 
-  const defualtState = state.get()
+  const defaultState = defaultFilterState
 
   useEffect(() => {
-    if (defualtState[filterType]?.length === selectedOptions?.length) {
+    if (defaultState[filterType]?.length === selectedOptions?.length) {
       setUpdated(false)
     } else {
       setUpdated(true)
     }
-  }, [defualtState, selectedOptions])
+  }, [defaultState, selectedOptions, filterType])
 
   useEffect(() => {
     if (prefill?.length) {
@@ -56,16 +57,23 @@ const Dropdown: React.FC<DropdownProps> = ({
   }
 
   const handleSelect = (option: string) => {
-    let newSelectedOptions = []
+    let newSelectedOptions: any = []
+
     if (selectedOptions.includes(option)) {
       newSelectedOptions = selectedOptions.filter((o) => o !== option)
     } else {
       newSelectedOptions = [...selectedOptions, option]
     }
+
     setSelectedOptions(newSelectedOptions)
     onSelectionChange(newSelectedOptions, filterType)
 
     handleUpdate(newSelectedOptions)
+
+    setFilter((prev) => ({
+      ...prev,
+      [filterType]: newSelectedOptions,
+    }))
   }
 
   const selectAll = () => {
@@ -73,6 +81,11 @@ const Dropdown: React.FC<DropdownProps> = ({
     onSelectionChange(options, filterType)
 
     setUpdated(false)
+
+    setFilter((prev) => ({
+      ...prev,
+      [filterType]: options,
+    }))
   }
 
   const clearAll = () => {
@@ -80,6 +93,11 @@ const Dropdown: React.FC<DropdownProps> = ({
     onSelectionChange([], filterType)
 
     setUpdated(true)
+
+    setFilter((prev) => ({
+      ...prev,
+      [filterType]: [],
+    }))
   }
 
   const toggleDropdown = () => {
@@ -138,8 +156,6 @@ const Dropdown: React.FC<DropdownProps> = ({
     </DropdownContainer>
   )
 }
-
-// Additional styled components for Dropdown
 
 const DropdownContainer = styled.div`
   position: relative;
@@ -219,7 +235,6 @@ const ScrollDiv = styled.div`
   overflow-x: hidden;
   box-sizing: border-box;
 
-  // white scrollbar
   &::-webkit-scrollbar {
     width: 10px;
   }
