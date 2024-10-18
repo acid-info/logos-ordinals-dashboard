@@ -2,7 +2,6 @@ import HamburguerMenu from '@/components/HamburgerMenu/HamburgerMenu'
 import { breakpoints } from '@/configs/ui.configs'
 import { truncateString } from '@/utils/general.utils'
 import styled from '@emotion/styled'
-import { ethers } from 'ethers'
 import Link from 'next/link'
 import React, { useState } from 'react'
 import { Navbar } from '../Navbar'
@@ -10,6 +9,7 @@ import { Navbar } from '../Navbar'
 declare global {
   interface Window {
     ethereum: any
+    okxwallet: any
   }
 }
 
@@ -24,17 +24,12 @@ const Header: React.FC<NavbarProps> = () => {
         setWalletAddress(null)
         alert('Wallet disconnected.')
       } else {
-        if (window.ethereum) {
-          const provider = new ethers.BrowserProvider(window.ethereum)
-          const accounts = await provider.send('eth_requestAccounts', [])
-          const signer = await provider.getSigner()
-          const address = await signer.getAddress()
-
-          setWalletAddress(address)
+        // DOCS: https://www.okx.com/web3/build/docs/sdks/chains/bitcoin/provider#connect
+        if (window.okxwallet) {
+          const result = await window.okxwallet.bitcoin.connect()
+          setWalletAddress(result.address)
         } else {
-          alert(
-            'No Ethereum wallet found. Please install MetaMask or another wallet.',
-          )
+          alert('No Bitcoin wallet found. Please install OKX Wallet.')
         }
       }
     } catch (error) {
