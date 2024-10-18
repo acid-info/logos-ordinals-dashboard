@@ -1,13 +1,47 @@
 import HamburguerMenu from '@/components/HamburgerMenu/HamburgerMenu'
 import { breakpoints } from '@/configs/ui.configs'
+import { truncateString } from '@/utils/general.utils'
 import styled from '@emotion/styled'
+import { ethers } from 'ethers'
 import Link from 'next/link'
-import React from 'react'
+import React, { useState } from 'react'
 import { Navbar } from '../Navbar'
+
+declare global {
+  interface Window {
+    ethereum: any
+  }
+}
 
 interface NavbarProps {}
 
 const Header: React.FC<NavbarProps> = () => {
+  const [walletAddress, setWalletAddress] = useState<string | null>(null)
+
+  const connectWallet = async () => {
+    try {
+      if (walletAddress) {
+        setWalletAddress(null)
+        alert('Wallet disconnected.')
+      } else {
+        if (window.ethereum) {
+          const provider = new ethers.BrowserProvider(window.ethereum)
+          const accounts = await provider.send('eth_requestAccounts', [])
+          const signer = await provider.getSigner()
+          const address = await signer.getAddress()
+
+          setWalletAddress(address)
+        } else {
+          alert(
+            'No Ethereum wallet found. Please install MetaMask or another wallet.',
+          )
+        }
+      }
+    } catch (error) {
+      console.error('Failed to connect or disconnect wallet:', error)
+    }
+  }
+
   return (
     <Container>
       <Link href="/">
@@ -37,11 +71,13 @@ const Header: React.FC<NavbarProps> = () => {
           </SocialButton>
         </Link>
         <HamburguerMenu />
-        {/* <WalletButton>
-          <WalletAddress>bc1qa...vehs9</WalletAddress>
-          <Icon src="/assets/btc.svg" alt="Wallet icon" />
+        <WalletButton onClick={connectWallet}>
+          <WalletAddress>
+            {walletAddress ? truncateString(walletAddress) : 'Connect'}
+          </WalletAddress>
+          {/* <Icon src="/assets/btc.svg" alt="Wallet icon" /> */}
         </WalletButton>
-        <PointsButton>
+        {/* <PointsButton>
           <PointsValue>4,278</PointsValue>
           <Icon src="/assets/star.png" alt="Points icon" />
         </PointsButton> */}
@@ -116,15 +152,15 @@ const DesktopNavbar = styled.div`
   }
 `
 
-// const WalletButton = styled(Button)`
-//   width: 140px;
-// `
+const WalletButton = styled(Button)`
+  width: fit-content;
+`
 
-// const WalletAddress = styled.span`
-//   overflow: hidden;
-//   text-overflow: ellipsis;
-//   white-space: nowrap;
-// `
+const WalletAddress = styled.span`
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+`
 
 // const PointsButton = styled(Button)`
 //   width: 83px;
