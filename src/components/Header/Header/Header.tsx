@@ -26,13 +26,14 @@ const Header: React.FC<NavbarProps> = () => {
         setWalletAddress(null)
         alert('Wallet disconnected.')
       } else {
-        // DOCS: https://www.okx.com/web3/build/docs/sdks/chains/bitcoin/provider#connect
         if (window.okxwallet) {
+          // DOCS: https://www.okx.com/web3/build/docs/sdks/chains/bitcoin/provider#connect
           const result = await window.okxwallet.bitcoin.connect()
           const address = result.address
 
           setWalletAddress(address)
 
+          // Docs: https://www.okx.com/web3/build/docs/sdks/chains/bitcoin/provider#signmessage
           const signature = await window.okxwallet.bitcoin.signMessage(
             WALLET_SIGN_MESSAGE_REQUEST,
             'bip322-simple',
