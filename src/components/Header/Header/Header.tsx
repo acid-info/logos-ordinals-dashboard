@@ -4,6 +4,8 @@ import { truncateString } from '@/utils/general.utils'
 import styled from '@emotion/styled'
 import Link from 'next/link'
 import React, { useState } from 'react'
+import { api } from '../../../../common/api'
+import { WALLET_SIGN_MESSAGE_REQUEST } from '../../../../constants/wallet'
 import { Navbar } from '../Navbar'
 
 declare global {
@@ -27,7 +29,21 @@ const Header: React.FC<NavbarProps> = () => {
         // DOCS: https://www.okx.com/web3/build/docs/sdks/chains/bitcoin/provider#connect
         if (window.okxwallet) {
           const result = await window.okxwallet.bitcoin.connect()
-          setWalletAddress(result.address)
+          const address = result.address
+
+          setWalletAddress(address)
+
+          const signature = await window.okxwallet.bitcoin.signMessage(
+            WALLET_SIGN_MESSAGE_REQUEST,
+            'bip322-simple',
+          )
+
+          const response = await api.post('/token/pair', {
+            address,
+            signature,
+          })
+
+          console.log('Token pair response:', response)
         } else {
           alert('No Bitcoin wallet found. Please install OKX Wallet.')
         }
