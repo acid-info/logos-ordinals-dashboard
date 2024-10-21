@@ -1,4 +1,3 @@
-import { Collapse } from '@/components/common/Collapse'
 import { breakpoints } from '@/configs/ui.configs'
 import { truncateString } from '@/utils/general.utils'
 import styled from '@emotion/styled'
@@ -9,33 +8,33 @@ import useGetPillars from '../../../../apis/general/useGetPillars'
 
 interface OperatorPanelProps {}
 
-const TEMP_BADGES = [
-  {
-    id: 1,
-    image: '/dashboard/badges/1-year-streak.svg',
-  },
-  {
-    id: 2,
-    image: '/dashboard/badges/10-day-streak.svg',
-  },
-  {
-    id: 3,
-    image: '/dashboard/badges/100-days-streak.svg',
-  },
-  {
-    id: 4,
-    image: '/dashboard/badges/badege-placeholder.svg',
-  },
-]
+// const TEMP_BADGES = [
+//   {
+//     id: 1,
+//     image: '/dashboard/badges/1-year-streak.svg',
+//   },
+//   {
+//     id: 2,
+//     image: '/dashboard/badges/10-day-streak.svg',
+//   },
+//   {
+//     id: 3,
+//     image: '/dashboard/badges/100-days-streak.svg',
+//   },
+//   {
+//     id: 4,
+//     image: '/dashboard/badges/badege-placeholder.svg',
+//   },
+// ]
 
 const OperatorPanel: React.FC<OperatorPanelProps> = () => {
   const { data: currentBlock } = useGetCurrentBTCBlock()
   const { data: epochs } = useGetEpochs()
   const { data: pillars } = useGetPillars()
 
-  console.log('currentBlock', currentBlock)
-  console.log('epochs', epochs)
-  console.log('pillars', pillars)
+  // console.log('currentBlock', currentBlock)
+  // console.log('epochs', epochs)
+  // console.log('pillars', pillars)
 
   return (
     <StyledPanel>
@@ -79,7 +78,7 @@ const OperatorPanel: React.FC<OperatorPanelProps> = () => {
         </InfoRow>
       </CallSignContainer>
 
-      <ProfileInfo>
+      {/* <ProfileInfo>
         <BadgesSection>
           <BadgeTitle>
             <Label>Badges</Label>
@@ -95,12 +94,12 @@ const OperatorPanel: React.FC<OperatorPanelProps> = () => {
             ))}
           </BadgeList>
         </BadgesSection>
-      </ProfileInfo>
+      </ProfileInfo> */}
 
-      <Collapse
+      {/* <Collapse
         header="Refer Operators +100 XP"
         content={truncateString('445f5slk1as4645sdf54')}
-      />
+      /> */}
     </StyledPanel>
   )
 }
@@ -159,11 +158,11 @@ const InfoRow = styled.div`
   background-color: var(--grey-900);
 `
 
-const ProfileInfo = styled.div`
-  display: flex;
-  flex-direction: column;
-  gap: 2px;
-`
+// const ProfileInfo = styled.div`
+//   display: flex;
+//   flex-direction: column;
+//   gap: 2px;
+// `
 
 const CallSignContainer = styled.div`
   margin-top: 24px;
@@ -187,38 +186,38 @@ const Value = styled.span`
   }
 `
 
-const BadgesSection = styled.div`
-  display: flex;
-  flex-direction: column;
-  background-color: var(--grey-900);
-  padding: 16px 8px;
-`
+// const BadgesSection = styled.div`
+//   display: flex;
+//   flex-direction: column;
+//   background-color: var(--grey-900);
+//   padding: 16px 8px;
+// `
 
-const BadgeTitle = styled.div`
-  display: flex;
-  align-items: center;
-  margin-bottom: 16px;
-  width: 100%;
-`
+// const BadgeTitle = styled.div`
+//   display: flex;
+//   align-items: center;
+//   margin-bottom: 16px;
+//   width: 100%;
+// `
 
-const BadgeIcon = styled.img`
-  width: 14px;
-  height: 14px;
+// const BadgeIcon = styled.img`
+//   width: 14px;
+//   height: 14px;
 
-  margin-left: auto;
-`
+//   margin-left: auto;
+// `
 
-const BadgeList = styled.div`
-  display: flex;
-  flex-wrap: wrap;
-  gap: 16px;
-`
+// const BadgeList = styled.div`
+//   display: flex;
+//   flex-wrap: wrap;
+//   gap: 16px;
+// `
 
-const Badge = styled.img`
-  width: 52px;
-  height: 52px;
-  object-fit: contain;
-`
+// const Badge = styled.img`
+//   width: 52px;
+//   height: 52px;
+//   object-fit: contain;
+// `
 
 const ActionButton = styled.button`
   display: flex;
