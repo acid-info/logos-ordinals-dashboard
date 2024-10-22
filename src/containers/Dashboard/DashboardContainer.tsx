@@ -3,7 +3,7 @@ import { OperatorPanel } from '@/components/Dashboard/OperatorPanel'
 import { ProgressBar } from '@/components/Dashboard/ProgressBar'
 import { breakpoints } from '@/configs/ui.configs'
 import styled from '@emotion/styled'
-import { useAtom, useSetAtom } from 'jotai'
+import { useAtom } from 'jotai'
 import React, { useEffect } from 'react'
 import useGetUserInfo from '../../../apis/operators/useGetUserInfo'
 import { userInfoAtom } from '../../../atoms/userInfo'
@@ -19,7 +19,7 @@ const DashboardContainer: React.FC<DashboardPageProps> = ({
   children,
   ...props
 }) => {
-  const setUserInfo = useSetAtom(userInfoAtom)
+  const [userInfo, setUserInfo] = useAtom(userInfoAtom)
 
   const [walletAddress, setWalletAddress] = useAtom(walletAddressAtom)
 

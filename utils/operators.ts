@@ -40,7 +40,7 @@ export function processMyOperators(operators: any[]) {
   }
 
   return operators?.map((operator) => ({
-    id: operator.id.toString(),
+    id: operator.id,
     arcgetypeId: operator.archetype_id,
     image: operator.image_400_jpeg_url,
     gif: operator.image_400_url,

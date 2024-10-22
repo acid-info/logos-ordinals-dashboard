@@ -1,9 +1,14 @@
 import styled from '@emotion/styled'
+import { useQueryClient } from '@tanstack/react-query'
+import { useAtomValue } from 'jotai'
 import Link from 'next/link'
 import React, { useState } from 'react'
+import useGetUserInfo from '../../../../apis/operators/useGetUserInfo'
 import { usePinOperator } from '../../../../apis/operators/usePinOperator'
 import { useStakeOperator } from '../../../../apis/operators/useStakeOperator'
 import { useUnstakeOperator } from '../../../../apis/operators/useUnstakeOperator'
+import { userInfoAtom } from '../../../../atoms/userInfo'
+import { walletAddressAtom } from '../../../../atoms/wallet'
 import { ProcessedOperator } from '../../../../types/operators'
 
 interface OperatorCardProps {
@@ -13,12 +18,22 @@ interface OperatorCardProps {
 const OperatorCard: React.FC<OperatorCardProps> = ({
   operator,
 }: OperatorCardProps) => {
+  const user = useAtomValue(userInfoAtom)
+
   const [isStaked, setIsStaked] = useState(operator.isStaked)
   const [isPinned, setIsPinned] = useState(operator.isPinned)
+
+  const queryClient = useQueryClient()
+
+  const walletAddress = useAtomValue(walletAddressAtom)
 
   const stake = useStakeOperator()
   const unstake = useUnstakeOperator()
   const pin = usePinOperator()
+
+  const { refetch, updateCache } = useGetUserInfo({
+    walletAddress,
+  })
 
   const handleStake = (operatorId: string) => {
     if (isStaked) {
@@ -26,11 +41,17 @@ const OperatorCard: React.FC<OperatorCardProps> = ({
         operator_id: operatorId,
         setIsStaked,
       })
+
+      queryClient.invalidateQueries('getUserInfo' as any)
+      refetch()
     } else {
       stake.mutate({
         operator_id: operatorId,
         setIsStaked,
       })
+
+      queryClient.invalidateQueries('getUserInfo' as any)
+      refetch()
     }
   }
 
@@ -38,14 +59,19 @@ const OperatorCard: React.FC<OperatorCardProps> = ({
     pin.mutate({
       operator_id: operatorId,
     })
-
-    setIsPinned(!isPinned)
+    window.location.reload()
   }
 
   return (
     <Container key={operator.id}>
       <Link href={`/operators/${operator.id}`} key={operator.id}>
-        <OperatorImage src={operator.image} alt={operator.name} />
+        <OperatorImage
+          src={operator?.gif}
+          data-src={operator?.gif}
+          alt={`Operator ${operator.name}`}
+          loading="lazy"
+          className="lazyload"
+        />
       </Link>
       <OperatorInfo>
         <OperatorName>{operator.name}</OperatorName>

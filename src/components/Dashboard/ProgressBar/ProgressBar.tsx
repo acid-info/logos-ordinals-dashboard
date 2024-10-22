@@ -1,8 +1,10 @@
 import { breakpoints } from '@/configs/ui.configs'
 import { numberWithCommas } from '@/utils/general.utils'
 import styled from '@emotion/styled'
+import { useAtomValue } from 'jotai'
 import React from 'react'
 import useGetEpochs from '../../../../apis/general/useGetEpochs'
+import { userInfoAtom } from '../../../../atoms/userInfo'
 
 interface ProgressBarProps {
   progress: number // Current progress of the epoch
@@ -14,6 +16,7 @@ const ProgressBar: React.FC<ProgressBarProps> = ({
   claimPosition = 76,
 }) => {
   const { data: epochs } = useGetEpochs()
+  const user = useAtomValue(userInfoAtom)
   // const { data: currentBlock } = useGetCurrentBTCBlock()
   // const { data: pillars } = useGetPillars()
 
@@ -58,7 +61,7 @@ const ProgressBar: React.FC<ProgressBarProps> = ({
           <EarnedReward>
             <Label>Total Points</Label>
             <Value color="#F29AE9" backgroundColor="#320430">
-              {`${numberWithCommas(40278)}`}
+              {`${numberWithCommas(user?.total_xp)}`}
             </Value>
           </EarnedReward>
           <EarnedReward>

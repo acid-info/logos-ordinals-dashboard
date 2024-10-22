@@ -28,7 +28,6 @@ interface OperatorPanelProps {}
 
 const OperatorPanel: React.FC<OperatorPanelProps> = () => {
   const user = useAtomValue(userInfoAtom)
-  console.log('user', user)
 
   const handleCopyAddress = () => {
     navigator.clipboard.writeText(user?.address)
@@ -45,18 +44,18 @@ const OperatorPanel: React.FC<OperatorPanelProps> = () => {
       {user?.pinned_operator && (
         <Profile>
           <OperatorImage
-            src="/dashboard/mock/operators/pinned.gif"
+            src={user?.pinned_operator?.image_400_url}
             alt="Operator"
           />
           <OperatorInfo>
-            <OperatorType>Quantum Recursive Memetic</OperatorType>
+            <OperatorType>{user?.pinned_operator?.name}</OperatorType>
           </OperatorInfo>
         </Profile>
       )}
 
       <InfoRow>
         <Label>Archetype</Label>
-        <Value>Memetic</Value>
+        <Value>{user?.pinned_operator?.archetype}</Value>
       </InfoRow>
 
       <CallSignContainer>

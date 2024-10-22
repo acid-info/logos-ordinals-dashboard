@@ -51,8 +51,6 @@ export async function signWalletMessage(address: string) {
           message: WALLET_SIGN_MESSAGE_REQUEST,
         },
         onFinish: (response) => {
-          console.log('onFinish response, ', response)
-
           resolve(response)
         },
         onCancel: () => {
