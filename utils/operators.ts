@@ -1,14 +1,10 @@
-import {
-  Group,
-  ProcessedOperator,
-} from '@/containers/Dashboard/DashboardContainer'
-import { Archetype } from '../types/operators'
+import { Archetype, Group, ProcessedOperator } from '../types/operators'
 
 export function processOperators(
   data: Group[],
   selectedArchetypes: Archetype[],
 ): ProcessedOperator[] {
-  const hasSelectedArchetypes = selectedArchetypes.length > 0
+  const hasSelectedArchetypes = selectedArchetypes?.length > 0
 
   return data?.flatMap((group) => {
     const groupArchetype = group.name.slice(0, -1) as Archetype
@@ -23,7 +19,6 @@ export function processOperators(
         image: operator.image_400_jpeg_url,
         gif: operator.image_400_url,
         name: operator.name,
-        pointsPerHour: Math.floor(Math.random() * 500),
         comp: operator.comp,
         background: operator.background,
         skin: operator.skin,
@@ -37,6 +32,29 @@ export function processOperators(
 
     return []
   })
+}
+
+export function processMyOperators(operators: any[]) {
+  if (!operators) {
+    return []
+  }
+
+  return operators?.map((operator) => ({
+    id: operator.id.toString(),
+    arcgetypeId: operator.archetype_id,
+    image: operator.image_400_jpeg_url,
+    gif: operator.image_400_url,
+    name: operator.name,
+    pointsPerHour: operator.staking_xp_per_block,
+    comp: operator.comp,
+    background: operator.background,
+    skin: operator.skin,
+    helmet: operator.helmet,
+    jacket: operator.jacket,
+    archetype: operator.archetype,
+    isStaked: operator.is_currently_staked,
+    isPinned: operator.is_user_pinned,
+  }))
 }
 
 export function getRandomSubset<T>(array: T[], count: number): T[] {

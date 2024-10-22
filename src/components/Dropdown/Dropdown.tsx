@@ -1,6 +1,6 @@
-import { defaultFilterState } from '@/states/filterState'
+import { defaultFilterState, filterAtom } from '@/states/filterState'
 import styled from '@emotion/styled'
-import { atom, useAtom } from 'jotai'
+import { useSetAtom } from 'jotai'
 import React, { useEffect, useRef, useState } from 'react'
 import Checkbox from './Checkbox'
 
@@ -15,8 +15,6 @@ interface DropdownProps {
   prefill?: string[]
 }
 
-const filterAtom = atom(defaultFilterState)
-
 const Dropdown: React.FC<DropdownProps> = ({
   title,
   options,
@@ -30,7 +28,7 @@ const Dropdown: React.FC<DropdownProps> = ({
 
   const dropdownRef = useRef<HTMLDivElement>(null)
 
-  const [filter, setFilter] = useAtom(filterAtom)
+  const setFilter = useSetAtom(filterAtom)
 
   const defaultState = defaultFilterState
 

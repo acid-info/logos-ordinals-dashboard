@@ -25,7 +25,7 @@ api.interceptors.response.use(
 
     if (error.response?.status === 401) {
       try {
-        const refreshToken = await localStorage.getItem('refreshToken')
+        const refreshToken = await sessionStorage.getItem('refreshToken')
         await api
           .post('/token/refresh', {
             refreshToken,

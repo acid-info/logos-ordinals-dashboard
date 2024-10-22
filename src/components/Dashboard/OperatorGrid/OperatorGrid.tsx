@@ -1,7 +1,8 @@
 import { breakpoints } from '@/configs/ui.configs'
-import { ProcessedOperator } from '@/containers/Dashboard/DashboardContainer'
 import styled from '@emotion/styled'
+import Link from 'next/link'
 import React from 'react'
+import { ProcessedOperator } from '../../../../types/operators'
 import OperatorCard from './OperatorCard'
 
 interface OperatorGridProps {
@@ -13,6 +14,13 @@ const OperatorGrid: React.FC<OperatorGridProps> = ({
   isLoading,
   data,
 }: OperatorGridProps) => {
+  const stakedOperators = data?.filter((operator) => operator.isStaked)
+
+  const totalXpPerBlock = data?.reduce(
+    (acc, operator) => acc + (operator.pointsPerHour ?? 0),
+    0,
+  )
+
   return (
     <Container>
       <Header>
@@ -31,31 +39,45 @@ const OperatorGrid: React.FC<OperatorGridProps> = ({
       <Stats>
         <Stat>
           <Label>Total Operators</Label>
-          <Value>7</Value>
+          <Value>{data?.length || 0}</Value>
         </Stat>
         <Stat>
           <Label>Staked</Label>
-          <Value>6</Value>
+          <Value>{stakedOperators?.length || 0}</Value>
         </Stat>
         <Stat>
           <Label>Unstaked</Label>
-          <Value>1</Value>
+          <Value>{data?.length - (stakedOperators?.length || 0)}</Value>
         </Stat>
         <Stat>
           <Label>XP/Block</Label>
-          <Value>912</Value>
+          <Value>{totalXpPerBlock || 0}</Value>
         </Stat>
       </Stats>
       <Grid>
-        {isLoading
-          ? Array.from({ length: 12 }).map((_, index) => (
-              <PlaceholderCard key={index}>
-                <Placeholder />
-              </PlaceholderCard>
-            ))
-          : data?.map((operator) => (
-              <OperatorCard key={operator.id} operator={operator} />
-            ))}
+        {isLoading ? (
+          Array.from({ length: 12 }).map((_, index) => (
+            <PlaceholderCard key={index}>
+              <Placeholder />
+            </PlaceholderCard>
+          ))
+        ) : data?.length === 0 ? (
+          <AddOperator href="https://logos.co/exit" target="_blank">
+            <PlusIcon>
+              <img
+                src="/assets/plus.svg"
+                width={10}
+                height={10}
+                alt="Add Operator"
+              />
+            </PlusIcon>
+            <span>Add Operator</span>
+          </AddOperator>
+        ) : (
+          data?.map((operator) => (
+            <OperatorCard key={operator.id} operator={operator} />
+          ))
+        )}
       </Grid>
     </Container>
   )
@@ -160,6 +182,28 @@ const Placeholder = styled.div`
   background-color: var(--grey-900);
   border-radius: 8px;
   opacity: 0.5;
+`
+
+const AddOperator = styled(Link)`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 24px;
+  width: 100%;
+  height: 258px;
+  padding: 24px;
+
+  span {
+    text-decoration: none;
+    color: white;
+  }
+
+  &:hover {
+    span {
+      text-decoration: underline;
+    }
+  }
 `
 
 export default OperatorGrid

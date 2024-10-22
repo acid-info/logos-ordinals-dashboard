@@ -1,10 +1,11 @@
 import { Dropdown } from '@/components/Dropdown'
 import { OperatorGrid } from '@/components/Explore/OperatorGrid'
-import { defaultFilterState, FilterState } from '@/states/filterState'
+import { defaultFilterState, filterAtom } from '@/states/filterState'
 import styled from '@emotion/styled'
-import { atom, useAtom } from 'jotai'
+import { useAtom } from 'jotai'
 import React, { useCallback, useMemo } from 'react'
 import useGetOperators from '../../../apis/operators/useGetOperators'
+
 import {
   ARCHETYPE,
   BACKGROUND,
@@ -17,19 +18,18 @@ import { processOperators, shuffleOperators } from '../../../utils/operators'
 
 interface ExploreSectionProps {}
 
-const filterAtom = atom<FilterState>(defaultFilterState)
-
-const ExploreSection: React.FC<ExploreSectionProps> = () => {
+const ExploreContainer: React.FC<ExploreSectionProps> = () => {
   const { data, isLoading } = useGetOperators()
 
   const [filter, setFilter] = useAtom(filterAtom)
 
   const processedOperators = processOperators(
     data as any,
-    filter.archetype.slice(),
+    filter?.archetype?.slice(),
   )
 
   const selectedOperators = useMemo(() => {
+    if (!processedOperators || !filter) return []
     const filterCopied = JSON.parse(JSON.stringify(filter))
 
     return processedOperators
@@ -65,42 +65,42 @@ const ExploreSection: React.FC<ExploreSectionProps> = () => {
           options={ARCHETYPE}
           onSelectionChange={handleFilterChange}
           filterType="archetype"
-          prefill={filter.archetype.slice()}
+          prefill={filter?.archetype.slice()}
         />
         <Dropdown
           title="Comp"
           options={COMP}
           onSelectionChange={handleFilterChange}
           filterType="comp"
-          prefill={filter.comp.slice()}
+          prefill={filter?.comp.slice()}
         />
         <Dropdown
           title="Skin"
           options={SKIN}
           onSelectionChange={handleFilterChange}
           filterType="skin"
-          prefill={filter.skin.slice()}
+          prefill={filter?.skin.slice()}
         />
         <Dropdown
           title="Helmet"
           options={HELMET}
           onSelectionChange={handleFilterChange}
           filterType="helmet"
-          prefill={filter.helmet.slice()}
+          prefill={filter?.helmet.slice()}
         />
         <Dropdown
           title="Jacket"
           options={JACKET}
           onSelectionChange={handleFilterChange}
           filterType="jacket"
-          prefill={filter.jacket.slice()}
+          prefill={filter?.jacket.slice()}
         />
         <Dropdown
           title="Background"
           options={BACKGROUND}
           onSelectionChange={handleFilterChange}
           filterType="background"
-          prefill={filter.background.slice()}
+          prefill={filter?.background.slice()}
         />
         <ResetAll onClick={handleResetAll}>
           Reset All <img src="/assets/close-black.svg" alt="close-black" />
@@ -181,4 +181,4 @@ const ResetAll = styled.button`
   }
 `
 
-export default ExploreSection
+export default ExploreContainer

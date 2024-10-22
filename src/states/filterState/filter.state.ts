@@ -27,7 +27,7 @@ export const defaultFilterState: FilterState = {
   background: BACKGROUND,
 }
 
-const filterAtom = atom<FilterState>(defaultFilterState)
+export const filterAtom = atom<FilterState>(defaultFilterState)
 
 const wrapFilterState = (
   filter: FilterState,

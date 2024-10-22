@@ -1,9 +1,9 @@
 import { breakpoints } from '@/configs/ui.configs'
-import { ProcessedOperator } from '@/containers/Dashboard/DashboardContainer'
 import styled from '@emotion/styled'
 import 'lazysizes'
 import Link from 'next/link'
 import React, { useCallback, useEffect, useRef, useState } from 'react'
+import { ProcessedOperator } from '../../../../types/operators'
 
 interface OperatorGridProps {
   isLoading: boolean

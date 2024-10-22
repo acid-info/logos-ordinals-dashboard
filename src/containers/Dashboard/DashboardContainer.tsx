@@ -3,59 +3,34 @@ import { OperatorPanel } from '@/components/Dashboard/OperatorPanel'
 import { ProgressBar } from '@/components/Dashboard/ProgressBar'
 import { breakpoints } from '@/configs/ui.configs'
 import styled from '@emotion/styled'
+import { useAtomValue, useSetAtom } from 'jotai'
 import React from 'react'
-import useGetOperators from '../../../apis/operators/useGetOperators'
-import { getRandomSubset, processOperators } from '../../../utils/operators'
+import useGetUserInfo from '../../../apis/operators/useGetUserInfo'
+import { userInfo } from '../../../atoms/userInfo'
+import { walletAddressAtom } from '../../../atoms/wallet'
+import { processMyOperators } from '../../../utils/operators'
 
 export type DashboardPageProps = React.DetailedHTMLProps<
   React.HTMLAttributes<HTMLDivElement>,
   HTMLDivElement
 >
 
-export interface Operator {
-  id: number
-  name: string
-  archetype: string
-  image_400_url: string
-  image_400_jpeg_url: string
-  comp: string
-  background: string
-  skin: string
-  helmet: string
-  jacket: string
-}
-
-export interface Group {
-  id: number
-  name: string
-  operators: Operator[]
-}
-
-export interface ProcessedOperator {
-  id: string
-  image: string
-  name: string
-  archetype: string
-  gif: string
-  comp: string
-  background: string
-  skin: string
-  helmet: string
-  jacket: string
-  pointsPerHour: number
-  isStaked: boolean
-  isPinned: boolean
-}
-
 const DashboardContainer: React.FC<DashboardPageProps> = ({
   children,
   ...props
 }) => {
-  const { data, isLoading } = useGetOperators()
+  const setUserInfo = useSetAtom(userInfo)
 
-  const processedOperators = processOperators(data as Group[], [])
+  const walletAddress = useAtomValue(walletAddressAtom)
 
-  const random20Operators = getRandomSubset(processedOperators, 20)
+  const { data: userInfoData, isLoading: isUserInfoLoading } = useGetUserInfo({
+    walletAddress,
+    setUserInfo,
+  })
+
+  // console.log('userInfoData', userInfoData)
+
+  const processedOperators = processMyOperators(userInfoData?.operators)
 
   return (
     <Container {...props}>
@@ -70,7 +45,10 @@ const DashboardContainer: React.FC<DashboardPageProps> = ({
           <DesktopProgressBar>
             <ProgressBar progress={30} claimPosition={76} />
           </DesktopProgressBar>
-          <OperatorGrid data={random20Operators} isLoading={isLoading} />
+          <OperatorGrid
+            data={processedOperators}
+            isLoading={isUserInfoLoading}
+          />
         </RightColumn>
       </Wrapper>
     </Container>

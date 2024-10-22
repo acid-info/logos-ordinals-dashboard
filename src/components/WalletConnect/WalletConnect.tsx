@@ -1,6 +1,8 @@
 import { truncateString } from '@/utils/general.utils'
 import styled from '@emotion/styled'
+import { useAtom } from 'jotai'
 import React, { useEffect, useRef, useState } from 'react'
+import { walletAddressAtom } from '../../../atoms/wallet'
 import { api } from '../../../common/api'
 import { getMEAddressAndSignature } from './magicEden'
 import { getOKXAddressAndSignature } from './okx'
@@ -17,7 +19,7 @@ const options = [
 
 const Dropdown: React.FC = () => {
   const [isExpanded, setIsExpanded] = useState(false)
-  const [walletAddress, setWalletAddress] = useState<string | null>(null)
+  const [walletAddress, setWalletAddress] = useAtom(walletAddressAtom)
 
   const walletHandlers = {
     okx: getOKXAddressAndSignature,
@@ -40,7 +42,10 @@ const Dropdown: React.FC = () => {
         setWalletAddress(address)
 
         const response = await api.post('/token/pair', { address, signature })
-        console.log('Token pair response:', response)
+        const { access, refresh } = response.data.token
+
+        sessionStorage.setItem('accessToken', access)
+        sessionStorage.setItem('refreshToken', refresh)
       }
     } catch (error) {
       console.error('Failed to connect or disconnect wallet:', error)

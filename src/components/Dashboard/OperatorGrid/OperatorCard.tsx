@@ -1,9 +1,9 @@
-import { ProcessedOperator } from '@/containers/Dashboard/DashboardContainer'
 import styled from '@emotion/styled'
 import Link from 'next/link'
 import React, { useState } from 'react'
 import { useStakeOperator } from '../../../../apis/operators/useStakeOperator'
 import { useUnstakeOperator } from '../../../../apis/operators/useUnstakeOperator'
+import { ProcessedOperator } from '../../../../types/operators'
 
 interface OperatorCardProps {
   operator: ProcessedOperator
@@ -21,15 +21,13 @@ const OperatorCard: React.FC<OperatorCardProps> = ({
     if (isStaked) {
       unstake.mutate({
         operator_id: operatorId,
+        setIsStaked,
       })
-
-      setIsStaked(false)
     } else {
       stake.mutate({
         operator_id: operatorId,
+        setIsStaked,
       })
-
-      setIsStaked(true)
     }
   }
 
@@ -41,14 +39,14 @@ const OperatorCard: React.FC<OperatorCardProps> = ({
       <OperatorInfo>
         <OperatorName>{operator.name}</OperatorName>
         <PointsPerHour>
-          <Label>Per Hour</Label>
-          <Value>{operator.pointsPerHour} rp</Value>
+          <Label>XP/Block</Label>
+          <Value>{operator.pointsPerHour} XP</Value>
         </PointsPerHour>
       </OperatorInfo>
       <Actions>
         <ActionButton
           onClick={() => handleStake(operator.id)}
-          isStaked={isStaked}
+          isStaked={!!isStaked}
         >
           {isStaked ? 'Unstake' : 'Stake'}
         </ActionButton>
@@ -63,6 +61,17 @@ const OperatorCard: React.FC<OperatorCardProps> = ({
     </Container>
   )
 }
+
+const Container = styled.div`
+  display: flex;
+  flex-direction: column;
+
+  color: rgb(var(--lsd-text-primary));
+
+  a {
+    display: flex;
+  }
+`
 
 const IconButton = styled.button`
   background-color: transparent;
@@ -90,17 +99,6 @@ const Value = styled.div`
   font-weight: 400;
   font-size: 14px;
   line-height: 20px;
-`
-
-const Container = styled.div`
-  display: flex;
-  flex-direction: column;
-
-  color: rgb(var(--lsd-text-primary));
-
-  a {
-    display: flex;
-  }
 `
 
 const OperatorImage = styled.img`

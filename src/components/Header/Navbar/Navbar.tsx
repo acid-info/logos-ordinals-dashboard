@@ -6,7 +6,14 @@ import React from 'react'
 
 interface NavbarProps {}
 
-export const navItems = [
+interface NavItem {
+  label: string
+  href: string
+  isDisabled?: boolean
+  isSoon?: boolean
+}
+
+export const navItems: NavItem[] = [
   {
     label: 'Countdown',
     href: '/countdown',
@@ -18,8 +25,8 @@ export const navItems = [
   {
     label: 'Dashboard',
     href: '/dashboard',
-    isDisabled: true,
-    isSoon: true,
+    // isDisabled: true,
+    // isSoon: true,
   },
   // {
   //   label: 'Leaderboard',
