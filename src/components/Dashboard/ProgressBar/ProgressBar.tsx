@@ -2,6 +2,7 @@ import { breakpoints } from '@/configs/ui.configs'
 import { numberWithCommas } from '@/utils/general.utils'
 import styled from '@emotion/styled'
 import React from 'react'
+import useGetEpochs from '../../../../apis/general/useGetEpochs'
 
 interface ProgressBarProps {
   progress: number // Current progress of the epoch
@@ -12,6 +13,13 @@ const ProgressBar: React.FC<ProgressBarProps> = ({
   progress = 0,
   claimPosition = 76,
 }) => {
+  const { data: epochs } = useGetEpochs()
+  // const { data: currentBlock } = useGetCurrentBTCBlock()
+  // const { data: pillars } = useGetPillars()
+
+  // console.log('currentBlock', currentBlock)
+  // console.log('epochs', epochs)
+
   return (
     <Container>
       <ProgressHeader>
@@ -42,7 +50,8 @@ const ProgressBar: React.FC<ProgressBarProps> = ({
         <TimeRemaining>
           <Label>Time Remaining</Label>
           <Value color="var(--orange)" backgroundColor="var(--dark-orange)">
-            {`${numberWithCommas(1026)} blocks`}
+            {epochs &&
+              `${numberWithCommas(epochs[0]?.blocks_remaining)} blocks`}
           </Value>
         </TimeRemaining>
         <PointsRow>

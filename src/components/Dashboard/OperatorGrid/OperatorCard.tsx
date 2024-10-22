@@ -1,6 +1,7 @@
 import styled from '@emotion/styled'
 import Link from 'next/link'
 import React, { useState } from 'react'
+import { usePinOperator } from '../../../../apis/operators/usePinOperator'
 import { useStakeOperator } from '../../../../apis/operators/useStakeOperator'
 import { useUnstakeOperator } from '../../../../apis/operators/useUnstakeOperator'
 import { ProcessedOperator } from '../../../../types/operators'
@@ -13,9 +14,11 @@ const OperatorCard: React.FC<OperatorCardProps> = ({
   operator,
 }: OperatorCardProps) => {
   const [isStaked, setIsStaked] = useState(operator.isStaked)
+  const [isPinned, setIsPinned] = useState(operator.isPinned)
 
   const stake = useStakeOperator()
   const unstake = useUnstakeOperator()
+  const pin = usePinOperator()
 
   const handleStake = (operatorId: string) => {
     if (isStaked) {
@@ -29,6 +32,14 @@ const OperatorCard: React.FC<OperatorCardProps> = ({
         setIsStaked,
       })
     }
+  }
+
+  const handledPin = (operatorId: string) => {
+    pin.mutate({
+      operator_id: operatorId,
+    })
+
+    setIsPinned(!isPinned)
   }
 
   return (
@@ -50,8 +61,8 @@ const OperatorCard: React.FC<OperatorCardProps> = ({
         >
           {isStaked ? 'Unstake' : 'Stake'}
         </ActionButton>
-        <IconButton>
-          {operator.isPinned ? (
+        <IconButton onClick={() => handledPin(operator.id)} isPinned={isPinned}>
+          {isPinned ? (
             <img src="/assets/pinned.svg" alt="Pinned" />
           ) : (
             <img src="/assets/unpinned.svg" alt="Unpinned" />
@@ -73,7 +84,7 @@ const Container = styled.div`
   }
 `
 
-const IconButton = styled.button`
+const IconButton = styled.button<{ isPinned?: boolean }>`
   background-color: transparent;
   border-left: none;
   width: 28px;
@@ -83,7 +94,8 @@ const IconButton = styled.button`
   align-items: center;
   justify-content: center;
   border: none;
-  border-left: 1px solid rgb(var(--lsd-border-primary));
+  border-left: ${(props) =>
+    props.isPinned ? '1px solid black' : '1px solid white'};
   height: 28px;
 
   cursor: pointer;

@@ -1,7 +1,8 @@
 import { truncateString } from '@/utils/general.utils'
 import styled from '@emotion/styled'
-import { useAtom } from 'jotai'
+import { useAtom, useSetAtom } from 'jotai'
 import React, { useEffect, useRef, useState } from 'react'
+import { userInfoAtom } from '../../../atoms/userInfo'
 import { walletAddressAtom } from '../../../atoms/wallet'
 import { api } from '../../../common/api'
 import { getMEAddressAndSignature } from './magicEden'
@@ -20,6 +21,8 @@ const options = [
 const Dropdown: React.FC = () => {
   const [isExpanded, setIsExpanded] = useState(false)
   const [walletAddress, setWalletAddress] = useAtom(walletAddressAtom)
+
+  const setUserInfo = useSetAtom(userInfoAtom)
 
   const walletHandlers = {
     okx: getOKXAddressAndSignature,
@@ -46,6 +49,7 @@ const Dropdown: React.FC = () => {
 
         sessionStorage.setItem('accessToken', access)
         sessionStorage.setItem('refreshToken', refresh)
+        sessionStorage.setItem('walletAddress', address)
       }
     } catch (error) {
       console.error('Failed to connect or disconnect wallet:', error)
@@ -69,7 +73,13 @@ const Dropdown: React.FC = () => {
 
   const handleDisconnect = () => {
     setWalletAddress(null)
-    alert('Wallet disconnected.')
+    sessionStorage.removeItem('accessToken')
+    sessionStorage.removeItem('refreshToken')
+    sessionStorage.removeItem('walletAddress')
+    setUserInfo(null)
+
+    // refresh page to clear cache
+    window.location.reload()
   }
 
   useEffect(() => {

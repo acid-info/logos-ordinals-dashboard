@@ -1,10 +1,9 @@
 import { breakpoints } from '@/configs/ui.configs'
 import { truncateString } from '@/utils/general.utils'
 import styled from '@emotion/styled'
+import { useAtomValue } from 'jotai'
 import React from 'react'
-import useGetCurrentBTCBlock from '../../../../apis/general/useGetCurrentBTCBlock'
-import useGetEpochs from '../../../../apis/general/useGetEpochs'
-import useGetPillars from '../../../../apis/general/useGetPillars'
+import { userInfoAtom } from '../../../../atoms/userInfo'
 
 interface OperatorPanelProps {}
 
@@ -28,25 +27,32 @@ interface OperatorPanelProps {}
 // ]
 
 const OperatorPanel: React.FC<OperatorPanelProps> = () => {
-  const { data: currentBlock } = useGetCurrentBTCBlock()
-  const { data: epochs } = useGetEpochs()
-  const { data: pillars } = useGetPillars()
+  const user = useAtomValue(userInfoAtom)
+  console.log('user', user)
 
-  // console.log('currentBlock', currentBlock)
-  // console.log('epochs', epochs)
-  // console.log('pillars', pillars)
+  const handleCopyAddress = () => {
+    navigator.clipboard.writeText(user?.address)
+
+    alert('Wallet address copied to clipboard')
+  }
+
+  const handleEditCallsign = () => {
+    alert('Not Available Yet')
+  }
 
   return (
     <StyledPanel>
-      <Profile>
-        <OperatorImage
-          src="/dashboard/mock/operators/pinned.gif"
-          alt="Operator"
-        />
-        <OperatorInfo>
-          <OperatorType>Quantum Recursive Memetic</OperatorType>
-        </OperatorInfo>
-      </Profile>
+      {user?.pinned_operator && (
+        <Profile>
+          <OperatorImage
+            src="/dashboard/mock/operators/pinned.gif"
+            alt="Operator"
+          />
+          <OperatorInfo>
+            <OperatorType>Quantum Recursive Memetic</OperatorType>
+          </OperatorInfo>
+        </Profile>
+      )}
 
       <InfoRow>
         <Label>Archetype</Label>
@@ -56,15 +62,15 @@ const OperatorPanel: React.FC<OperatorPanelProps> = () => {
       <CallSignContainer>
         <InfoRow>
           <Label>Wallet</Label>
-          <Value>{truncateString('bc1qaa13nskasjovehs9')}</Value>
-          <ActionButton>
+          <Value>{truncateString(user?.address)}</Value>
+          <ActionButton onClick={handleCopyAddress}>
             <img src="/assets/file-copy.svg" alt="Copy wallet address" />
           </ActionButton>
         </InfoRow>
         <InfoRow>
           <Label>Callsign</Label>
           <Value>RagingBull</Value>
-          <ActionButton>
+          <ActionButton onClick={handleEditCallsign}>
             <img src="/assets/edit.svg" alt="Edit callsign" />
           </ActionButton>
         </InfoRow>
@@ -74,7 +80,7 @@ const OperatorPanel: React.FC<OperatorPanelProps> = () => {
         </InfoRow>
         <InfoRow>
           <Label>OP Number</Label>
-          <Value>#214</Value>
+          <Value>#{user?.id}</Value>
         </InfoRow>
       </CallSignContainer>
 

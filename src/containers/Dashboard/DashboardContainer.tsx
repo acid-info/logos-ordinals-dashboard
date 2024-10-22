@@ -3,10 +3,10 @@ import { OperatorPanel } from '@/components/Dashboard/OperatorPanel'
 import { ProgressBar } from '@/components/Dashboard/ProgressBar'
 import { breakpoints } from '@/configs/ui.configs'
 import styled from '@emotion/styled'
-import { useAtomValue, useSetAtom } from 'jotai'
-import React from 'react'
+import { useAtom, useSetAtom } from 'jotai'
+import React, { useEffect } from 'react'
 import useGetUserInfo from '../../../apis/operators/useGetUserInfo'
-import { userInfo } from '../../../atoms/userInfo'
+import { userInfoAtom } from '../../../atoms/userInfo'
 import { walletAddressAtom } from '../../../atoms/wallet'
 import { processMyOperators } from '../../../utils/operators'
 
@@ -19,16 +19,27 @@ const DashboardContainer: React.FC<DashboardPageProps> = ({
   children,
   ...props
 }) => {
-  const setUserInfo = useSetAtom(userInfo)
+  const setUserInfo = useSetAtom(userInfoAtom)
 
-  const walletAddress = useAtomValue(walletAddressAtom)
+  const [walletAddress, setWalletAddress] = useAtom(walletAddressAtom)
 
-  const { data: userInfoData, isLoading: isUserInfoLoading } = useGetUserInfo({
+  const {
+    data: userInfoData,
+    isLoading: isUserInfoLoading,
+    refetch,
+  } = useGetUserInfo({
     walletAddress,
     setUserInfo,
   })
 
-  // console.log('userInfoData', userInfoData)
+  useEffect(() => {
+    const walletAddress = sessionStorage.getItem('walletAddress')
+
+    if (walletAddress && userInfoData == null) {
+      refetch()
+      setWalletAddress(walletAddress)
+    }
+  }, [setUserInfo, walletAddress, userInfoData, refetch, setWalletAddress])
 
   const processedOperators = processMyOperators(userInfoData?.operators)
 

@@ -16,7 +16,10 @@ export function numberWithCommas(x: number) {
 
 // truncates a string to first 5 and last 5, appends an ellipsis in the middle
 export function truncateString(str: string, length = 10) {
-  if (str.length <= length) {
+  if (!str) {
+    return ''
+  }
+  if (str?.length <= length) {
     return str
   }
 
