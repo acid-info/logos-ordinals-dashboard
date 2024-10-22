@@ -94,7 +94,11 @@ const Dropdown: React.FC = () => {
                 {walletAddress == null ? (
                   options.map((option, index) => (
                     <WalletName
-                      onClick={() => connectWallet(option.value)}
+                      onClick={() =>
+                        connectWallet(
+                          option.value as keyof typeof walletHandlers,
+                        )
+                      }
                       key={'wallet-' + index}
                     >
                       {option.label}
