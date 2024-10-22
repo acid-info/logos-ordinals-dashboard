@@ -10,6 +10,9 @@ declare global {
   interface Window {
     ethereum: any
     okxwallet: any
+    unisat: any
+    phantom: any
+    solana: any
   }
 }
 

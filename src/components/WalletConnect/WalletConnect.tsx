@@ -2,7 +2,10 @@ import { truncateString } from '@/utils/general.utils'
 import styled from '@emotion/styled'
 import React, { useEffect, useRef, useState } from 'react'
 import { api } from '../../../common/api'
-import { WALLET_SIGN_MESSAGE_REQUEST } from '../../../constants/wallet'
+import { getMEAddressAndSignature } from './magicEden'
+import { getOKXAddressAndSignature } from './okx'
+import { getPhantomAddressAndSignature } from './phantom'
+import { getUnisatAddressAndSignature } from './unisat'
 
 const options = [
   { label: 'Multiplass', value: 'multiplass' },
@@ -16,34 +19,28 @@ const Dropdown: React.FC = () => {
   const [isExpanded, setIsExpanded] = useState(false)
   const [walletAddress, setWalletAddress] = useState<string | null>(null)
 
-  const connectWallet = async (wallet: string) => {
+  const walletHandlers = {
+    okx: getOKXAddressAndSignature,
+    unisat: getUnisatAddressAndSignature,
+    'magic-eden': getMEAddressAndSignature,
+    phantom: getPhantomAddressAndSignature,
+  }
+
+  const connectWallet = async (wallet: keyof typeof walletHandlers) => {
     try {
-      if (walletAddress) {
-        setWalletAddress(null)
-        alert('Wallet disconnected.')
-      } else {
-        if (wallet === 'okx' && window.okxwallet) {
-          // Docs: https://www.okx.com/web3/build/docs/sdks/chains/bitcoin/provider#connect
-          const result = await window.okxwallet.bitcoin.connect()
-          const address = result.address
+      if (walletAddress == null) {
+        const handler = walletHandlers[wallet]
 
-          setWalletAddress(address)
-
-          // Docs: https://www.okx.com/web3/build/docs/sdks/chains/bitcoin/provider#signmessage
-          const signature = await window.okxwallet.bitcoin.signMessage(
-            WALLET_SIGN_MESSAGE_REQUEST,
-            'bip322-simple',
-          )
-
-          const response = await api.post('/token/pair', {
-            address,
-            signature,
-          })
-
-          console.log('Token pair response:', response)
-        } else {
-          alert('Only OKX wallet is supported for now.')
+        if (!handler) {
+          console.error('Wallet not supported')
+          return
         }
+
+        const { addr: address, sig: signature } = await handler()
+        setWalletAddress(address)
+
+        const response = await api.post('/token/pair', { address, signature })
+        console.log('Token pair response:', response)
       }
     } catch (error) {
       console.error('Failed to connect or disconnect wallet:', error)
@@ -63,6 +60,11 @@ const Dropdown: React.FC = () => {
     ) {
       setIsExpanded(false)
     }
+  }
+
+  const handleDisconnect = () => {
+    setWalletAddress(null)
+    alert('Wallet disconnected.')
   }
 
   useEffect(() => {
@@ -89,14 +91,18 @@ const Dropdown: React.FC = () => {
           {isExpanded && (
             <DropdownContent>
               <ScrollDiv>
-                {options.map((option, index) => (
-                  <WalletName
-                    onClick={() => connectWallet(option.value)}
-                    key={'wallet-' + index}
-                  >
-                    {option.label}
-                  </WalletName>
-                ))}
+                {walletAddress == null ? (
+                  options.map((option, index) => (
+                    <WalletName
+                      onClick={() => connectWallet(option.value)}
+                      key={'wallet-' + index}
+                    >
+                      {option.label}
+                    </WalletName>
+                  ))
+                ) : (
+                  <WalletName onClick={handleDisconnect}>Disconnect</WalletName>
+                )}
               </ScrollDiv>
             </DropdownContent>
           )}
@@ -169,7 +175,7 @@ const WalletAddress = styled.span`
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
-  min-width: 90px;
+  min-width: 85px;
 `
 
 const Icon = styled.img`
