@@ -1,6 +1,6 @@
-import { truncateString } from '@/utils/general.utils'
+import { numberWithCommas, truncateString } from '@/utils/general.utils'
 import styled from '@emotion/styled'
-import { useAtom, useSetAtom } from 'jotai'
+import { useAtom } from 'jotai'
 import React, { useEffect, useRef, useState } from 'react'
 import { userInfoAtom } from '../../../atoms/userInfo'
 import { walletAddressAtom } from '../../../atoms/wallet'
@@ -22,7 +22,7 @@ const Dropdown: React.FC = () => {
   const [isExpanded, setIsExpanded] = useState(false)
   const [walletAddress, setWalletAddress] = useAtom(walletAddressAtom)
 
-  const setUserInfo = useSetAtom(userInfoAtom)
+  const [userInfo, setUserInfo] = useAtom(userInfoAtom)
 
   const walletHandlers = {
     okx: getOKXAddressAndSignature,
@@ -51,8 +51,11 @@ const Dropdown: React.FC = () => {
         sessionStorage.setItem('refreshToken', refresh)
         sessionStorage.setItem('walletAddress', address)
       }
-    } catch (error) {
-      console.error('Failed to connect or disconnect wallet:', error)
+    } catch (error: any) {
+      console.log('Failed to connect or disconnect wallet:', error)
+      alert(error.message)
+
+      setWalletAddress(null)
     }
   }
 
@@ -128,7 +131,9 @@ const Dropdown: React.FC = () => {
         </div>
         {walletAddress && (
           <PointsButton>
-            <PointsValue>4,278 XP</PointsValue>
+            <PointsValue>
+              {`${numberWithCommas(userInfo?.total_xp) || 0}`} XP
+            </PointsValue>
           </PointsButton>
         )}
       </DropdownHeader>

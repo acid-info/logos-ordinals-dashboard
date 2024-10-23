@@ -68,18 +68,18 @@ const OperatorPanel: React.FC<OperatorPanelProps> = () => {
         </InfoRow>
         <InfoRow>
           <Label>Callsign</Label>
-          <Value>RagingBull</Value>
+          <Value></Value>
           <ActionButton onClick={handleEditCallsign}>
             <img src="/assets/edit.svg" alt="Edit callsign" />
           </ActionButton>
         </InfoRow>
         <InfoRow>
           <Label>Role</Label>
-          <Value>Operator</Value>
+          <Value>{user?.id && 'Operator'}</Value>
         </InfoRow>
         <InfoRow>
           <Label>OP Number</Label>
-          <Value>#{user?.id}</Value>
+          <Value>{user?.id && `#${user?.id}`}</Value>
         </InfoRow>
       </CallSignContainer>
 

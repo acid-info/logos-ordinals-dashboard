@@ -61,13 +61,13 @@ const ProgressBar: React.FC<ProgressBarProps> = ({
           <EarnedReward>
             <Label>Total Points</Label>
             <Value color="#F29AE9" backgroundColor="#320430">
-              {`${numberWithCommas(user?.total_xp)}`}
+              {`${numberWithCommas(user?.total_xp) || 0}`}
             </Value>
           </EarnedReward>
           <EarnedReward>
             <Label>Epoch 1 XP</Label>
             <Value color="#F29AE9" backgroundColor="#320430">
-              {`${numberWithCommas(5020)}`}
+              {`${numberWithCommas(0)}`}
             </Value>
           </EarnedReward>
         </PointsRow>

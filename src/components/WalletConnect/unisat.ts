@@ -10,5 +10,6 @@ export const getUnisatAddressAndSignature = async () => {
     WALLET_SIGN_MESSAGE_REQUEST,
     'bip322-simple',
   )
+
   return { addr, sig }
 }
