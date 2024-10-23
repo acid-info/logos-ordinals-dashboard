@@ -21,6 +21,27 @@ const OperatorGrid: React.FC<OperatorGridProps> = ({
     0,
   )
 
+  // pinned operators first, then staked operators, then the rest alphabetically
+  const handleSort = (a: ProcessedOperator, b: ProcessedOperator) => {
+    if (a.isPinned && !b.isPinned) {
+      return -1
+    }
+
+    if (!a.isPinned && b.isPinned) {
+      return 1
+    }
+
+    if (a.isStaked && !b.isStaked) {
+      return -1
+    }
+
+    if (!a.isStaked && b.isStaked) {
+      return 1
+    }
+
+    return a.name.localeCompare(b.name)
+  }
+
   return (
     <Container>
       <Header>
@@ -74,9 +95,11 @@ const OperatorGrid: React.FC<OperatorGridProps> = ({
             <span>Add Operator</span>
           </AddOperator>
         ) : (
-          data?.map((operator) => (
-            <OperatorCard key={operator.id} operator={operator} />
-          ))
+          data
+            ?.sort(handleSort)
+            .map((operator) => (
+              <OperatorCard key={operator.id} operator={operator} />
+            ))
         )}
       </Grid>
     </Container>
