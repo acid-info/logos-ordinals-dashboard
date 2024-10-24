@@ -38,7 +38,7 @@ const Toast: React.FC = () => {
   const [time, setTime] = useState('DD:HH:mm:ss')
 
   useEffect(() => {
-    const targetTime = new Date('2024-10-31T17:00:00Z').getTime()
+    const targetTime = new Date('2024-11-04T13:00:00Z').getTime()
 
     const formatTime = (timeInSeconds: number) => {
       const days = Math.floor(timeInSeconds / (3600 * 24))
@@ -75,7 +75,7 @@ const Toast: React.FC = () => {
 
   return (
     <ToastContainer>
-      Logos Ordinals Mint Begins October 31, 2024 at 5PM UTC
+      Logos Ordinals Mint Begins November 4, 2024 at 1PM UTC
       <span>Time remaining: {time}</span>
     </ToastContainer>
   )

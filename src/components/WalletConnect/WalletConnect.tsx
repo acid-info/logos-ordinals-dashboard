@@ -5,13 +5,14 @@ import React, { useEffect, useRef, useState } from 'react'
 import { userInfoAtom } from '../../../atoms/userInfo'
 import { walletAddressAtom } from '../../../atoms/wallet'
 import { api } from '../../../common/api'
+import MultipassItem from './MultipassItem'
 import { getMEAddressAndSignature } from './magicEden'
 import { getOKXAddressAndSignature } from './okx'
 import { getPhantomAddressAndSignature } from './phantom'
 import { getUnisatAddressAndSignature } from './unisat'
 
 const options = [
-  { label: 'Multiplass', value: 'multiplass' },
+  { label: 'Multiplass', value: 'multipass' },
   { label: 'Unisat', value: 'unisat' },
   { label: 'Magic Eden', value: 'magic-eden' },
   { label: 'Phantom', value: 'phantom' },
@@ -23,6 +24,7 @@ const Dropdown: React.FC = () => {
   const [walletAddress, setWalletAddress] = useAtom(walletAddressAtom)
 
   const [userInfo, setUserInfo] = useAtom(userInfoAtom)
+  const [showMultiPass, setShowMultiPass] = useState(false)
 
   const walletHandlers = {
     okx: getOKXAddressAndSignature,
@@ -31,9 +33,16 @@ const Dropdown: React.FC = () => {
     phantom: getPhantomAddressAndSignature,
   }
 
-  const connectWallet = async (wallet: keyof typeof walletHandlers) => {
+  const connectWallet = async (
+    wallet: keyof typeof walletHandlers | 'multipass',
+  ) => {
     try {
       if (walletAddress == null) {
+        if (wallet === 'multipass') {
+          setShowMultiPass(true)
+          return
+        }
+
         const handler = walletHandlers[wallet]
 
         if (!handler) {
@@ -61,8 +70,8 @@ const Dropdown: React.FC = () => {
 
   const dropdownRef = useRef<HTMLDivElement>(null)
 
-  const toggleDropdown = () => {
-    setIsExpanded(!isExpanded)
+  const toggleDropdown = (e: React.MouseEvent) => {
+    setIsExpanded(true)
   }
 
   const handleClickOutside = (event: MouseEvent) => {
@@ -83,6 +92,18 @@ const Dropdown: React.FC = () => {
 
     // refresh page to clear cache
     window.location.reload()
+  }
+
+  const handleWalletClick = (option: string) => {
+    if (option !== 'multipass') {
+      setIsExpanded(false)
+    } else {
+      setShowMultiPass(true)
+      setIsExpanded(true)
+      return
+    }
+
+    connectWallet(option as keyof typeof walletHandlers)
   }
 
   useEffect(() => {
@@ -110,18 +131,18 @@ const Dropdown: React.FC = () => {
             <DropdownContent>
               <ScrollDiv>
                 {walletAddress == null ? (
-                  options.map((option, index) => (
-                    <WalletName
-                      onClick={() =>
-                        connectWallet(
-                          option.value as keyof typeof walletHandlers,
-                        )
-                      }
-                      key={'wallet-' + index}
-                    >
-                      {option.label}
-                    </WalletName>
-                  ))
+                  showMultiPass ? (
+                    <MultipassItem />
+                  ) : (
+                    options.map((option, index) => (
+                      <WalletName
+                        onClick={() => handleWalletClick(option.value)}
+                        key={'wallet-' + index}
+                      >
+                        {option.label}
+                      </WalletName>
+                    ))
+                  )
                 ) : (
                   <WalletName onClick={handleDisconnect}>Disconnect</WalletName>
                 )}
