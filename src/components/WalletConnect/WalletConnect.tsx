@@ -129,14 +129,14 @@ const Dropdown: React.FC = () => {
             </DropdownContent>
           )}
         </div>
-        {walletAddress && (
-          <PointsButton>
-            <PointsValue>
-              {`${numberWithCommas(userInfo?.total_xp) || 0}`} XP
-            </PointsValue>
-          </PointsButton>
-        )}
       </DropdownHeader>
+      {walletAddress && (
+        <PointsButton>
+          <PointsValue>
+            {`${numberWithCommas(userInfo?.total_xp) || 0}`} XP
+          </PointsValue>
+        </PointsButton>
+      )}
     </DropdownContainer>
   )
 }
@@ -227,12 +227,12 @@ const PointsButton = styled.button`
   width: fit-content;
   position: absolute;
   background-color: transparent;
-  cursor: pointer;
   height: 28px;
   border: 1px solid rgb(var(--lsd-border-primary));
   padding: 8px 12px;
-  top: 36px;
-  right: 0;
+  top: 0px;
+  right: -60px;
+  z-index: 100000;
 `
 
 const PointsValue = styled.span`

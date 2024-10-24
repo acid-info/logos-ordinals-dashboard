@@ -8,7 +8,7 @@ export const Layout = styled.div`
 export const Container = styled.div`
   display: flex;
   flex-direction: column;
-  overflow: hidden;
+  /* overflow: hidden; */
   max-width: ${uiConfigs.maxContainerWidth}px;
   margin: 0 auto;
   padding: 8px 0 24px 0;
