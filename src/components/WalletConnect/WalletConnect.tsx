@@ -59,6 +59,8 @@ const Dropdown: React.FC = () => {
         sessionStorage.setItem('accessToken', access)
         sessionStorage.setItem('refreshToken', refresh)
         sessionStorage.setItem('walletAddress', address)
+
+        setIsExpanded(false)
       }
     } catch (error: any) {
       console.log('Failed to connect or disconnect wallet:', error)
