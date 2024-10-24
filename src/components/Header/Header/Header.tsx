@@ -28,11 +28,7 @@ const Header: React.FC<NavbarProps> = () => {
         <Navbar />
       </DesktopNavbar>
       <UserActions>
-        <Link
-          href="https://app.gitbook.com/o/JaXLyutHsCMnV7ROVSHw/s/Q0TLtn9WN6DR3Lzv4Gcs/logos-operators/pillars-and-contributions"
-          passHref
-          target="_blank"
-        >
+        <Link href="https://gitbook.logos.co/" passHref target="_blank">
           <GitbookButton>
             <span>Gitbook</span>
           </GitbookButton>

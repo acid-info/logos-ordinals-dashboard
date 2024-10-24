@@ -46,16 +46,7 @@ const OperatorGrid: React.FC<OperatorGridProps> = ({
     <Container>
       <Header>
         <Title>Operators</Title>
-        <Controls>
-          <PlusIcon>
-            <img
-              src="/assets/plus.svg"
-              width={10}
-              height={10}
-              alt="Add Operator"
-            />
-          </PlusIcon>
-        </Controls>
+        <Controls></Controls>
       </Header>
       <Stats>
         <Stat>
@@ -208,7 +199,7 @@ const Placeholder = styled.div`
 `
 
 const AddOperator = styled(Link)`
-  display: flex;
+  display: none;
   flex-direction: column;
   justify-content: center;
   align-items: center;
@@ -218,6 +209,11 @@ const AddOperator = styled(Link)`
   padding: 24px;
 
   span {
+    text-decoration: none;
+    color: white;
+  }
+
+  & {
     text-decoration: none;
     color: white;
   }
