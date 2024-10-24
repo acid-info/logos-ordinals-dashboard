@@ -25,8 +25,8 @@ export const navItems: NavItem[] = [
   {
     label: 'Dashboard',
     href: '/dashboard',
-    // isDisabled: true,
-    // isSoon: true,
+    isDisabled: true,
+    isSoon: true,
   },
   // {
   //   label: 'Leaderboard',

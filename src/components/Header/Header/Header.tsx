@@ -37,17 +37,21 @@ const Header: React.FC<NavbarProps> = () => {
             <span>Gitbook</span>
           </GitbookButton>
         </Link>
-        {/* <Link
-          href="https://discord.com/invite/logosnetwork"
-          passHref
-          target="_blank"
-        >
-          <SocialButton>
-            <span>Join our Discord</span>
-            <Icon src="/icons/discord-white.svg" alt="Discord" />
-          </SocialButton>
-        </Link> */}
-        <WalletConnect />
+
+        {process.env.NEXT_PUBLIC_API_MODE === 'development' ? (
+          <WalletConnect />
+        ) : (
+          <Link
+            href="https://discord.com/invite/logosnetwork"
+            passHref
+            target="_blank"
+          >
+            <SocialButton>
+              <span>Join our Discord</span>
+              <Icon src="/icons/discord-white.svg" alt="Discord" />
+            </SocialButton>
+          </Link>
+        )}
         <HamburguerMenu />
       </UserActions>
     </Container>
@@ -85,15 +89,32 @@ const UserActions = styled.div`
   }
 `
 
-// const SocialButton = styled(Button)`
-//   width: 142px;
-//   box-sizing: border-box;
-//   gap: 12px;
+const SocialButton = styled.button`
+  width: 142px;
+  box-sizing: border-box;
+  gap: 12px;
 
-//   span {
-//     white-space: nowrap;
-//   }
-// `
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 12px;
+  height: 28px;
+  font-weight: 400;
+  font-size: 12px;
+  line-height: 16px;
+  border: 1px solid rgb(var(--lsd-border-primary));
+  background: transparent;
+  color: rgb(var(--lsd-text-primary));
+  cursor: pointer;
+
+  span {
+    white-space: nowrap;
+  }
+`
+
+const Icon = styled.img`
+  padding: 0;
+`
 
 const DesktopNavbar = styled.div`
   position: absolute;
