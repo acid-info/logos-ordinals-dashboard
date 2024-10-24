@@ -132,7 +132,12 @@ const Dropdown: React.FC = () => {
               <ScrollDiv>
                 {walletAddress == null ? (
                   showMultiPass ? (
-                    <MultipassItem />
+                    <MultipassItem
+                      handleClick={() => {
+                        setIsExpanded(false)
+                        setShowMultiPass(false)
+                      }}
+                    />
                   ) : (
                     options.map((option, index) => (
                       <WalletName

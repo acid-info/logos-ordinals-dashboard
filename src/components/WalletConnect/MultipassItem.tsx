@@ -1,15 +1,19 @@
 import styled from '@emotion/styled'
 
-const Multipass = () => {
+interface Props {
+  handleClick: () => void
+}
+
+const MultipassItem = ({ handleClick }: Props) => {
   return (
-    <div>
+    <div onClick={handleClick}>
       <WalletName>
         <img src="/assets/chevron-left.svg" alt="Multipass" />
         Multipass
       </WalletName>
       <QRCodeContainer>
         <p>Scan to connect</p>
-        <img src="/assets/qr-multipass.png" alt="Multipass QR code" />
+        <img src="/assets/qr-multipass.svg" alt="Multipass QR code" />
       </QRCodeContainer>
     </div>
   )
@@ -44,4 +48,4 @@ const QRCodeContainer = styled.div`
   }
 `
 
-export default Multipass
+export default MultipassItem
