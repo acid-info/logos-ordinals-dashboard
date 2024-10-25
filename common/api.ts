@@ -26,13 +26,17 @@ api.interceptors.response.use(
     if (error.response?.status === 401) {
       try {
         const refreshToken = await sessionStorage.getItem('refreshToken')
+
         await api
           .post('/token/refresh', {
             refresh: refreshToken,
           })
           .then(async (res) => {
+            sessionStorage.setItem('accessToken', res.data.access)
+
             api.defaults.headers.common['Authorization'] =
-              'Bearer ' + res.data.token?.accessToken
+              'Bearer ' + res.data.access
+
             return await axios(originalRequest as any)
           })
       } catch (e) {
