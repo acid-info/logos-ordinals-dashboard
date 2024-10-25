@@ -28,7 +28,7 @@ api.interceptors.response.use(
         const refreshToken = await sessionStorage.getItem('refreshToken')
         await api
           .post('/token/refresh', {
-            refreshToken,
+            refresh: refreshToken,
           })
           .then(async (res) => {
             api.defaults.headers.common['Authorization'] =
@@ -36,8 +36,7 @@ api.interceptors.response.use(
             return await axios(originalRequest as any)
           })
       } catch (e) {
-        // localStorage.setItem('refreshToken', '');
-        // deleteCookie('refresh-token');
+        console.log('refresh token error', e)
       }
     }
 
