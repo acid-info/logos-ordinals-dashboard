@@ -2,7 +2,8 @@ import { breakpoints } from '@/configs/ui.configs'
 import { truncateString } from '@/utils/general.utils'
 import styled from '@emotion/styled'
 import { useAtomValue } from 'jotai'
-import React from 'react'
+import React, { useEffect, useState } from 'react'
+import { useUpdateCallSign } from '../../../../apis/operators/useUpdateCallSign'
 import { userInfoAtom } from '../../../../atoms/userInfo'
 
 interface OperatorPanelProps {}
@@ -29,6 +30,15 @@ interface OperatorPanelProps {}
 const OperatorPanel: React.FC<OperatorPanelProps> = () => {
   const user = useAtomValue(userInfoAtom)
 
+  const [editCallsign, setEditCallsign] = useState(false)
+  const [callsign, setCallsign] = useState('')
+
+  const updateCallSign = useUpdateCallSign()
+
+  useEffect(() => {
+    setCallsign(user?.call_sign || '')
+  }, [user])
+
   const handleCopyAddress = () => {
     navigator.clipboard.writeText(user?.address)
 
@@ -36,7 +46,19 @@ const OperatorPanel: React.FC<OperatorPanelProps> = () => {
   }
 
   const handleEditCallsign = () => {
-    alert('Not Available Yet')
+    setEditCallsign((prev) => !prev)
+  }
+
+  const handleCallSignChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setCallsign(e.target.value)
+  }
+
+  const handleCallSignUpdate = () => {
+    setEditCallsign(false)
+
+    updateCallSign.mutate({
+      call_sign: callsign,
+    })
   }
 
   return (
@@ -68,10 +90,23 @@ const OperatorPanel: React.FC<OperatorPanelProps> = () => {
         </InfoRow>
         <InfoRow>
           <Label>Callsign</Label>
-          <Value></Value>
-          <ActionButton onClick={handleEditCallsign}>
-            <img src="/assets/edit.svg" alt="Edit callsign" />
-          </ActionButton>
+          {editCallsign ? (
+            <ActionButton>
+              <input
+                type="text"
+                defaultValue={callsign}
+                onChange={handleCallSignChange}
+              />
+              <div onClick={handleCallSignUpdate}>
+                <img src="/assets/edit.svg" alt="Edit callsign" />
+              </div>
+            </ActionButton>
+          ) : (
+            <ActionButton onClick={handleEditCallsign}>
+              <span>{callsign}</span>
+              <img src="/assets/edit.svg" alt="Edit callsign" />
+            </ActionButton>
+          )}
         </InfoRow>
         <InfoRow>
           <Label>Role</Label>
@@ -230,8 +265,41 @@ const ActionButton = styled.button`
   justify-content: center;
   border: none;
   background-color: transparent;
+  position: relative;
   cursor: pointer;
   margin-left: 18px;
+
+  input {
+    background: var(--grey-900);
+    border: none;
+    border-bottom: 1px solid white;
+    width: 150px;
+    position: absolute;
+    right: 20px;
+
+    color: white;
+    font-size: 14px;
+    line-height: 20px;
+    text-align: right;
+    padding-right: 10px;
+  }
+
+  input:focus {
+    outline: none;
+  }
+
+  span {
+    background: transparent;
+    width: 150px;
+    position: absolute;
+    right: 20px;
+
+    color: white;
+    font-size: 14px;
+    line-height: 20px;
+    text-align: right;
+    padding-right: 10px;
+  }
 `
 
 export default OperatorPanel

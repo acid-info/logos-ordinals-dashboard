@@ -68,7 +68,7 @@ const OperatorGrid: React.FC<OperatorGridProps> = ({
       </Stats>
       <Grid>
         {isLoading ? (
-          Array.from({ length: 12 }).map((_, index) => (
+          Array.from({ length: 15 }).map((_, index) => (
             <PlaceholderCard key={index}>
               <Placeholder />
             </PlaceholderCard>
@@ -193,7 +193,7 @@ const PlaceholderCard = styled.div`
 const Placeholder = styled.div`
   width: 100%;
   aspect-ratio: 1;
-  background-color: var(--grey-900);
+  background-color: var(--grey-500);
   border-radius: 8px;
   opacity: 0.5;
 `
