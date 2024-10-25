@@ -88,7 +88,6 @@ const Dropdown: React.FC = () => {
   const handleDisconnect = () => {
     setWalletAddress(null)
     sessionStorage.removeItem('accessToken')
-    sessionStorage.removeItem('refreshToken')
     sessionStorage.removeItem('walletAddress')
     setUserInfo(null)
 
