@@ -32,7 +32,6 @@ const Collapse: React.FC<CollapsibleProps> = ({ header, children }) => {
 
 const Container = styled.div`
   background-color: #320430;
-  border-radius: 8px;
   color: #f29ae9;
   cursor: pointer;
 `
