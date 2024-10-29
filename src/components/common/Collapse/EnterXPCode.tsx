@@ -23,7 +23,7 @@ const EnterXPCode: React.FC = () => {
       })
       .catch((err) => {
         console.log(err)
-        setMessage(err.message || 'Something went wrong')
+        setMessage(err.response.data.message || 'Something went wrong')
         setIsSuccess(false)
       })
   }

@@ -49,7 +49,6 @@ const Header = styled.div`
 const Body = styled.div<{ isOpen: boolean }>`
   display: ${({ isOpen }) => (isOpen ? 'flex' : 'none')};
   justify-content: space-between;
-  max-height: ${({ isOpen }) => (isOpen ? '100px' : '0')};
   overflow: hidden;
   transition: max-height 0.3s ease;
   background-color: #260324;
