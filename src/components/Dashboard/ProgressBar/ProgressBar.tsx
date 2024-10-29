@@ -4,6 +4,7 @@ import styled from '@emotion/styled'
 import { useAtomValue } from 'jotai'
 import React from 'react'
 import useGetEpochs from '../../../../apis/general/useGetEpochs'
+import useGetUserXP from '../../../../apis/general/useGetUserXP'
 import { userInfoAtom } from '../../../../atoms/userInfo'
 
 interface ProgressBarProps {
@@ -16,6 +17,8 @@ const ProgressBar: React.FC<ProgressBarProps> = ({
   claimPosition = 76,
 }) => {
   const { data: epochs } = useGetEpochs()
+  const { data: userXP } = useGetUserXP()
+  console.log('userXP', userXP)
   const user = useAtomValue(userInfoAtom)
   // const { data: currentBlock } = useGetCurrentBTCBlock()
   // const { data: pillars } = useGetPillars()
