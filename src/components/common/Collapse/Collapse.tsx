@@ -3,24 +3,14 @@ import React, { useState } from 'react'
 
 interface CollapsibleProps {
   header: string
-  content: string
-  enableCopy?: boolean
+  children: React.ReactNode
 }
 
-const Collapse: React.FC<CollapsibleProps> = ({
-  header,
-  content,
-  enableCopy = true,
-}) => {
+const Collapse: React.FC<CollapsibleProps> = ({ header, children }) => {
   const [isOpen, setIsOpen] = useState(false)
 
   const toggleOpen = () => {
     setIsOpen(!isOpen)
-  }
-
-  const copyToClipboard = () => {
-    navigator.clipboard.writeText(content)
-    alert('Copied to clipboard!')
   }
 
   return (
@@ -35,14 +25,7 @@ const Collapse: React.FC<CollapsibleProps> = ({
           )}
         </Chevron>
       </Header>
-      <Body isOpen={isOpen}>
-        {content}
-        {enableCopy && (
-          <CopyButton onClick={copyToClipboard}>
-            <img src="/assets/file-copy-purple.svg" alt="file copy" />
-          </CopyButton>
-        )}
-      </Body>
+      <Body isOpen={isOpen}>{children}</Body>
     </Container>
   )
 }
@@ -50,7 +33,6 @@ const Collapse: React.FC<CollapsibleProps> = ({
 const Container = styled.div`
   background-color: #320430;
   border-radius: 8px;
-  margin: 10px 0;
   color: #f29ae9;
   cursor: pointer;
 `
@@ -70,21 +52,12 @@ const Body = styled.div<{ isOpen: boolean }>`
   max-height: ${({ isOpen }) => (isOpen ? '100px' : '0')};
   overflow: hidden;
   transition: max-height 0.3s ease;
-  background-color: #320430;
-  padding: 20px 16px 20px 8px;
+  background-color: #260324;
+  padding: 16px 8px;
   font-size: 14px;
   line-height: 20px;
   color: #f29ae9;
   letter-spacing: 0.14px;
-`
-
-const CopyButton = styled.button`
-  background: none;
-  border: none;
-  color: #f29ae9;
-  cursor: pointer;
-  font-size: 14px;
-  margin-left: 10px;
 `
 
 const Chevron = styled.span<{ isExpanded: boolean }>`

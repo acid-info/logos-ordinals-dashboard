@@ -1,3 +1,5 @@
+import CopyCode from '@/components/common/Collapse/CopyCode'
+import EnterXPCode from '@/components/common/Collapse/EnterXPCode'
 import { breakpoints } from '@/configs/ui.configs'
 import { truncateString } from '@/utils/general.utils'
 import styled from '@emotion/styled'
@@ -136,10 +138,10 @@ const OperatorPanel: React.FC<OperatorPanelProps> = () => {
         </BadgesSection>
       </ProfileInfo> */}
 
-      {/* <Collapse
-        header="Refer Operators +100 XP"
-        content={truncateString('445f5slk1as4645sdf54')}
-      /> */}
+      <CollapseContainer>
+        <EnterXPCode />
+        <CopyCode />
+      </CollapseContainer>
     </StyledPanel>
   )
 }
@@ -158,6 +160,13 @@ const Profile = styled.div`
     display: flex;
     gap: 16px;
   }
+`
+
+const CollapseContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  margin-top: 24px;
 `
 
 const OperatorImage = styled.img`

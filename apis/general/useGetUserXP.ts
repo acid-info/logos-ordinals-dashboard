@@ -7,11 +7,15 @@ const useQueryOptions = {
   retry: 1,
 }
 
+interface Props {
+  enabled: boolean
+}
+
 export const fetchData = async () => {
   return await api.get('/user/xp').then((res) => res.data)
 }
 
-const useGetUserXP = () => {
+const useGetUserXP = ({ enabled }: Props) => {
   const queryKey = ['getUserXP']
   const queryClient = useQueryClient()
 
@@ -22,6 +26,7 @@ const useGetUserXP = () => {
   const response = useQuery({
     queryKey: queryKey,
     queryFn: fetchData,
+    enabled,
     ...useQueryOptions,
   })
 

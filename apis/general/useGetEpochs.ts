@@ -11,7 +11,11 @@ export const fetchData = async () => {
   return await api.get('/epochs').then((res) => res.data)
 }
 
-const useGetEpochs = () => {
+interface Props {
+  enabled: boolean
+}
+
+const useGetEpochs = ({ enabled }: Props) => {
   const queryKey = ['getEpochs']
   const queryClient = useQueryClient()
 
@@ -22,6 +26,7 @@ const useGetEpochs = () => {
   const response = useQuery({
     queryKey: queryKey,
     queryFn: fetchData,
+    enabled,
     ...useQueryOptions,
   })
 
