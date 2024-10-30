@@ -64,7 +64,7 @@ const Dropdown: React.FC = () => {
       }
     } catch (error: any) {
       console.log('Failed to connect or disconnect wallet:', error)
-      alert(error.message)
+      alert(error)
 
       setWalletAddress(null)
     }

@@ -21,8 +21,8 @@ export async function connectMEWallet() {
     getAddress({
       getProvider: getBtcProvider,
       payload: {
-        purposes: [AddressPurpose.Ordinals, AddressPurpose.Payment],
-        message: 'Address for receiving Ordinals and payments',
+        purposes: [AddressPurpose.Ordinals],
+        message: 'Select a Bitcoin address to connect with.',
         network: {
           type: BitcoinNetworkType.Mainnet,
         },
@@ -60,18 +60,23 @@ export async function signWalletMessage(address: string) {
         },
       })
     } catch (err) {
-      console.error(err)
+      console.log(err)
       reject(err)
     }
   })
 }
 
 export const getMEAddressAndSignature = async () => {
-  const wallets: any = await connectMEWallet()
-  const addresses = wallets.addresses
+  try {
+    const wallets: any = await connectMEWallet()
+    const addresses = wallets?.addresses
 
-  const addr = addresses[0].address
-  const sig = await signWalletMessage(addr)
+    const addr = addresses[0]?.address
+    const sig = await signWalletMessage(addr)
 
-  return { addr, sig }
+    return { addr, sig }
+  } catch (err) {
+    console.log(err)
+    throw new Error('Failed to get address and signature')
+  }
 }
