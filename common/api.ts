@@ -40,7 +40,7 @@ api.interceptors.response.use(
             return await axios(originalRequest as any)
           })
       } catch (e) {
-        console.log('refresh token error', e)
+        console.log('refresh token', e)
       }
     }
 
