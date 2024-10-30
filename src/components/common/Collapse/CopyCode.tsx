@@ -1,19 +1,20 @@
 import styled from '@emotion/styled'
-import React from 'react'
 import Collapse from './Collapse'
 
-const CopyCode: React.FC = () => {
-  const content = '445f5..4645sdf54'
+interface Props {
+  referralCode: string
+}
 
+const CopyCode = ({ referralCode }: Props) => {
   const copyToClipboard = () => {
-    navigator.clipboard.writeText(content)
+    navigator.clipboard.writeText(referralCode || '')
     alert('Copied to clipboard!')
   }
 
   return (
     <Collapse header="Refer Operators +100 XP">
       <Wrapper>
-        <div>{content}</div>
+        <div>{referralCode || ''}</div>
         <CopyButton onClick={copyToClipboard}>
           <img src="/assets/file-copy-purple.svg" alt="file copy" />
         </CopyButton>
