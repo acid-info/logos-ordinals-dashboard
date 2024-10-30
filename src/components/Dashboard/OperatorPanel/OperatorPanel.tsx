@@ -140,7 +140,7 @@ const OperatorPanel: React.FC<OperatorPanelProps> = () => {
 
       <CollapseContainer>
         <EnterXPCode />
-        <CopyCode referralCode="WIP" />
+        <CopyCode referralCode={user?.referral_code || ''} />
       </CollapseContainer>
     </StyledPanel>
   )
