@@ -43,8 +43,6 @@ const OperatorPanel: React.FC<OperatorPanelProps> = () => {
 
   const handleCopyAddress = () => {
     navigator.clipboard.writeText(user?.address)
-
-    alert('Wallet address copied to clipboard')
   }
 
   const handleEditCallsign = () => {
@@ -308,6 +306,12 @@ const ActionButton = styled.button`
     line-height: 20px;
     text-align: right;
     padding-right: 10px;
+  }
+
+  &:hover {
+    img {
+      filter: brightness(0.8);
+    }
   }
 `
 

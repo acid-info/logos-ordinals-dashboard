@@ -136,6 +136,19 @@ const IconButton = styled.button<{ isPinned?: boolean }>`
   height: 28px;
 
   cursor: pointer;
+
+  // hover state when not pinned
+  ${(props) =>
+    !props.isPinned &&
+    `
+    &:hover {
+      background-color: rgb(var(--lsd-surface-secondary));
+
+      img {
+      filter: invert(1);
+    }
+    }
+  `}
 `
 
 const Label = styled.div`
