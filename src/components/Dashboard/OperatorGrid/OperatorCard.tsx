@@ -1,6 +1,6 @@
 import styled from '@emotion/styled'
 import { useQueryClient } from '@tanstack/react-query'
-import { useAtomValue } from 'jotai'
+import { useAtomValue, useSetAtom } from 'jotai'
 import Link from 'next/link'
 import React, { useState } from 'react'
 import useGetUserInfo from '../../../../apis/operators/useGetUserInfo'
@@ -18,10 +18,9 @@ interface OperatorCardProps {
 const OperatorCard: React.FC<OperatorCardProps> = ({
   operator,
 }: OperatorCardProps) => {
-  const user = useAtomValue(userInfoAtom)
+  const setUserInfo = useSetAtom(userInfoAtom)
 
   const [isStaked, setIsStaked] = useState(operator.isStaked)
-  const [isPinned, setIsPinned] = useState(operator.isPinned)
 
   const queryClient = useQueryClient()
 
@@ -36,8 +35,10 @@ const OperatorCard: React.FC<OperatorCardProps> = ({
   })
 
   const handleStake = (operatorId: string) => {
+    setIsStaked((prev) => !prev)
+
     if (isStaked) {
-      unstake.mutate({
+      unstake.mutateAsync({
         operator_id: operatorId,
         setIsStaked,
       })
@@ -45,7 +46,7 @@ const OperatorCard: React.FC<OperatorCardProps> = ({
       queryClient.invalidateQueries('getUserInfo' as any)
       refetch()
     } else {
-      stake.mutate({
+      stake.mutateAsync({
         operator_id: operatorId,
         setIsStaked,
       })
@@ -55,11 +56,18 @@ const OperatorCard: React.FC<OperatorCardProps> = ({
     }
   }
 
-  const handledPin = (operatorId: string) => {
-    pin.mutate({
+  const handledPin = async (operatorId: string) => {
+    queryClient.invalidateQueries('getUserInfo' as any)
+
+    await pin.mutateAsync({
       operator_id: operatorId,
     })
-    window.location.reload()
+
+    const res = await refetch()
+
+    const newUserInfo = res.data
+
+    setUserInfo(newUserInfo)
   }
 
   return (
@@ -87,8 +95,11 @@ const OperatorCard: React.FC<OperatorCardProps> = ({
         >
           {isStaked ? 'Unstake' : 'Stake'}
         </ActionButton>
-        <IconButton onClick={() => handledPin(operator.id)} isPinned={isPinned}>
-          {isPinned ? (
+        <IconButton
+          onClick={() => handledPin(operator.id)}
+          isPinned={operator.isPinned}
+        >
+          {operator.isPinned ? (
             <img src="/assets/pinned.svg" alt="Pinned" />
           ) : (
             <img src="/assets/unpinned.svg" alt="Unpinned" />

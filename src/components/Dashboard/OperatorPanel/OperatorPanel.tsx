@@ -58,7 +58,7 @@ const OperatorPanel: React.FC<OperatorPanelProps> = () => {
   const handleCallSignUpdate = () => {
     setEditCallsign(false)
 
-    updateCallSign.mutate({
+    updateCallSign.mutateAsync({
       call_sign: callsign,
     })
   }

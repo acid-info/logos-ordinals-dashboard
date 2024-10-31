@@ -48,7 +48,7 @@ const DashboardContainer: React.FC<DashboardPageProps> = ({
     enabled: !!walletAddress && walletAddress.length > 0,
   })
 
-  console.log('userXP', userXP)
+  // console.log('userXP', userXP)
 
   return (
     <Container {...props}>
