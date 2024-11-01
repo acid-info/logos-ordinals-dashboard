@@ -24,7 +24,7 @@ const CopyCode = ({ referralCode }: Props) => {
   return (
     <Collapse header="Refer Operators +100 XP">
       <Wrapper>
-        <div>{referralCode || ''}</div>
+        <div>{referralCode || 'Connect to wallet to get referral code'}</div>
         <CopyButton onClick={copyToClipboard}>
           <img src="/assets/file-copy-purple.svg" alt="file copy" />
         </CopyButton>

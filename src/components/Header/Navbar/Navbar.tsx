@@ -36,10 +36,10 @@ export const navItems: NavItem[] = [
   //   label: 'Roles',
   //   href: '/roles',
   // },
-  // {
-  //   label: 'Docs',
-  //   href: '/docs',
-  // },
+  {
+    label: 'Docs',
+    href: '/docs',
+  },
   // {
   //   label: 'Multipass',
   //   href: '/multipass',
