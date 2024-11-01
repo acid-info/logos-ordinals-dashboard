@@ -62,18 +62,20 @@ const DashboardContainer: React.FC<DashboardPageProps> = ({
 
   // console.log('userXP', userXP)
 
+  const currentRate = 0
+
   return (
     <Container {...props}>
       <Wrapper>
         <LeftColumn>
           <MobileProgressBar>
-            <ProgressBar progress={30} claimPosition={76} />
+            <ProgressBar progress={currentRate} claimPosition={80} />
           </MobileProgressBar>
           <OperatorPanel />
         </LeftColumn>
         <RightColumn>
           <DesktopProgressBar>
-            <ProgressBar progress={30} claimPosition={76} />
+            <ProgressBar progress={currentRate} claimPosition={80} />
           </DesktopProgressBar>
           <OperatorGrid
             data={processedOperators}

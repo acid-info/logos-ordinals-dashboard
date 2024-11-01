@@ -53,7 +53,7 @@ const ProgressBar: React.FC<ProgressBarProps> = ({
         </Epoch2Wrapper>
       </ProgressRow>
       <ProgressStats>
-        <Stat>Current Rate: 100%</Stat>
+        <Stat>Current Rate: {progress}%</Stat>
         {/* <Stat>XP Bonus: +20%</Stat> */}
       </ProgressStats>
       <ProgressFooter>
