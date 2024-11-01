@@ -4,39 +4,8 @@ import { useAtomValue } from 'jotai'
 import { useEffect, useState } from 'react'
 import { userInfoAtom } from '../../../atoms/userInfo'
 
-const ToastContainer = styled.div`
-  position: relative;
-  padding: 14px;
-  justify-content: flex-end;
-  width: 100%;
-  text-align: center;
-  justify-content: center;
-  align-items: center;
-  background: #321504;
-  z-index: 10000;
-
-  color: #fe740c;
-  font-size: 14px;
-  font-weight: 400;
-  line-height: 20px;
-  letter-spacing: 0.14px;
-
-  span {
-    margin-left: 20px;
-  }
-
-  @media (max-width: ${breakpoints.sm}px) {
-    font-size: 12px;
-    line-height: 16px;
-
-    span {
-      // new line
-      display: block;
-    }
-  }
-`
-
 const Toast: React.FC = () => {
+  const [showTopToast, setShowTopToast] = useState(true)
   const [time, setTime] = useState('DD:HH:mm:ss')
   const userInfo = useAtomValue(userInfoAtom)
 
@@ -77,7 +46,7 @@ const Toast: React.FC = () => {
   }, [])
 
   return (
-    <ToastContainer>
+    <ToastContainer showTopToast={showTopToast}>
       {userInfo?.message?.length > 0 ? (
         userInfo.message
       ) : (
@@ -86,8 +55,61 @@ const Toast: React.FC = () => {
           <span>Time remaining: {time}</span>
         </>
       )}
+      <div>
+        <button className="close-button" onClick={() => setShowTopToast(false)}>
+          <img src="/assets/close-orange.svg" alt="close" />
+        </button>
+      </div>
     </ToastContainer>
   )
 }
+
+const ToastContainer = styled.div<{ showTopToast: boolean }>`
+  display: ${({ showTopToast }) => (showTopToast ? 'flex' : 'none')};
+  position: relative;
+  padding: 14px;
+  justify-content: flex-end;
+  width: 100%;
+  text-align: center;
+  justify-content: center;
+  align-items: center;
+  background: #321504;
+  z-index: 10000;
+
+  color: #fe740c;
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 20px;
+  letter-spacing: 0.14px;
+
+  span {
+    margin-left: 20px;
+  }
+
+  .close-button {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    position: absolute;
+    right: 10px;
+    top: 10px;
+    width: 28px;
+    height: 28px;
+    border: 1px solid #fe740c;
+    background: transparent;
+    padding: 0;
+  }
+
+  @media (max-width: ${breakpoints.sm}px) {
+    font-size: 12px;
+    line-height: 16px;
+
+    span {
+      // new line
+      display: block;
+    }
+  }
+`
 
 export default Toast
