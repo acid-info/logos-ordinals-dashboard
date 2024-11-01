@@ -12,7 +12,7 @@ export type Archetype =
 
 export interface Operator {
   id: number
-  name: string
+  archetype__name: string
   archetype: string
   image_400_url: string
   image_400_jpeg_url: string

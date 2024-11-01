@@ -18,7 +18,7 @@ export function processOperators(
         id: operator.id.toString(),
         image: operator.image_400_jpeg_url,
         gif: operator.image_400_url,
-        name: operator.name,
+        name: operator.archetype__name,
         comp: operator.comp,
         background: operator.background,
         skin: operator.skin,
@@ -51,7 +51,7 @@ export function processMyOperators(operators: any[]) {
     skin: operator.skin,
     helmet: operator.helmet,
     jacket: operator.jacket,
-    archetype: operator.archetype,
+    archetype: operator.archetype__name,
     isStaked: operator.is_currently_staked,
     isPinned: operator.is_user_pinned,
   }))

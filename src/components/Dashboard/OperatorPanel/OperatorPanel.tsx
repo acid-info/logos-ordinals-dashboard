@@ -77,7 +77,7 @@ const OperatorPanel: React.FC<OperatorPanelProps> = () => {
 
       <InfoRow>
         <Label>Archetype</Label>
-        <Value>{user?.pinned_operator?.archetype}</Value>
+        <Value>{user?.pinned_operator?.archetype__name}</Value>
       </InfoRow>
 
       <CallSignContainer>
