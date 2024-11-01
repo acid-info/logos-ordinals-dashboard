@@ -15,7 +15,7 @@ import { getPhantomAddressAndSignature } from './phantom'
 import { getUnisatAddressAndSignature } from './unisat'
 
 const options = [
-  { label: 'Multiplass', value: 'multipass' },
+  // { label: 'Multiplass', value: 'multipass' },
   { label: 'Unisat', value: 'unisat' },
   { label: 'Magic Eden', value: 'magic-eden' },
   { label: 'Phantom', value: 'phantom' },
