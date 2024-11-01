@@ -12,6 +12,7 @@ const Button = styled.button`
   height: 28px;
   border: 1px solid rgb(var(--lsd-border-primary));
   background: transparent;
+  flex-shrink: 0;
   cursor: pointer;
 
   @media (min-width: ${breakpoints.md}px) {

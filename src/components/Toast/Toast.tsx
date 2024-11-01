@@ -1,6 +1,8 @@
 import { breakpoints } from '@/configs/ui.configs'
 import styled from '@emotion/styled'
+import { useAtomValue } from 'jotai'
 import { useEffect, useState } from 'react'
+import { userInfoAtom } from '../../../atoms/userInfo'
 
 const ToastContainer = styled.div`
   position: relative;
@@ -36,6 +38,7 @@ const ToastContainer = styled.div`
 
 const Toast: React.FC = () => {
   const [time, setTime] = useState('DD:HH:mm:ss')
+  const userInfo = useAtomValue(userInfoAtom)
 
   useEffect(() => {
     const targetTime = new Date('2024-11-04T13:00:00Z').getTime()
@@ -75,8 +78,14 @@ const Toast: React.FC = () => {
 
   return (
     <ToastContainer>
-      Logos Ordinals Mint Begins November 4, 2024 at 1PM UTC
-      <span>Time remaining: {time}</span>
+      {userInfo?.message?.length > 0 ? (
+        userInfo.message
+      ) : (
+        <>
+          Logos Ordinals Mint Begins November 4, 2024 at 1PM UTC
+          <span>Time remaining: {time}</span>
+        </>
+      )}
     </ToastContainer>
   )
 }

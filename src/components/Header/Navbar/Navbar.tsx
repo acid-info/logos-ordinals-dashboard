@@ -93,10 +93,6 @@ const Navigation = styled.ul`
   }
 
   @media (max-width: ${breakpoints.md}px) {
-    display: none;
-  }
-
-  @media (max-width: 768px) {
     display: flex;
     flex-direction: column;
     align-items: flex-start;

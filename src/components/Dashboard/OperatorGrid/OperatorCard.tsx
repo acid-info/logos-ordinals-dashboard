@@ -36,7 +36,7 @@ const OperatorCard: React.FC<OperatorCardProps> = ({
     walletAddress,
   })
 
-  const handleStake = (operatorId: string) => {
+  const handleStake = async (operatorId: string) => {
     setIsStaked((prev) => !prev)
 
     if (isStaked) {
@@ -46,7 +46,11 @@ const OperatorCard: React.FC<OperatorCardProps> = ({
       })
 
       queryClient.invalidateQueries('getUserInfo' as any)
-      refetch()
+      const res = await refetch()
+      const newInfo = res.data
+
+      updateCache(newInfo)
+      setUserInfo(newInfo)
     } else {
       stake.mutateAsync({
         operator_id: operatorId,
@@ -54,7 +58,11 @@ const OperatorCard: React.FC<OperatorCardProps> = ({
       })
 
       queryClient.invalidateQueries('getUserInfo' as any)
-      refetch()
+      const res = await refetch()
+      const newInfo = res.data
+
+      updateCache(newInfo)
+      setUserInfo(newInfo)
     }
   }
 

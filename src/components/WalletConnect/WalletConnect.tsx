@@ -4,6 +4,7 @@ import styled from '@emotion/styled'
 import { useAtom } from 'jotai'
 import { useRouter } from 'next/router'
 import React, { useEffect, useRef, useState } from 'react'
+import useGetUserInfo from '../../../apis/operators/useGetUserInfo'
 import { userInfoAtom } from '../../../atoms/userInfo'
 import { walletAddressAtom } from '../../../atoms/wallet'
 import { api } from '../../../common/api'
@@ -25,11 +26,19 @@ const Dropdown: React.FC = () => {
   const [isExpanded, setIsExpanded] = useState(false)
   const [walletAddress, setWalletAddress] = useAtom(walletAddressAtom)
 
+  console.log('walletAddress', walletAddress)
+
   const router = useRouter()
 
   const { referral_code, referral_address, referral_source } = router.query
 
   const [userInfo, setUserInfo] = useAtom(userInfoAtom)
+
+  useGetUserInfo({
+    walletAddress,
+    setUserInfo,
+  })
+
   const [showMultiPass, setShowMultiPass] = useState(false)
 
   const walletHandlers = {
