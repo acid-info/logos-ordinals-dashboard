@@ -1,4 +1,6 @@
 import styled from '@emotion/styled'
+import { useAtomValue } from 'jotai'
+import { userInfoAtom } from '../../../../atoms/userInfo'
 import Collapse from './Collapse'
 
 interface Props {
@@ -6,8 +8,16 @@ interface Props {
 }
 
 const CopyCode = ({ referralCode }: Props) => {
+  const walletAddress = useAtomValue(userInfoAtom)?.address
+
+  // attach : ?referral_code=${referralCode}&referral_address=${walletAddress}
+
   const copyToClipboard = () => {
-    navigator.clipboard.writeText(referralCode || '')
+    const currentUrl = window.location.href
+    const referral = `${currentUrl}?referral_code=${referralCode}&referral_address=${walletAddress}`
+
+    navigator.clipboard.writeText(referral || '')
+
     alert('Copied to clipboard!')
   }
 

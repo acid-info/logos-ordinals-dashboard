@@ -51,7 +51,7 @@ const ProgressBar: React.FC<ProgressBarProps> = ({
       </ProgressRow>
       <ProgressStats>
         <Stat>Current Rate: 100%</Stat>
-        <Stat>XP Bonus: +20%</Stat>
+        {/* <Stat>XP Bonus: +20%</Stat> */}
       </ProgressStats>
       <ProgressFooter>
         <TimeRemaining>
