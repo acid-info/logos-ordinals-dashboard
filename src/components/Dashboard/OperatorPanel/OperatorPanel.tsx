@@ -61,8 +61,6 @@ const OperatorPanel: React.FC<OperatorPanelProps> = () => {
     })
   }
 
-  console.log('user', user)
-
   return (
     <StyledPanel>
       {user?.pinned_operator && (

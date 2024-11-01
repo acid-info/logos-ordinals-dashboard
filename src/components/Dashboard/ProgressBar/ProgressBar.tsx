@@ -40,7 +40,7 @@ const ProgressBar: React.FC<ProgressBarProps> = ({
         <ProgressTrack>
           <ProgressFill width={progress} />
           <ClaimPeriodWrapper>
-            <ClaimPeriod position={claimPosition}>claim xp</ClaimPeriod>
+            <ClaimPeriod position={claimPosition}>cooldown</ClaimPeriod>
             <VerticalBar />
           </ClaimPeriodWrapper>
         </ProgressTrack>
