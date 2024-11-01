@@ -5,7 +5,7 @@ import { breakpoints } from '@/configs/ui.configs'
 import styled from '@emotion/styled'
 import { useAtom, useSetAtom } from 'jotai'
 import React, { useEffect } from 'react'
-import useGetUserXP from '../../../apis/general/useGetUserXP'
+// import useGetUserXP from '../../../apis/general/useGetUserXP'
 import useGetUserInfo from '../../../apis/operators/useGetUserInfo'
 import { userInfoAtom } from '../../../atoms/userInfo'
 import { walletAddressAtom } from '../../../atoms/wallet'
@@ -44,11 +44,9 @@ const DashboardContainer: React.FC<DashboardPageProps> = ({
 
   const processedOperators = processMyOperators(userInfoData?.operators)
 
-  console.log('processedOperators', processedOperators)
-
-  const { data: userXP } = useGetUserXP({
-    enabled: !!walletAddress && walletAddress.length > 0,
-  })
+  // const { data: userXP } = useGetUserXP({
+  //   enabled: !!walletAddress && walletAddress.length > 0,
+  // })
 
   // console.log('userXP', userXP)
 

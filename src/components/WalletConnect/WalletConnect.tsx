@@ -1,6 +1,7 @@
 import { numberWithCommas, truncateString } from '@/utils/general.utils'
 import styled from '@emotion/styled'
 import { useAtom } from 'jotai'
+import { useRouter } from 'next/router'
 import React, { useEffect, useRef, useState } from 'react'
 import { userInfoAtom } from '../../../atoms/userInfo'
 import { walletAddressAtom } from '../../../atoms/wallet'
@@ -22,6 +23,10 @@ const options = [
 const Dropdown: React.FC = () => {
   const [isExpanded, setIsExpanded] = useState(false)
   const [walletAddress, setWalletAddress] = useAtom(walletAddressAtom)
+
+  const router = useRouter()
+
+  const { referral_code, referral_address, referral_source } = router.query
 
   const [userInfo, setUserInfo] = useAtom(userInfoAtom)
   const [showMultiPass, setShowMultiPass] = useState(false)
@@ -51,20 +56,27 @@ const Dropdown: React.FC = () => {
         }
 
         const { addr: address, sig: signature } = await handler()
-        setWalletAddress(address)
 
         const response = await api.post('/token/pair', { address, signature })
+        setIsExpanded(false)
+        setWalletAddress(address)
+
         const { access, refresh } = response.data.token
 
         sessionStorage.setItem('accessToken', access)
         sessionStorage.setItem('refreshToken', refresh)
         sessionStorage.setItem('walletAddress', address)
 
-        setIsExpanded(false)
+        if (referral_code?.length && referral_address?.length) {
+          await api.post('/user/referral', {
+            referral_code: referral_code,
+            referral_address,
+            referral_source,
+          })
+        }
       }
     } catch (error: any) {
       console.log('Failed to connect or disconnect wallet:', error)
-      alert(error)
 
       setWalletAddress(null)
     }
