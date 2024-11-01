@@ -16,6 +16,7 @@ export interface Operator {
   archetype: string
   image_400_url: string
   image_400_jpeg_url: string
+  image_pixalated_url: string
   comp: string
   background: string
   skin: string
@@ -40,6 +41,7 @@ export interface ProcessedOperator {
   skin: string
   helmet: string
   jacket: string
+  pixelated?: string
   pointsPerHour?: number
   isStaked?: boolean
   isPinned?: boolean

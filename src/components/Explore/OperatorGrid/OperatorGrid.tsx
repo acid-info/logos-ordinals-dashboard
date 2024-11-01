@@ -1,8 +1,10 @@
 import { breakpoints } from '@/configs/ui.configs'
 import styled from '@emotion/styled'
+import { useAtomValue } from 'jotai'
 import 'lazysizes'
 import Link from 'next/link'
 import React, { useCallback, useEffect, useRef, useState } from 'react'
+import { degenModeAtom } from '../../../../atoms/degenMode'
 import { ProcessedOperator } from '../../../../types/operators'
 
 interface OperatorGridProps {
@@ -14,6 +16,7 @@ const OFFSET = 18
 
 const OperatorGrid: React.FC<OperatorGridProps> = ({ data, isLoading }) => {
   const [itemsCount, setItemsCount] = useState(18)
+  const isDegenMode = useAtomValue(degenModeAtom)
 
   const observerRef = useRef<IntersectionObserver | null>(null)
   const lastElementRef = useRef<HTMLDivElement | null>(null)
@@ -65,8 +68,8 @@ const OperatorGrid: React.FC<OperatorGridProps> = ({ data, isLoading }) => {
               <GridItem ref={lastElementRef}>
                 <img
                   key={index}
-                  src={operator.image}
-                  data-src={operator?.gif}
+                  src={isDegenMode ? operator?.pixelated : operator.image}
+                  data-src={isDegenMode ? operator?.pixelated : operator?.gif}
                   alt={`Operator ${index + 1}`}
                   loading="lazy"
                   className="lazyload"
@@ -83,8 +86,8 @@ const OperatorGrid: React.FC<OperatorGridProps> = ({ data, isLoading }) => {
               <GridItem>
                 <img
                   key={index}
-                  src={operator?.image}
-                  data-src={operator?.gif}
+                  src={isDegenMode ? operator?.pixelated : operator?.image}
+                  data-src={isDegenMode ? operator?.pixelated : operator?.gif}
                   alt={`Operator ${index + 1}`}
                   loading="lazy"
                   className="lazyload"

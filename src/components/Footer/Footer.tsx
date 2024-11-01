@@ -1,43 +1,67 @@
 import { breakpoints } from '@/configs/ui.configs'
 import styled from '@emotion/styled'
 import React from 'react'
+import DegenMode from './DegenMode'
 
 interface FooterProps {}
 
 const Footer: React.FC<FooterProps> = () => {
   return (
     <Container>
-      <FirstRow>
-        <span className="logo">Logos Operators</span>
-        <span className="ift">
-          Built by{' '}
-          <a href="https://free.technology/" target="_blank">
-            IFT
+      <Wrapper>
+        <FirstRow>
+          <span className="logo">Logos Operators</span>
+          <span className="ift">
+            Built by{' '}
+            <a href="https://free.technology/" target="_blank">
+              IFT
+            </a>
+          </span>
+        </FirstRow>
+        <div className="footer-nav">
+          <a href="https://logos.co/terms" target="_blank">
+            Terms of Use
           </a>
-        </span>
-      </FirstRow>
-      <div className="footer-nav">
-        <a href="https://logos.co/terms" target="_blank">
-          Terms of Use
-        </a>
-        <a href="https://logos.co/privacy-policy" target="_blank">
-          Privacy Policy
-        </a>
-        <a href="https://discord.gg/logosnetwork" target="_blank">
-          Discord
-        </a>
-        <a href="https://logos.co/manifesto" target="_blank">
-          Manifesto
-        </a>
-      </div>
+          <a href="https://logos.co/privacy-policy" target="_blank">
+            Privacy Policy
+          </a>
+          <a href="https://discord.gg/logosnetwork" target="_blank">
+            Discord
+          </a>
+          <a href="https://logos.co/manifesto" target="_blank">
+            Manifesto
+          </a>
+        </div>
+      </Wrapper>
+      <DegenMode />
     </Container>
   )
 }
 
 const Container = styled.footer`
   display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  margin: 200px auto auto;
+  width: fit-content;
+
   width: 100%;
-  margin: 200px auto 0 auto;
+
+  @media (max-width: ${breakpoints.md}px) {
+    margin-bottom: 16px;
+  }
+
+  @media (max-width: ${breakpoints.sm}px) {
+    flex-direction: column;
+
+    margin-top: 200px;
+  }
+`
+
+const Wrapper = styled.div`
+  display: flex;
+  width: 100%;
   max-width: 912px;
   height: 48px;
   padding: 16px;
@@ -51,6 +75,7 @@ const Container = styled.footer`
   position: relative;
 
   .footer-nav {
+    width: fit-content;
     position: absolute;
     left: 50%;
     bottom: 50%;
@@ -71,11 +96,15 @@ const Container = styled.footer`
     text-decoration: underline;
   }
 
+  @media (max-width: 1200px) {
+    width: 80vw;
+  }
+
   @media (max-width: ${breakpoints.sm}px) {
     flex-direction: column-reverse;
     max-width: 100%;
-    margin-top: 200px;
-    margin-bottom: 16px;
+    width: 100%;
+
     height: auto;
 
     .footer-nav {

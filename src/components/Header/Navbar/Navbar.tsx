@@ -25,8 +25,8 @@ export const navItems: NavItem[] = [
   {
     label: 'Dashboard',
     href: '/dashboard',
-    isDisabled: true,
-    isSoon: true,
+    // isDisabled: true,
+    // isSoon: true,
   },
   // {
   //   label: 'Leaderboard',
@@ -92,10 +92,8 @@ const Navigation = styled.ul`
     gap: 6px;
   }
 
-  @media (max-width: 1300px) {
-    position: static;
-    transform: none;
-    flex-wrap: wrap;
+  @media (max-width: ${breakpoints.md}px) {
+    display: none;
   }
 
   @media (max-width: 768px) {

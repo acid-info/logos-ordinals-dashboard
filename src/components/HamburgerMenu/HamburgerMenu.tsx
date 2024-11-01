@@ -14,13 +14,13 @@ const Button = styled.button`
   background: transparent;
   cursor: pointer;
 
-  @media (min-width: ${breakpoints.sm}px) {
+  @media (min-width: ${breakpoints.md}px) {
     display: none;
   }
 `
 
 const HamburguerMenuContainer = styled.div`
-  @media (min-width: ${breakpoints.sm}px) {
+  @media (min-width: ${breakpoints.md}px) {
     display: none;
   }
 

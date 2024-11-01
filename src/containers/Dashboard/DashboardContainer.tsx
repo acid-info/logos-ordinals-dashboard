@@ -44,6 +44,8 @@ const DashboardContainer: React.FC<DashboardPageProps> = ({
 
   const processedOperators = processMyOperators(userInfoData?.operators)
 
+  console.log('processedOperators', processedOperators)
+
   // const { data: userXP } = useGetUserXP({
   //   enabled: !!walletAddress && walletAddress.length > 0,
   // })

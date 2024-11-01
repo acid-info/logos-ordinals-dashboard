@@ -117,7 +117,7 @@ const DesktopNavbar = styled.div`
   left: 50%;
   transform: translateX(-50%);
 
-  @media (max-width: ${breakpoints.sm}px) {
+  @media (max-width: ${breakpoints.md}px) {
     display: none;
   }
 `

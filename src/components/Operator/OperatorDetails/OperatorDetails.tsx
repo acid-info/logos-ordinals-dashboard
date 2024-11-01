@@ -1,7 +1,9 @@
 import { breakpoints } from '@/configs/ui.configs'
 import styled from '@emotion/styled'
+import { useAtomValue } from 'jotai'
 import 'lazysizes'
 import React from 'react'
+import { degenModeAtom } from '../../../../atoms/degenMode'
 import operators from '../../../../data/operators.json'
 import { findOperatorById, processOperators } from '../../../../utils/operators'
 import DownloadDropdown from './DownloadDropdown'
@@ -33,6 +35,7 @@ const OperatorDetails: React.FC<OperatorDetailsProps> = ({
   id,
 }: OperatorDetailsProps) => {
   // const router = useRouter()
+  const isDegenMode = useAtomValue(degenModeAtom)
 
   const processedOperators = processOperators(operators as any, [])
   // const isIncripted = false
@@ -74,8 +77,8 @@ const OperatorDetails: React.FC<OperatorDetailsProps> = ({
     <Container>
       <OperatorImage>
         <img
-          src={operator?.image}
-          data-src={operator?.gif}
+          src={isDegenMode ? operator?.pixelated : operator?.image}
+          data-src={isDegenMode ? operator?.pixelated : operator?.gif}
           alt={`Operator ${id}`}
           loading="lazy"
           className="lazyload"

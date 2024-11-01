@@ -1,3 +1,4 @@
+import { breakpoints } from '@/configs/ui.configs'
 import { numberWithCommas, truncateString } from '@/utils/general.utils'
 import styled from '@emotion/styled'
 import { useAtom } from 'jotai'
@@ -70,8 +71,8 @@ const Dropdown: React.FC = () => {
         if (referral_code?.length && referral_address?.length) {
           await api.post('/user/referral', {
             referral_code: referral_code,
-            referral_address,
-            referral_source,
+            referral_address: referral_address,
+            referral_source: referral_source || '',
           })
         }
       }
@@ -184,7 +185,7 @@ const DropdownContainer = styled.div`
   position: relative;
   display: inline-block;
 
-  @media (max-width: 768px) {
+  @media (max-width: ${breakpoints.md}px) {
     width: 100%;
   }
 `
@@ -263,15 +264,18 @@ const PointsButton = styled.button`
   display: flex;
   align-items: center;
   justify-content: center;
-  width: fit-content;
   position: absolute;
   background-color: transparent;
   height: 28px;
   border: 1px solid rgb(var(--lsd-border-primary));
   padding: 8px 12px;
   top: 0px;
-  right: -60px;
+  left: 134px;
   z-index: 100000;
+
+  @media (max-width: ${breakpoints.md}px) {
+    display: none;
+  }
 `
 
 const PointsValue = styled.span`

@@ -7,6 +7,7 @@ import useGetUserInfo from '../../../../apis/operators/useGetUserInfo'
 import { usePinOperator } from '../../../../apis/operators/usePinOperator'
 import { useStakeOperator } from '../../../../apis/operators/useStakeOperator'
 import { useUnstakeOperator } from '../../../../apis/operators/useUnstakeOperator'
+import { degenModeAtom } from '../../../../atoms/degenMode'
 import { userInfoAtom } from '../../../../atoms/userInfo'
 import { walletAddressAtom } from '../../../../atoms/wallet'
 import { ProcessedOperator } from '../../../../types/operators'
@@ -19,6 +20,7 @@ const OperatorCard: React.FC<OperatorCardProps> = ({
   operator,
 }: OperatorCardProps) => {
   const setUserInfo = useSetAtom(userInfoAtom)
+  const isDegenMode = useAtomValue(degenModeAtom)
 
   const [isStaked, setIsStaked] = useState(operator.isStaked)
 
@@ -74,8 +76,8 @@ const OperatorCard: React.FC<OperatorCardProps> = ({
     <Container key={operator.id}>
       <Link href={`/operators/${operator.id}`} key={operator.id}>
         <OperatorImage
-          src={operator?.gif}
-          data-src={operator?.gif}
+          src={isDegenMode ? operator?.pixelated : operator?.gif}
+          data-src={isDegenMode ? operator?.pixelated : operator?.gif}
           alt={`Operator ${operator.name}`}
           loading="lazy"
           className="lazyload"
