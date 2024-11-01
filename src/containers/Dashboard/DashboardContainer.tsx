@@ -3,10 +3,12 @@ import { OperatorPanel } from '@/components/Dashboard/OperatorPanel'
 import { ProgressBar } from '@/components/Dashboard/ProgressBar'
 import { breakpoints } from '@/configs/ui.configs'
 import styled from '@emotion/styled'
-import { useAtom } from 'jotai'
+import { useAtom, useSetAtom } from 'jotai'
 import React, { useEffect } from 'react'
 // import useGetUserXP from '../../../apis/general/useGetUserXP'
+import useGetEpochs from '../../../apis/general/useGetEpochs'
 import useGetUserInfo from '../../../apis/operators/useGetUserInfo'
+import { epochsAtom } from '../../../atoms/epochs'
 import { userInfoAtom } from '../../../atoms/userInfo'
 import { walletAddressAtom } from '../../../atoms/wallet'
 import { processMyOperators } from '../../../utils/operators'
@@ -28,6 +30,18 @@ const DashboardContainer: React.FC<DashboardPageProps> = ({
     walletAddress,
     setUserInfo,
   })
+
+  const { data: epochsData } = useGetEpochs({
+    enabled: true,
+  })
+
+  const setEpochs = useSetAtom(epochsAtom)
+
+  useEffect(() => {
+    if (epochsData) {
+      setEpochs(epochsData)
+    }
+  }, [epochsData, setEpochs])
 
   useEffect(() => {
     const walletAddress = sessionStorage.getItem('walletAddress')

@@ -61,6 +61,8 @@ const OperatorPanel: React.FC<OperatorPanelProps> = () => {
     })
   }
 
+  console.log('user', user)
+
   return (
     <StyledPanel>
       {user?.pinned_operator && (
@@ -110,7 +112,7 @@ const OperatorPanel: React.FC<OperatorPanelProps> = () => {
         </InfoRow>
         <InfoRow>
           <Label>Role</Label>
-          <Value>{user?.id && 'Operator'}</Value>
+          <Value>{user?.role && 'Operator'}</Value>
         </InfoRow>
         <InfoRow>
           <Label>OP Number</Label>

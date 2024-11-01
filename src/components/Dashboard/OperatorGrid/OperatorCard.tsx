@@ -8,6 +8,7 @@ import { usePinOperator } from '../../../../apis/operators/usePinOperator'
 import { useStakeOperator } from '../../../../apis/operators/useStakeOperator'
 import { useUnstakeOperator } from '../../../../apis/operators/useUnstakeOperator'
 import { degenModeAtom } from '../../../../atoms/degenMode'
+import { epochsAtom } from '../../../../atoms/epochs'
 import { userInfoAtom } from '../../../../atoms/userInfo'
 import { walletAddressAtom } from '../../../../atoms/wallet'
 import { ProcessedOperator } from '../../../../types/operators'
@@ -23,6 +24,9 @@ const OperatorCard: React.FC<OperatorCardProps> = ({
   const isDegenMode = useAtomValue(degenModeAtom)
 
   const [isStaked, setIsStaked] = useState(operator.isStaked)
+  const epochs = useAtomValue(epochsAtom)
+
+  const xpPerBlock = epochs?.[0]?.xp_per_block
 
   const queryClient = useQueryClient()
 
@@ -95,7 +99,7 @@ const OperatorCard: React.FC<OperatorCardProps> = ({
         <OperatorName>{operator.name}</OperatorName>
         <PointsPerHour>
           <Label>XP/Block</Label>
-          <Value>{operator.pointsPerHour} XP</Value>
+          <Value>{xpPerBlock} XP</Value>
         </PointsPerHour>
       </OperatorInfo>
       <Actions>

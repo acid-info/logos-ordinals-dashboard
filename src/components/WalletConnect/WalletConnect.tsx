@@ -26,8 +26,6 @@ const Dropdown: React.FC = () => {
   const [isExpanded, setIsExpanded] = useState(false)
   const [walletAddress, setWalletAddress] = useAtom(walletAddressAtom)
 
-  console.log('walletAddress', walletAddress)
-
   const router = useRouter()
 
   const { referral_code, referral_address, referral_source } = router.query
@@ -77,10 +75,10 @@ const Dropdown: React.FC = () => {
         sessionStorage.setItem('refreshToken', refresh)
         sessionStorage.setItem('walletAddress', address)
 
-        if (referral_code?.length && referral_address?.length) {
+        if (referral_code?.length) {
           await api.post('/user/referral', {
             referral_code: referral_code,
-            referral_address: referral_address,
+            referral_address: walletAddress,
             referral_source: referral_source || '',
           })
         }

@@ -47,8 +47,8 @@ const Toast: React.FC = () => {
 
   return (
     <ToastContainer showTopToast={showTopToast}>
-      {userInfo?.message?.length > 0 ? (
-        userInfo.message
+      {userInfo?.alert_message?.length > 0 ? (
+        userInfo.alert_message
       ) : (
         <>
           Logos Ordinals Mint Begins November 4, 2024 at 1PM UTC

@@ -3,7 +3,7 @@ import { numberWithCommas } from '@/utils/general.utils'
 import styled from '@emotion/styled'
 import { useAtomValue } from 'jotai'
 import React from 'react'
-import useGetEpochs from '../../../../apis/general/useGetEpochs'
+import { epochsAtom } from '../../../../atoms/epochs'
 import { userInfoAtom } from '../../../../atoms/userInfo'
 
 interface ProgressBarProps {
@@ -16,16 +16,19 @@ const ProgressBar: React.FC<ProgressBarProps> = ({
   claimPosition = 76,
 }) => {
   const user = useAtomValue(userInfoAtom)
-
-  const { data: epochs } = useGetEpochs({
-    enabled: user?.address?.length > 0,
-  })
+  const epochs = useAtomValue(epochsAtom)
 
   // const { data: currentBlock } = useGetCurrentBTCBlock()
   // const { data: pillars } = useGetPillars()
 
   // console.log('currentBlock', currentBlock)
-  // console.log('epochs', epochs)
+
+  // sum up user => operators => staking_xp_per_block
+  const epochXP =
+    user?.operators.reduce(
+      (acc: any, operator: any) => acc + operator.staking_xp_per_block,
+      0,
+    ) || 0
 
   return (
     <Container>
@@ -71,7 +74,7 @@ const ProgressBar: React.FC<ProgressBarProps> = ({
           <EarnedReward>
             <Label>Epoch 1 XP</Label>
             <Value color="#F29AE9" backgroundColor="#320430">
-              {`${numberWithCommas(0)}`}
+              {`${numberWithCommas(epochXP)}`}
             </Value>
           </EarnedReward>
         </PointsRow>
