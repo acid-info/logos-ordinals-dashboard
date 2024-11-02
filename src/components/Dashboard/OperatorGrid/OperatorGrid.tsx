@@ -17,7 +17,7 @@ const OperatorGrid: React.FC<OperatorGridProps> = ({
   const stakedOperators = data?.filter((operator) => operator.isStaked)
 
   const totalXpPerBlock = data?.reduce(
-    (acc, operator) => acc + (operator.pointsPerHour ?? 0),
+    (acc, operator) => acc + (operator.stakingXPPerBlock ?? 0),
     0,
   )
 

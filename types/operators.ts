@@ -42,7 +42,7 @@ export interface ProcessedOperator {
   helmet: string
   jacket: string
   pixelated?: string
-  pointsPerHour?: number
+  stakingXPPerBlock?: number
   isStaked?: boolean
   isPinned?: boolean
 }

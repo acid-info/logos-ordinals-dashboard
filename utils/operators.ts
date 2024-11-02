@@ -46,7 +46,7 @@ export function processMyOperators(operators: any[]) {
     image: operator.image_400_jpeg_url,
     gif: operator.image_400_url,
     name: operator.name,
-    pointsPerHour: operator.staking_xp_per_block,
+    stakingXPPerBlock: operator.staking_xp_per_block,
     comp: operator.comp,
     background: operator.background,
     skin: operator.skin,

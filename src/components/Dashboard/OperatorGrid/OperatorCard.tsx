@@ -97,10 +97,10 @@ const OperatorCard: React.FC<OperatorCardProps> = ({
       </Link>
       <OperatorInfo>
         <OperatorName>{operator.name}</OperatorName>
-        <PointsPerHour>
+        <StakingXPPerBlock>
           <Label>XP/Block</Label>
           <Value>{xpPerBlock} XP</Value>
-        </PointsPerHour>
+        </StakingXPPerBlock>
       </OperatorInfo>
       <Actions>
         <ActionButton
@@ -200,7 +200,7 @@ const OperatorName = styled.div`
   -webkit-line-clamp: 1;
 `
 
-const PointsPerHour = styled.div`
+const StakingXPPerBlock = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
