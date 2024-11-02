@@ -19,6 +19,8 @@ export const getBtcProvider = () => {
 export async function connectMEWallet() {
   return new Promise((resolve, reject) => {
     getAddress({
+      //@ts-ignore
+      host: 'magiceden.io',
       getProvider: getBtcProvider,
       payload: {
         purposes: [AddressPurpose.Ordinals],
@@ -43,6 +45,9 @@ export async function signWalletMessage(address: string) {
   return new Promise((resolve, reject) => {
     try {
       signMessage({
+        //@ts-ignore
+        host: 'magiceden.io',
+        getProvider: getBtcProvider,
         payload: {
           network: {
             type: BitcoinNetworkType.Mainnet,

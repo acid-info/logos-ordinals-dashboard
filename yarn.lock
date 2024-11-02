@@ -4842,7 +4842,7 @@ satori@0.10.9:
     postcss-value-parser "^4.2.0"
     yoga-wasm-web "^0.3.3"
 
-sats-connect@^2.8.3:
+sats-connect@^2.4.0:
   version "2.8.3"
   resolved "https://registry.yarnpkg.com/sats-connect/-/sats-connect-2.8.3.tgz#bf9fb1113c71b8442f1fa477174855aee7d3655c"
   integrity sha512-9qQj4s/5Rj2OImygbs856AwWm7kAx6w19nUru43Dl4zDGv20uy3xHCBEUrKbBDcmE95bE5/SW+iAe89nU+irIw==

@@ -47,7 +47,7 @@
     "rehype-raw": "^7.0.0",
     "remark-breaks": "^4.0.0",
     "remark-gfm": "3.0.1",
-    "sats-connect": "^2.8.3"
+    "sats-connect": "^2.4.0"
   },
   "devDependencies": {
     "@tanstack/eslint-plugin-query": "^5.57.2",
