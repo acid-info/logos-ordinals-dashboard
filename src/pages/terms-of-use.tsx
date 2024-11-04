@@ -117,19 +117,19 @@ You shall indemnify us and hold us harmless from and against any and all claims,
 
 <br />
 
-11. **Modifications**
+## 11. Modifications
 
 We may modify or replace any part of this Website Terms of Use at any time and without notice. You are responsible for checking the Website periodically for any changes. The new Website Terms of Use will be effective immediately upon its posting on the Website.
 
 <br />
 
-12. **Governing law**
+## 12. Governing law
 
 Swiss law governs these Website Terms of Use and any disputes between you and us, whether in court or arbitration, without regard to conflict of laws provisions.
 
 <br />
 
-13. **Disputes**
+## 13. Disputes
 
 In these Website Terms of Use, “dispute” has the broadest meaning enforceable by law and includes any claim you make against or controversy you may have in relation to these Website Terms of Use, the Website, the content on the Website, or your use of the Website.  
 
@@ -143,7 +143,7 @@ Regardless of any applicable statute of limitations, you must bring any claims w
 
 <br />
 
-14. **About these Website Terms of Use**
+## 14. About these Website Terms of Use
 
 These Website Terms of Use cover the entire agreement between you and us in connection with the Website and supersede all prior and contemporaneous understandings, agreements, representations and warranties, both written and oral, with respect to the Website. 
 
