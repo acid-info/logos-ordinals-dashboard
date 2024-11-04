@@ -51,8 +51,13 @@ const Toast: React.FC = () => {
         userInfo.alert_message
       ) : (
         <>
-          Logos Ordinals Mint Begins November 4, 2024 at 1PM UTC
-          <span>Time remaining: {time}</span>
+          Logos Operators Ordinals Mint Is Live
+          <a
+            href="https://ordinalsbot.com/mint/logos-operators"
+            target="_blank"
+          >
+            https://ordinalsbot.com/mint/logos-operators
+          </a>
         </>
       )}
       <div>
@@ -82,7 +87,8 @@ const ToastContainer = styled.div<{ showTopToast: boolean }>`
   line-height: 20px;
   letter-spacing: 0.14px;
 
-  span {
+  a {
+    color: #fe740c;
     margin-left: 20px;
   }
 

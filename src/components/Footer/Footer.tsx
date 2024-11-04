@@ -1,5 +1,6 @@
 import { breakpoints } from '@/configs/ui.configs'
 import styled from '@emotion/styled'
+import Link from 'next/link'
 import React from 'react'
 import DegenMode from './DegenMode'
 
@@ -19,12 +20,8 @@ const Footer: React.FC<FooterProps> = () => {
           </span>
         </FirstRow>
         <div className="footer-nav">
-          <a href="https://logos.co/terms" target="_blank">
-            Terms of Use
-          </a>
-          <a href="https://logos.co/privacy-policy" target="_blank">
-            Privacy Policy
-          </a>
+          <Link href="/terms-of-use">Terms of Use</Link>
+          <Link href="/privacy-policy">Privacy Policy</Link>
           <a href="https://discord.gg/logosnetwork" target="_blank">
             Discord
           </a>
