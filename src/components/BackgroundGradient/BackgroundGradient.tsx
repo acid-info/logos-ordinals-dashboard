@@ -9,6 +9,7 @@ const Gradient = styled.div`
   top: 0;
   left: 0;
   width: 100%;
+  min-height: calc(100vh - 48px);
   height: 100%;
   z-index: 0;
 

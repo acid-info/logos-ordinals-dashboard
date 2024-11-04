@@ -55,6 +55,9 @@ const OperatorCard: React.FC<OperatorCardProps> = ({
 
       updateCache(newInfo)
       setUserInfo(newInfo)
+
+      // refresh the website
+      window.location.reload()
     } else {
       stake.mutateAsync({
         operator_id: operatorId,
@@ -67,6 +70,9 @@ const OperatorCard: React.FC<OperatorCardProps> = ({
 
       updateCache(newInfo)
       setUserInfo(newInfo)
+
+      // refresh the website
+      window.location.reload()
     }
   }
 
