@@ -14,10 +14,10 @@ interface NavItem {
 }
 
 export const navItems: NavItem[] = [
-  {
-    label: 'Countdown',
-    href: '/countdown',
-  },
+  // {
+  //   label: 'Countdown',
+  //   href: '/countdown',
+  // },
   {
     label: 'Explore',
     href: '/',
