@@ -51,7 +51,7 @@ const Toast: React.FC = () => {
         userInfo.alert_message
       ) : (
         <>
-          Logos Operators Ordinals Mint Is Live
+          <div>Logos Operators Ordinals Mint Is Live</div>
           <a
             href="https://ordinalsbot.com/mint/logos-operators"
             target="_blank"
@@ -111,9 +111,12 @@ const ToastContainer = styled.div<{ showTopToast: boolean }>`
     font-size: 12px;
     line-height: 16px;
 
+    flex-direction: column;
+
     a {
       // new line
       display: block;
+      margin-left: 0;
     }
   }
 `
