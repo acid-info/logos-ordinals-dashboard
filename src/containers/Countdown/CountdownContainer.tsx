@@ -1,6 +1,6 @@
 import { breakpoints } from '@/configs/ui.configs'
 import styled from '@emotion/styled'
-import React, { useEffect, useState } from 'react'
+import React from 'react'
 
 const NOVEMBER_1_9AM_UTC = new Date(Date.UTC(2024, 10, 1, 9)) // November 1, 2024 9:00:00 AM UTC
 const NOVEMBER_4_1PM_UTC = new Date(Date.UTC(2024, 10, 4, 13)) // November 4, 2024 1:00:00 PM UTC
@@ -18,19 +18,19 @@ const getVideoSource = (): string => {
 }
 
 const CountdownContainer: React.FC = () => {
-  const [videoSrc, setVideoSrc] = useState<string>(getVideoSource())
+  // const [videoSrc, setVideoSrc] = useState<string>(getVideoSource())
 
-  useEffect(() => {
-    const interval = setInterval(() => {
-      setVideoSrc(getVideoSource())
-    }, 60 * 1000)
-    return () => clearInterval(interval)
-  }, [])
+  // useEffect(() => {
+  //   const interval = setInterval(() => {
+  //     setVideoSrc(getVideoSource())
+  //   }, 60 * 1000)
+  //   return () => clearInterval(interval)
+  // }, [])
 
   return (
     <Container>
       <Video autoPlay loop muted playsInline>
-        <source src={videoSrc} type="video/mp4" />
+        <source src={'/videos/countdown-3.mp4'} type="video/mp4" />
       </Video>
     </Container>
   )
