@@ -94,6 +94,20 @@ const DownloadDropdown = ({ operator }: Props) => {
           </Left>
           <FileType>.jpeg</FileType>
         </DropdownItem>
+        {/* <DropdownItem href={updateImageUrl(operator?.image)} download>
+          <Left>
+            <Icon>
+              <Image
+                src="/assets/download.svg"
+                alt="Download"
+                width={12}
+                height={12}
+              />
+            </Icon>
+            <span>On-chain image</span>
+          </Left>
+          <FileType>.jpeg</FileType>
+        </DropdownItem> */}
       </DropdownContent>
     </DropdownWrapper>
   )

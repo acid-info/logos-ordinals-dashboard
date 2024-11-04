@@ -6,6 +6,7 @@ import styled from '@emotion/styled'
 import { useAtomValue } from 'jotai'
 import React, { useEffect, useState } from 'react'
 import { useUpdateCallSign } from '../../../../apis/operators/useUpdateCallSign'
+import { degenModeAtom } from '../../../../atoms/degenMode'
 import { userInfoAtom } from '../../../../atoms/userInfo'
 
 interface OperatorPanelProps {}
@@ -31,6 +32,7 @@ interface OperatorPanelProps {}
 
 const OperatorPanel: React.FC<OperatorPanelProps> = () => {
   const user = useAtomValue(userInfoAtom)
+  const isDegenMode = useAtomValue(degenModeAtom)
 
   const [editCallsign, setEditCallsign] = useState(false)
   const [callsign, setCallsign] = useState('')
@@ -66,7 +68,11 @@ const OperatorPanel: React.FC<OperatorPanelProps> = () => {
       {user?.pinned_operator && (
         <Profile>
           <OperatorImage
-            src={user?.pinned_operator?.image_400_url}
+            src={
+              isDegenMode
+                ? user?.pinned_operator?.image_pixalated_url
+                : user?.pinned_operator?.image_400_url
+            }
             alt="Operator"
           />
           <OperatorInfo>
