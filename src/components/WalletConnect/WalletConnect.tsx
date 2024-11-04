@@ -13,11 +13,13 @@ import { getMEAddressAndSignature } from './magicEden'
 import { getOKXAddressAndSignature } from './okx'
 import { getPhantomAddressAndSignature } from './phantom'
 import { getUnisatAddressAndSignature } from './unisat'
+import { getXverseAddressAndSignature } from './xverse'
 
 const options = [
   // { label: 'Multiplass', value: 'multipass' },
   { label: 'Unisat', value: 'unisat' },
   { label: 'Magic Eden', value: 'magic-eden' },
+  { label: 'Xverse', value: 'xverse' },
   { label: 'Phantom', value: 'phantom' },
   { label: 'OKX', value: 'okx' },
 ]
@@ -44,6 +46,7 @@ const Dropdown: React.FC = () => {
     unisat: getUnisatAddressAndSignature,
     'magic-eden': getMEAddressAndSignature,
     phantom: getPhantomAddressAndSignature,
+    xverse: getXverseAddressAndSignature,
   }
 
   const connectWallet = async (
