@@ -1,6 +1,9 @@
 import axios, { AxiosError } from 'axios'
 
-export const API_BASE = 'https://exit-test-567058b69f45.herokuapp.com/api'
+export const API_BASE =
+  process.env.NEXT_PUBLIC_API_MODE === 'development'
+    ? 'https://exit-test-567058b69f45.herokuapp.com/api'
+    : 'https://exit.logos.co/api'
 
 const api = axios.create({
   baseURL: API_BASE,

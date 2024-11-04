@@ -60,8 +60,9 @@ const ProgressBar: React.FC<ProgressBarProps> = ({
         <TimeRemaining>
           <Label>Time Remaining</Label>
           <Value color="var(--orange)" backgroundColor="var(--dark-orange)">
-            {epochs &&
-              `${numberWithCommas(epochs[0]?.blocks_remaining)} blocks`}
+            {epochs && epochs[0]?.blocks_remaining
+              ? `${numberWithCommas(epochs[0]?.blocks_remaining)} blocks`
+              : `N/A`}
           </Value>
         </TimeRemaining>
         <PointsRow>

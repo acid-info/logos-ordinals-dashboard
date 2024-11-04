@@ -18,7 +18,15 @@ $ git clone https://github.com/acid-info/logos-ordinals-dashboard.git
 $ yarn install
 ```
 
-3. Start the development server:
+3. Create a .env file
+
+`NEXT_PUBLIC_API_MODE=development` for development
+
+```bash
+NEXT_PUBLIC_API_MODE=development
+```
+
+4. Start the development server:
 
 ```bash
 $ yarn dev

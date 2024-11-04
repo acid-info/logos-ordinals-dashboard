@@ -33,8 +33,8 @@ const Header: React.FC<NavbarProps> = () => {
             <span>Gitbook</span>
           </GitbookButton>
         </Link>
-
-        {process.env.NEXT_PUBLIC_API_MODE === 'development' ? (
+        <WalletConnect />
+        {/* {process.env.NEXT_PUBLIC_API_MODE === 'development' ? (
           <WalletConnect />
         ) : (
           <Link
@@ -47,7 +47,7 @@ const Header: React.FC<NavbarProps> = () => {
               <Icon src="/icons/discord-white.svg" alt="Discord" />
             </SocialButton>
           </Link>
-        )}
+        )} */}
         <HamburguerMenu />
       </UserActions>
     </Container>
