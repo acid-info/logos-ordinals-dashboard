@@ -111,7 +111,7 @@ const ToastContainer = styled.div<{ showTopToast: boolean }>`
     font-size: 12px;
     line-height: 16px;
 
-    span {
+    a {
       // new line
       display: block;
     }
