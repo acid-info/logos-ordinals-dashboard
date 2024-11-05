@@ -1,5 +1,4 @@
 import styled from '@emotion/styled'
-import Image from 'next/image'
 import { useState } from 'react'
 
 interface Props {
@@ -29,7 +28,7 @@ const DownloadDropdown = ({ operator }: Props) => {
       <DropdownButton onClick={toggleDropdown} isOpen={isOpen}>
         <span>Download</span>
         <ChevronIconWrapper isOpen={isOpen}>
-          <Image
+          <img
             src="/assets/chevron-down.svg"
             alt="Chevron"
             width={12}
@@ -41,7 +40,7 @@ const DownloadDropdown = ({ operator }: Props) => {
         <DropdownItem href={operator?.gif} download>
           <Left>
             <Icon>
-              <Image
+              <img
                 src="/assets/download.svg"
                 alt="Download"
                 width={12}
@@ -55,7 +54,7 @@ const DownloadDropdown = ({ operator }: Props) => {
         <DropdownItem href={updateImageUrl(operator?.gif)} download>
           <Left>
             <Icon>
-              <Image
+              <img
                 src="/assets/download.svg"
                 alt="Download"
                 width={12}
@@ -69,7 +68,7 @@ const DownloadDropdown = ({ operator }: Props) => {
         <DropdownItem href={operator?.image} download>
           <Left>
             <Icon>
-              <Image
+              <img
                 src="/assets/download.svg"
                 alt="Download"
                 width={12}
@@ -83,7 +82,7 @@ const DownloadDropdown = ({ operator }: Props) => {
         <DropdownItem href={updateImageUrl(operator?.image)} download>
           <Left>
             <Icon>
-              <Image
+              <img
                 src="/assets/download.svg"
                 alt="Download"
                 width={12}
