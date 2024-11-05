@@ -1,4 +1,3 @@
-import { Toast } from '@/components/Toast'
 import { DefaultLayout } from '@/layouts/DefaultLayout'
 import { css, Global } from '@emotion/react'
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
@@ -116,7 +115,7 @@ export default function App({ Component, pageProps }: AppLayoutProps) {
             }
           `}
         />
-        <Toast />
+        {/* <Toast /> */}
         {getLayout(<Component {...pageProps} />)}
       </QueryClientProvider>
     </LSDThemeProvider>
