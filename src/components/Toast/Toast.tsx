@@ -45,28 +45,20 @@ const Toast: React.FC = () => {
     return () => clearInterval(interval)
   }, [])
 
-  return (
+  return userInfo?.alert_message?.length > 0 ? (
     <ToastContainer showTopToast={showTopToast}>
-      {userInfo?.alert_message?.length > 0 ? (
-        userInfo.alert_message
-      ) : (
-        <>
-          <div>Logos Operators Ordinals Mint Is Live</div>
-          <a
-            href="https://ordinalsbot.com/mint/logos-operators"
-            target="_blank"
-          >
-            https://ordinalsbot.com/mint/logos-operators
-          </a>
-        </>
-      )}
+      {/* <div>Logos Operators Ordinals Mint Is Live</div>
+      <a href="https://ordinalsbot.com/mint/logos-operators" target="_blank">
+        https://ordinalsbot.com/mint/logos-operators
+      </a> */}
+      {userInfo.alert_message}
       <div>
         <button className="close-button" onClick={() => setShowTopToast(false)}>
           <img src="/assets/close-orange.svg" alt="close" />
         </button>
       </div>
     </ToastContainer>
-  )
+  ) : null
 }
 
 const ToastContainer = styled.div<{ showTopToast: boolean }>`
