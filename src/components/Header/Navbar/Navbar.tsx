@@ -25,8 +25,6 @@ export const navItems: NavItem[] = [
   {
     label: 'Dashboard',
     href: '/dashboard',
-    // isDisabled: true,
-    // isSoon: true,
   },
   // {
   //   label: 'Leaderboard',
@@ -40,10 +38,12 @@ export const navItems: NavItem[] = [
     label: 'Docs',
     href: '/docs',
   },
-  // {
-  //   label: 'Multipass',
-  //   href: '/multipass',
-  // },
+  {
+    label: 'Multipass',
+    href: '/multipass',
+    isDisabled: true,
+    isSoon: true,
+  },
 ]
 
 const Navbar: React.FC<NavbarProps> = () => {
