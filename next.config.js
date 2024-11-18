@@ -11,7 +11,10 @@ const withMDX = createMDX({
 
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  output: 'export',
+  /* Breaks currently used 'next start' due to:
+   *   Error: "next start" does not work with "output: export" configuration.
+   *   Use "npx serve@latest out" instead. */
+  //output: 'export',
   trailingSlash: true,
   images: {
     unoptimized: true,
