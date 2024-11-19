@@ -41,7 +41,7 @@ export const navItems: NavItem[] = [
   {
     label: 'Multipass',
     href: '/multipass',
-    isDisabled: true,
+    // isDisabled: true,
     isSoon: true,
   },
 ]
