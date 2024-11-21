@@ -87,7 +87,9 @@ const Dropdown: React.FC = () => {
         }
       }
     } catch (error: any) {
-      alert('Please check if wallet is available and try again')
+      alert(
+        'Please check if the wallet is available or if it is not connected.',
+      )
       console.log('Failed to connect or disconnect wallet:', error)
 
       setWalletAddress(null)
