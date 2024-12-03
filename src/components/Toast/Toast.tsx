@@ -60,10 +60,10 @@ const Toast: React.FC = () => {
     </ToastContainer>
   ) : (
     <ToastContainer showTopToast={showTopToast}>
-      <>
+      <span>
         Logos Ordinals Mint Begins 16th December, 2024 at 1PM UTC
         <TimeRemaining>Time remaining: {time}</TimeRemaining>
-      </>
+      </span>
       <div>
         <button className="close-button" onClick={() => setShowTopToast(false)}>
           <img src="/assets/close-orange.svg" alt="close" />
@@ -116,6 +116,10 @@ const ToastContainer = styled.div<{ showTopToast: boolean }>`
     line-height: 16px;
 
     flex-direction: column;
+
+    span {
+      width: 80%;
+    }
 
     a {
       // new line
