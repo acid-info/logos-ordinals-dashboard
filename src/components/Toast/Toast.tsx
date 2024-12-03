@@ -10,7 +10,7 @@ const Toast: React.FC = () => {
   const userInfo = useAtomValue(userInfoAtom)
 
   useEffect(() => {
-    const targetTime = new Date('2024-11-04T13:00:00Z').getTime()
+    const targetTime = new Date('2024-12-16T13:00:00Z').getTime()
 
     const formatTime = (timeInSeconds: number) => {
       const days = Math.floor(timeInSeconds / (3600 * 24))
@@ -58,7 +58,19 @@ const Toast: React.FC = () => {
         </button>
       </div>
     </ToastContainer>
-  ) : null
+  ) : (
+    <ToastContainer showTopToast={showTopToast}>
+      <>
+        Logos Ordinals Mint Begins 16th December, 2024 at 1PM UTC
+        <TimeRemaining>Time remaining: {time}</TimeRemaining>
+      </>
+      <div>
+        <button className="close-button" onClick={() => setShowTopToast(false)}>
+          <img src="/assets/close-orange.svg" alt="close" />
+        </button>
+      </div>
+    </ToastContainer>
+  )
 }
 
 const ToastContainer = styled.div<{ showTopToast: boolean }>`
@@ -111,6 +123,10 @@ const ToastContainer = styled.div<{ showTopToast: boolean }>`
       margin-left: 0;
     }
   }
+`
+
+const TimeRemaining = styled.div`
+  margin-left: 20px;
 `
 
 export default Toast
