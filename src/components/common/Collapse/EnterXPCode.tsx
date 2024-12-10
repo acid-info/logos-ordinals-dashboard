@@ -29,10 +29,10 @@ const EnterXPCode: React.FC = () => {
   }
 
   return (
-    <Collapse header="Enter XP Code">
+    <Collapse header="Enter Exit Code">
       <Wrapper>
         <Form onSubmit={handleSubmit}>
-          <Input onChange={handleChange} placeholder="XP Code" />
+          <Input onChange={handleChange} placeholder="Exit Code" />
           <button type="submit">
             <img src="/icons/chevron-right-dark-purple.svg" alt="submit" />
           </button>
