@@ -12,10 +12,6 @@ export const defaultThemeState: ThemeState = {
 }
 
 const themeAtom = atom<ThemeState>(() => {
-  if (typeof window !== 'undefined') {
-    const storedTheme = localStorage.getItem('theme')
-    return storedTheme ? JSON.parse(storedTheme) : defaultThemeState
-  }
   return defaultThemeState
 })
 
