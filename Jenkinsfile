@@ -1,18 +1,8 @@
+#!/usr/bin/env groovy
+library 'status-jenkins-lib@v1.9.16'
+
 pipeline {
   agent { label 'linux' }
-
-  parameters {
-    string(
-      name: 'IMAGE_TAG',
-      defaultValue: params.IMAGE_TAG ?: '',
-      description: 'Optional Docker image tag to push.'
-    )
-    string(
-      name: 'DOCKER_REGISTRY',
-      description: 'Docker registry ',
-      defaultValue: params.DOCKER_REGISTRY ?: 'harbor.status.im',
-    )
-  }
 
   options {
     disableConcurrentBuilds()
@@ -25,33 +15,36 @@ pipeline {
 
   environment {
     NEXT_PUBLIC_SITE_URL = "https://${env.JOB_BASE_NAME}"
+    GIT_COMMITTER_NAME = 'status-im-auto'
+    GIT_COMMITTER_EMAIL = 'auto@status.im'
   }
 
   stages {
+    stage('Install') {
+      steps {
+        sh 'yarn install'
+      }
+    }
+
     stage('Build') {
       steps {
+        script {
+          sh 'yarn build'
+          jenkins.genBuildMetaJSON('build/build.json')
         }
       }
     }
 
-    stage('Push') {
+    stage('Publish') {
       steps {
-        script {
-          withDockerRegistry([credentialsId: 'harbor-acid-info-private-robot', url: 'https://${DOCKER_REGISTRY}']) {
-            image.push()
-          }
-        }
-      }
-    }
-
-    stage('Deploy') {
-      when { expression { params.IMAGE_TAG != '' } }
-      steps {
-        script {
-          withDockerRegistry([credentialsId: 'harbor-acid-info-private-robot', url: 'https://${DOCKER_REGISTRY}']) {
-            image.push(params.IMAGE_TAG)
-          }
-        }
+        sshagent(credentials: ['status-im-auto-ssh']) {
+          sh """
+            ghp-import \
+              -b ${deployBranch()} \
+              -c ${deployDomain()} \
+              -p build
+          """
+         }
       }
     }
   }
@@ -60,3 +53,7 @@ pipeline {
     cleanup { cleanWs() }
   }
 }
+
+def isMasterBranch() { GIT_BRANCH ==~ /.*master/ }
+def deployBranch() { isMasterBranch() ? 'deploy-master' : 'deploy-develop' }
+def deployDomain() { isMasterBranch() ? 'dashboard.logos.co' : 'dev-dashboard.logos.co' }
