@@ -45,7 +45,7 @@ pipeline {
               ghp-import \
                 -b ${deployBranch()} \
                 -c ${deployDomain()} \
-                -p build
+                -p out
             """, pure: false)
           }
         }
