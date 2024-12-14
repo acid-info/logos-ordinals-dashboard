@@ -42,17 +42,17 @@ $ yarn dev
 $ yarn build
 ```
 
-The files will be created in the `build` directory.
+The files will be created in the `out` directory.
 
-2. Serve the build:
+2. The build is located in the `/out` directory. You can host it using a static HTTP server such as [http-server](https://www.npmjs.com/package/http-server)
 
 ```bash
-$ yarn start
+$ cd out && http-server . -p 3000
 ```
 
-4. Visit `http://localhost:3000` in your browser.
+For more details about the NextJS static build process, visit the official documentation: [https://nextjs.org/docs/pages/building-your-application/deploying/static-exports](https://nextjs.org/docs/pages/building-your-application/deploying/static-exports)
 
-Keep in mind this webpage rebuilds itself at runtime.
+3. Visit `http://localhost:3000` in your browser.
 
 ## Change Process
 
