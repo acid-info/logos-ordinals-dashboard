@@ -51,7 +51,7 @@ const DownloadDropdown = ({ operator }: Props) => {
           </Left>
           <FileType>.gif</FileType>
         </DropdownItem>
-        <DropdownItem href={updateImageUrl(operator?.gif)} download>
+        <DropdownItem href={updateImageUrl(operator?.gif_2048)} download>
           <Left>
             <Icon>
               <img
@@ -79,7 +79,7 @@ const DownloadDropdown = ({ operator }: Props) => {
           </Left>
           <FileType>.jpeg</FileType>
         </DropdownItem>
-        <DropdownItem href={updateImageUrl(operator?.image)} download>
+        <DropdownItem href={updateImageUrl(operator?.image_2048)} download>
           <Left>
             <Icon>
               <img

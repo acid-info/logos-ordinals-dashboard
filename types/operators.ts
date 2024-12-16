@@ -18,6 +18,10 @@ export interface Operator {
   image_200_jpeg_url: string
   image_400_url?: string
   image_400_jpeg_url?: string
+  image_1024_url?: string
+  image_1024_jpeg_url?: string
+  image_2048_url?: string
+  image_2048_jpeg_url?: string
   image_pixalated_url: string
   comp: string
   background: string
@@ -36,10 +40,12 @@ export interface ProcessedOperator {
   id: string
   image: string
   image_400?: string
+  image_2048?: string
   name: string
   archetype: string
   gif: string
   gif_400?: string
+  gif_2048?: string
   comp: string
   background: string
   skin: string
