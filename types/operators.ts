@@ -14,8 +14,8 @@ export interface Operator {
   id: number
   archetype__name: string
   archetype: string
-  image_400_url: string
-  image_400_jpeg_url: string
+  image_200_url: string
+  image_200_jpeg_url: string
   image_pixalated_url: string
   comp: string
   background: string

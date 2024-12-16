@@ -16,8 +16,8 @@ export function processOperators(
     if (isSelectedArchetype) {
       return group.operators.map((operator) => ({
         id: operator.id.toString(),
-        image: operator.image_400_jpeg_url,
-        gif: operator.image_400_url,
+        image: operator.image_200_jpeg_url,
+        gif: operator.image_200_url,
         pixelated: operator.image_pixalated_url,
         name: operator.archetype__name,
         comp: operator.comp,
@@ -43,8 +43,8 @@ export function processMyOperators(operators: any[]) {
   return operators?.map((operator) => ({
     id: operator.id,
     arcgetypeId: operator.archetype_id,
-    image: operator.image_400_jpeg_url,
-    gif: operator.image_400_url,
+    image: operator.image_200_jpeg_url,
+    gif: operator.image_200_url,
     name: operator.name,
     stakingXPPerBlock: operator.staking_xp_per_block,
     comp: operator.comp,
