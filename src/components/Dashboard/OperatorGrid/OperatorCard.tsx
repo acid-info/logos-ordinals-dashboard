@@ -92,7 +92,11 @@ const OperatorCard: React.FC<OperatorCardProps> = ({
 
   return (
     <Container key={operator.id}>
-      <Link href={`/operators/${operator.id}`} key={operator.id}>
+      <Link
+        href={`/operators/${operator.id}`}
+        key={operator.id}
+        prefetch={false}
+      >
         <OperatorImage
           src={isDegenMode ? operator?.pixelated : operator?.gif}
           data-src={isDegenMode ? operator?.pixelated : operator?.gif}

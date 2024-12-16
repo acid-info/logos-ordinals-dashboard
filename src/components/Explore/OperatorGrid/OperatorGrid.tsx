@@ -71,6 +71,7 @@ const OperatorGrid: React.FC<OperatorGridProps> = ({ data, isLoading }) => {
               <Link
                 href={`/operators/${operator.id}`}
                 key={'explore-operator-' + index}
+                prefetch={false}
               >
                 <GridItem ref={lastElementRef}>
                   <img
