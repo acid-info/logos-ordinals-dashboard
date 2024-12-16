@@ -19,7 +19,9 @@ const nextConfig = {
   images: {
     unoptimized: true,
   },
-
+  generateBuildId: async () => {
+    return 'dashboard-build'
+  },
   pageExtensions: ['js', 'jsx', 'mdx', 'ts', 'tsx'],
   images: {
     // loader: 'imgix',
