@@ -77,8 +77,8 @@ const OperatorDetails: React.FC<OperatorDetailsProps> = ({
     <Container>
       <OperatorImage>
         <img
-          src={isDegenMode ? operator?.pixelated : operator?.image}
-          data-src={isDegenMode ? operator?.pixelated : operator?.gif}
+          src={isDegenMode ? operator?.pixelated : operator?.image_400}
+          data-src={isDegenMode ? operator?.pixelated : operator?.gif_400}
           alt={`Operator ${id}`}
           loading="lazy"
           className="lazyload"

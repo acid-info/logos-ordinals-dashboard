@@ -16,6 +16,8 @@ export interface Operator {
   archetype: string
   image_200_url: string
   image_200_jpeg_url: string
+  image_400_url?: string
+  image_400_jpeg_url?: string
   image_pixalated_url: string
   comp: string
   background: string
@@ -33,9 +35,11 @@ export interface Group {
 export interface ProcessedOperator {
   id: string
   image: string
+  image_400?: string
   name: string
   archetype: string
   gif: string
+  gif_400?: string
   comp: string
   background: string
   skin: string

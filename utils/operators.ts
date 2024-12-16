@@ -17,7 +17,9 @@ export function processOperators(
       return group.operators.map((operator) => ({
         id: operator.id.toString(),
         image: operator.image_200_jpeg_url,
+        image_400: operator.image_400_url,
         gif: operator.image_200_url,
+        gif_400: operator.image_400_url,
         pixelated: operator.image_pixalated_url,
         name: operator.archetype__name,
         comp: operator.comp,
