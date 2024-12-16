@@ -120,7 +120,7 @@ const OperatorPanel: React.FC<OperatorPanelProps> = () => {
         </InfoRow>
         <InfoRow>
           <Label>OP Number</Label>
-          <Value>{user?.id && `#${user?.id}`}</Value>
+          <Value>{user?.op_number && `#${user?.op_number}`}</Value>
         </InfoRow>
       </CallSignContainer>
 
