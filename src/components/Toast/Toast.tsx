@@ -1,6 +1,7 @@
 import { breakpoints } from '@/configs/ui.configs'
 import styled from '@emotion/styled'
 import { useAtomValue } from 'jotai'
+import Link from 'next/link'
 import { useEffect, useState } from 'react'
 import { userInfoAtom } from '../../../atoms/userInfo'
 
@@ -45,6 +46,12 @@ const Toast: React.FC = () => {
     return () => clearInterval(interval)
   }, [])
 
+  const handleClose = (e: React.MouseEvent<HTMLButtonElement>) => {
+    e.preventDefault()
+    e.stopPropagation()
+    setShowTopToast(false)
+  }
+
   return userInfo?.alert_message?.length > 0 ? (
     <ToastContainer showTopToast={showTopToast}>
       {/* <div>Logos Operators Ordinals Mint Is Live</div>
@@ -53,23 +60,25 @@ const Toast: React.FC = () => {
       </a> */}
       {userInfo.alert_message}
       <div>
-        <button className="close-button" onClick={() => setShowTopToast(false)}>
+        <button className="close-button" onClick={handleClose}>
           <img src="/assets/close-orange.svg" alt="close" />
         </button>
       </div>
     </ToastContainer>
   ) : (
-    <ToastContainer showTopToast={showTopToast}>
-      <span>
-        Logos Ordinals Mint Begins 16th December, 2024 at 1PM UTC
-        <TimeRemaining>Time remaining : {time}</TimeRemaining>
-      </span>
-      <div>
-        <button className="close-button" onClick={() => setShowTopToast(false)}>
-          <img src="/assets/close-orange.svg" alt="close" />
-        </button>
-      </div>
-    </ToastContainer>
+    <CustomLink
+      href="https://gamma.io/ordinals/collections/logos-operators"
+      target="_blank"
+    >
+      <ToastContainer showTopToast={showTopToast}>
+        <span>Logos Operators mint is LIVE</span>
+        <div>
+          <button className="close-button" onClick={handleClose}>
+            <img src="/assets/close-orange.svg" alt="close" />
+          </button>
+        </div>
+      </ToastContainer>
+    </CustomLink>
   )
 }
 
@@ -93,7 +102,7 @@ const ToastContainer = styled.div<{ showTopToast: boolean }>`
 
   a {
     color: #fe740c;
-    margin-left: 20px;
+    margin-left: 8px;
   }
 
   .close-button {
@@ -129,8 +138,9 @@ const ToastContainer = styled.div<{ showTopToast: boolean }>`
   }
 `
 
-const TimeRemaining = styled.div`
-  margin-left: 20px;
+const CustomLink = styled(Link)`
+  text-decoration: none;
+  color: inherit;
 `
 
 export default Toast

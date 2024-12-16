@@ -13,6 +13,7 @@ interface OperatorGridProps {
 }
 
 const OFFSET = 18
+const LIMIT = 200
 
 const OperatorGrid: React.FC<OperatorGridProps> = ({ data, isLoading }) => {
   const [itemsCount, setItemsCount] = useState(18)
@@ -24,7 +25,12 @@ const OperatorGrid: React.FC<OperatorGridProps> = ({ data, isLoading }) => {
   const handleObserver = useCallback(
     (entries: IntersectionObserverEntry[]) => {
       const target = entries[0]
-      if (target.isIntersecting && itemsCount < data.length) {
+      // Less than 200 operators
+      if (
+        target.isIntersecting &&
+        itemsCount < data.length &&
+        itemsCount < LIMIT
+      ) {
         setItemsCount((prevCount) => prevCount + OFFSET)
       }
     },
@@ -37,7 +43,7 @@ const OperatorGrid: React.FC<OperatorGridProps> = ({ data, isLoading }) => {
     observerRef.current = new IntersectionObserver(handleObserver, {
       root: null,
       rootMargin: '20px',
-      threshold: 1.0,
+      threshold: 0.8,
     })
 
     if (lastElementRef.current)
@@ -57,47 +63,53 @@ const OperatorGrid: React.FC<OperatorGridProps> = ({ data, isLoading }) => {
       ))}
     </GridContainer>
   ) : (
-    <GridContainer>
-      {data.slice(0, itemsCount).map((operator, index) => {
-        if (index === itemsCount - 1) {
-          return (
-            <Link
-              href={`/operators/${operator.id}`}
-              key={'explore-operator-' + index}
-            >
-              <GridItem ref={lastElementRef}>
-                <img
-                  key={index}
-                  src={isDegenMode ? operator?.pixelated : operator.image}
-                  data-src={isDegenMode ? operator?.pixelated : operator?.gif}
-                  alt={`Operator ${index + 1}`}
-                  loading="lazy"
-                  className="lazyload"
-                />
-              </GridItem>
-            </Link>
-          )
-        } else {
-          return (
-            <Link
-              href={`/operators/${operator?.id}`}
-              key={'explore-operator-' + index}
-            >
-              <GridItem>
-                <img
-                  key={index}
-                  src={isDegenMode ? operator?.pixelated : operator?.image}
-                  data-src={isDegenMode ? operator?.pixelated : operator?.gif}
-                  alt={`Operator ${index + 1}`}
-                  loading="lazy"
-                  className="lazyload"
-                />
-              </GridItem>
-            </Link>
-          )
-        }
-      })}
-    </GridContainer>
+    <>
+      <GridContainer>
+        {data.slice(0, itemsCount).map((operator, index) => {
+          if (index === itemsCount - 1) {
+            return (
+              <Link
+                href={`/operators/${operator.id}`}
+                key={'explore-operator-' + index}
+              >
+                <GridItem ref={lastElementRef}>
+                  <img
+                    key={index}
+                    src={isDegenMode ? operator?.pixelated : operator.image}
+                    data-src={isDegenMode ? operator?.pixelated : operator?.gif}
+                    alt={`Operator ${index + 1}`}
+                    loading="lazy"
+                    className="lazyload"
+                  />
+                </GridItem>
+              </Link>
+            )
+          } else {
+            return (
+              <Link
+                href={`/operators/${operator?.id}`}
+                key={'explore-operator-' + index}
+                prefetch={false}
+              >
+                <GridItem>
+                  <img
+                    key={index}
+                    src={isDegenMode ? operator?.pixelated : operator?.image}
+                    data-src={isDegenMode ? operator?.pixelated : operator?.gif}
+                    alt={`Operator ${index + 1}`}
+                    loading="lazy"
+                    className="lazyload"
+                  />
+                </GridItem>
+              </Link>
+            )
+          }
+        })}
+      </GridContainer>
+      {itemsCount >= LIMIT && (
+        <GridLimit>Please refresh the page to see other Operators.</GridLimit>
+      )}
+    </>
   )
 }
 
@@ -136,6 +148,17 @@ const Placeholder = styled.div`
   aspect-ratio: 1;
   background-color: var(--grey-900);
   opacity: 0.5;
+`
+
+const GridLimit = styled.p`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  text-align: center;
+  color: white;
+  padding-top: 32px;
+  padding-bottom: 64px;
 `
 
 export default OperatorGrid
