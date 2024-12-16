@@ -32,7 +32,7 @@ pipeline {
       steps {
         script {
           nix.develop('yarn build')
-          jenkins.genBuildMetaJSON('build/build.json')
+          jenkins.genBuildMetaJSON('out/build.json')
         }
       }
     }
