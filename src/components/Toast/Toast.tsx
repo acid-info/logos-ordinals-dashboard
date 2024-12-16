@@ -62,7 +62,7 @@ const Toast: React.FC = () => {
     <ToastContainer showTopToast={showTopToast}>
       <span>
         Logos Ordinals Mint Begins 16th December, 2024 at 1PM UTC
-        <TimeRemaining>Time remaining : {time}</TimeRemaining>
+        <TimeRemaining>Time remaining: {time}</TimeRemaining>
       </span>
       <div>
         <button className="close-button" onClick={() => setShowTopToast(false)}>
