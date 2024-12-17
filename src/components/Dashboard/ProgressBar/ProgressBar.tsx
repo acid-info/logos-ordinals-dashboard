@@ -24,11 +24,16 @@ const ProgressBar: React.FC<ProgressBarProps> = ({
   // console.log('currentBlock', currentBlock)
 
   // sum up user => operators => staking_xp_per_block
-  const epochXP =
-    user?.operators.reduce(
-      (acc: any, operator: any) => acc + operator.staking_xp_per_block,
-      0,
-    ) || 0
+  // const epochXP =
+  //   user?.operators.reduce(
+  //     (acc: any, operator: any) => acc + operator.staking_xp_per_block,
+  //     0,
+  //   ) || 0
+
+  // console.log('user', user)
+
+  const epochXP = user?.current_epoch_staking_xp_total || 0
+  // console.log('epochXP', epochXP)
 
   return (
     <Container>
