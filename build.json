@@ -1,15 +1,15 @@
 {
-    "timestamp": "2024-12-18T10:53:21Z",
+    "timestamp": "2024-12-18T11:14:03Z",
     "git": {
         "commit": "369cd08101bebc063781bab998992343e5ea1ae7",
         "branch": "origin/develop",
         "url": "git@github.com:acid-info/logos-ordinals-dashboard.git"
     },
     "build": {
-        "id": "46",
-        "number": "46",
+        "id": "47",
+        "number": "47",
         "name": "website/dev-dashboard.logos.co",
         "slave": "linux-01",
-        "url": "https://ci.infra.status.im/job/website/job/dev-dashboard.logos.co/46/"
+        "url": "https://ci.infra.status.im/job/website/job/dev-dashboard.logos.co/47/"
     }
 }
