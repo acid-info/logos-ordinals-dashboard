@@ -12,13 +12,11 @@ interface ProgressBarProps {
 }
 
 const ProgressBar: React.FC<ProgressBarProps> = ({
-  progress = 0,
+  // progress = 0,
   claimPosition = 76,
 }) => {
   const user = useAtomValue(userInfoAtom)
   const epochs = useAtomValue(epochsAtom)
-
-  console.log('epochs', epochs)
 
   // const { data: currentBlock } = useGetCurrentBTCBlock()
   // const { data: pillars } = useGetPillars()
@@ -78,7 +76,7 @@ const ProgressBar: React.FC<ProgressBarProps> = ({
         </TimeRemaining>
         <PointsRow>
           <EarnedReward>
-            <Label>Total Points</Label>
+            <Label>Total XP</Label>
             <Value color="#F29AE9" backgroundColor="#320430">
               {`${numberWithCommas(user?.total_xp) || 0}`}
             </Value>

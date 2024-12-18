@@ -7,7 +7,7 @@ type PageProps = {}
 export default function DashboardPage(props: PageProps) {
   return (
     <>
-      <SEO pagePath="/dashboard" />
+      <SEO pagePath="/explore" />
       <DashboardContainer />
     </>
   )

@@ -19,12 +19,12 @@ export const navItems: NavItem[] = [
   //   href: '/countdown',
   // },
   {
-    label: 'Explore',
+    label: 'Dashboard',
     href: '/',
   },
   {
-    label: 'Dashboard',
-    href: '/dashboard',
+    label: 'Explore',
+    href: '/explore',
   },
   // {
   //   label: 'Leaderboard',
@@ -42,6 +42,12 @@ export const navItems: NavItem[] = [
     label: 'Multipass',
     href: '/multipass',
     // isDisabled: true,
+    isSoon: true,
+  },
+  {
+    label: 'OpChan',
+    href: '/multipass',
+    isDisabled: true,
     isSoon: true,
   },
 ]

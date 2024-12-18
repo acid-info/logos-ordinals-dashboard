@@ -55,4 +55,5 @@ export interface ProcessedOperator {
   stakingXPPerBlock?: number
   isStaked?: boolean
   isPinned?: boolean
+  generation?: string
 }

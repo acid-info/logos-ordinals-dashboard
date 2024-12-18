@@ -118,12 +118,22 @@ const OperatorDetails: React.FC<OperatorDetailsProps> = ({
             <AttributeValue>{operator?.jacket}</AttributeValue>
           </AttributeItem>
         </AttributesFirstGrid>
-        <AttributesFullGrid>
+        <AttributesFirstGrid>
           <AttributeItem>
             <AttributeLabel>Skin</AttributeLabel>
             <AttributeValue>{operator?.skin}</AttributeValue>
           </AttributeItem>
-        </AttributesFullGrid>
+          <AttributeItem>
+            <AttributeLabel>Generation</AttributeLabel>
+            <AttributeValue>{operator?.generation}</AttributeValue>
+          </AttributeItem>
+        </AttributesFirstGrid>
+        {/* <AttributesFullGrid>
+          <AttributeItem>
+            <AttributeLabel>Skin</AttributeLabel>
+            <AttributeValue>{operator?.skin}</AttributeValue>
+          </AttributeItem>
+        </AttributesFullGrid> */}
 
         {/* <DetailsList>
           {isIncripted &&
@@ -237,10 +247,10 @@ const AttributesFirstGrid = styled.div`
   margin-top: 2px;
 `
 
-const AttributesFullGrid = styled(AttributesFirstGrid)`
-  grid-template-columns: 1fr;
-  margin-top: 2px;
-`
+// const AttributesFullGrid = styled(AttributesFirstGrid)`
+//   grid-template-columns: 1fr;
+//   margin-top: 2px;
+// `
 
 const AttributeItem = styled.div`
   background-color: #320430;

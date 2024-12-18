@@ -32,6 +32,7 @@ export function processOperators(
         archetype: groupArchetype,
         isStaked: false,
         isPinned: false,
+        generation: 'Founder',
       }))
     }
 

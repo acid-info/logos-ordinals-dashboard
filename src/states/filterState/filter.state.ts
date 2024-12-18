@@ -3,6 +3,7 @@ import {
   ARCHETYPE,
   BACKGROUND,
   COMP,
+  GENERATION,
   HELMET,
   JACKET,
   SKIN,
@@ -16,6 +17,7 @@ export type FilterState = {
   helmet: string[]
   jacket: string[]
   background: string[]
+  generation: string[]
 }
 
 export const defaultFilterState: FilterState = {
@@ -25,6 +27,7 @@ export const defaultFilterState: FilterState = {
   helmet: HELMET,
   jacket: JACKET,
   background: BACKGROUND,
+  generation: GENERATION,
 }
 
 export const filterAtom = atom<FilterState>(defaultFilterState)

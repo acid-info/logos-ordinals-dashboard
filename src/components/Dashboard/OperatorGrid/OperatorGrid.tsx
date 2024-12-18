@@ -43,6 +43,8 @@ const OperatorGrid: React.FC<OperatorGridProps> = ({
     return a.name.localeCompare(b.name)
   }
 
+  console.log('data', data)
+
   return (
     <Container>
       <Header>
@@ -68,31 +70,31 @@ const OperatorGrid: React.FC<OperatorGridProps> = ({
         </Stat>
       </Stats>
       <Grid>
-        {isLoading ? (
-          Array.from({ length: 15 }).map((_, index) => (
-            <PlaceholderCard key={index}>
-              <Placeholder />
-            </PlaceholderCard>
-          ))
-        ) : data?.length === 0 ? (
-          <AddOperator href="https://logos.co/exit" target="_blank">
-            <PlusIcon>
-              <img
-                src="/assets/plus.svg"
-                width={10}
-                height={10}
-                alt="Add Operator"
-              />
-            </PlusIcon>
-            <span>Add Operator</span>
-          </AddOperator>
-        ) : (
-          data
-            ?.sort(handleSort)
-            .map((operator) => (
-              <OperatorCard key={operator.id} operator={operator} />
+        {isLoading
+          ? Array.from({ length: 15 }).map((_, index) => (
+              <PlaceholderCard key={index}>
+                <Placeholder />
+              </PlaceholderCard>
             ))
-        )}
+          : data
+              ?.sort(handleSort)
+              .map((operator) => (
+                <OperatorCard key={operator.id} operator={operator} />
+              ))}
+        <AddOperator
+          href="https://magiceden.us/ordinals/marketplace/logos-operators"
+          target="_blank"
+        >
+          <PlusIcon>
+            <img
+              src="/assets/plus.svg"
+              width={10}
+              height={10}
+              alt="Add Operator"
+            />
+          </PlusIcon>
+          <span>Add Operator</span>
+        </AddOperator>
       </Grid>
     </Container>
   )
@@ -200,7 +202,7 @@ const Placeholder = styled.div`
 `
 
 const AddOperator = styled(Link)`
-  display: none;
+  display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;

@@ -1,5 +1,7 @@
 import { Archetype } from '../types/operators'
 
+export const GENERATION: string[] = ['Founder']
+
 export const ARCHETYPE: Archetype[] = [
   'Alchemist',
   'Artisan',
