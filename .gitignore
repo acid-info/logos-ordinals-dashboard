@@ -14,6 +14,7 @@
 
 # production
 /build
+/tiny-out
 
 # misc
 .DS_Store
