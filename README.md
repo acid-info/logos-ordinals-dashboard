@@ -1,8 +1,6 @@
 # Logos Ordinals
 
-This is currently at the MVP stage of the project.
-
-Staging: [https://logos-ordinals-dashboard.vercel.app/](https://logos-ordinals-dashboard.vercel.app/)
+Staging: [https://dev-dashboard.logos.co/](https://dev-dashboard.logos.co/)
 
 ## How to Run Locally
 
