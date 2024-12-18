@@ -66,7 +66,7 @@ const ExploreContainer: React.FC<ExploreSectionProps> = () => {
         mere avatars—they are symbols of each participant&lsquo;s role within
         the Logos greater movement.
       </Paragraph>
-      <CTAButton href="https://exit.logos.co/" target="_blank">
+      <CTAButton href="https://exit.logos.co/discover" target="_blank">
         Discover Your Archetype
         <img src="/assets/chevron-right.svg" alt="chevron-right" />
       </CTAButton>
