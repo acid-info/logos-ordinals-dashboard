@@ -18,6 +18,8 @@ const ProgressBar: React.FC<ProgressBarProps> = ({
   const user = useAtomValue(userInfoAtom)
   const epochs = useAtomValue(epochsAtom)
 
+  console.log('epochs', epochs)
+
   // const { data: currentBlock } = useGetCurrentBTCBlock()
   // const { data: pillars } = useGetPillars()
 
@@ -33,7 +35,11 @@ const ProgressBar: React.FC<ProgressBarProps> = ({
   // console.log('user', user)
 
   const epochXP = user?.current_epoch_staking_xp_total || 0
-  // console.log('epochXP', epochXP)
+
+  const progressCalculated =
+    (epochs?.length &&
+      epochs[0]?.epoch_blocks_completed / epochs[0]?.epoch_blocks_total) *
+      100 || 0
 
   return (
     <Container>
@@ -43,7 +49,7 @@ const ProgressBar: React.FC<ProgressBarProps> = ({
       </ProgressHeader>
       <ProgressRow>
         <ProgressTrack>
-          <ProgressFill width={progress} />
+          <ProgressFill width={progressCalculated} />
           <ClaimPeriodWrapper>
             <ClaimPeriod position={claimPosition}>cooldown</ClaimPeriod>
             <VerticalBar />
