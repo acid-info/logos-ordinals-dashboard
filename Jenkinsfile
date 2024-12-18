@@ -42,10 +42,13 @@ pipeline {
         sshagent(credentials: ['status-im-auto-ssh']) {
           script {
             nix.develop("""
+              mkdir -p temp_out
+              tar -xzf out.tar.gz -C temp_out --strip-components=1
               ghp-import \
                 -b ${deployBranch()} \
                 -c ${deployDomain()} \
-                -p out
+                -p temp_out
+              rm -rf temp_out
             """, pure: false)
           }
         }
