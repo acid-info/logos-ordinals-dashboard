@@ -5,7 +5,7 @@ set -e
 set -x
 
 REPO_PATH="$(pwd)/repo"
-TAR_FILE_PATH="$(REPO_PATH)/out.tar.gz"
+TAR_FILE_PATH="${REPO_PATH}/out.tar.gz"
 
 if [ -f "${TAR_FILE_PATH}" ]; then
     echo "Found tar file"
