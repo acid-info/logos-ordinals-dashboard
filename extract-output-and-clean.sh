@@ -4,10 +4,10 @@
 set -e
 set -x
 
-if [ -f "out.tar.gz" ]; then
+if [ -f "$(pwd)/out.tar.gz" ]; then
     echo "Found tar file"
 
-    if /usr/bin/tar -xzf "out.tar.gz" -C $(pwd) --strip-components=1; then
+    if /usr/bin/tar -xzf "$(pwd)/out.tar.gz"; then
         echo "Successfully extracted tar file"
 
     else
