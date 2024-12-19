@@ -4,10 +4,13 @@
 set -e
 set -x
 
-if [ -f "$(pwd)/out.tar.gz" ]; then
+REPO_PATH="$(pwd)/repo"
+TAR_FILE_PATH="$(REPO_PATH)/out.tar.gz"
+
+if [ -f "${TAR_FILE_PATH}" ]; then
     echo "Found tar file"
 
-    if /usr/bin/tar -xzf "$(pwd)/out.tar.gz"; then
+    if /usr/bin/tar -xzf "${TAR_FILE_PATH}" -C "${REPO_PATH}" --strip-components=1; then
         echo "Successfully extracted tar file"
 
     else
