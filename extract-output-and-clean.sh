@@ -17,6 +17,9 @@ if [ -f "${TAR_FILE_PATH}" ]; then
         echo "Failed to extract tar file"
         exit 1
     fi
+
+    echo "successfully cleaned tar file at ${TAR_FILE_PATH}"
+    rm "${TAR_FILE_PATH}"
 else
     echo "Tar file not found"
     exit 1
