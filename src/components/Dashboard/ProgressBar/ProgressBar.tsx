@@ -2,9 +2,10 @@ import { breakpoints } from '@/configs/ui.configs'
 import { numberWithCommas } from '@/utils/general.utils'
 import styled from '@emotion/styled'
 import { useAtomValue } from 'jotai'
-import React from 'react'
-import { epochsAtom } from '../../../../atoms/epochs'
+import React, { useState } from 'react'
+import { Epoch, epochsAtom } from '../../../../atoms/epochs'
 import { userInfoAtom } from '../../../../atoms/userInfo'
+import ProgressModal from './ProgressModal'
 
 interface ProgressBarProps {
   progress: number // Current progress of the epoch
@@ -18,6 +19,13 @@ const ProgressBar: React.FC<ProgressBarProps> = ({
   const user = useAtomValue(userInfoAtom)
   const epochs = useAtomValue(epochsAtom)
 
+  const [showModal, setShowModal] = useState(false)
+
+  const currentEpoch = epochs?.find(
+    (epoch: Epoch) => epoch.is_current_epoch === true,
+  )
+
+  // console.log('currentEpoch', currentEpoch)
   // const { data: currentBlock } = useGetCurrentBTCBlock()
   // const { data: pillars } = useGetPillars()
 
@@ -34,10 +42,7 @@ const ProgressBar: React.FC<ProgressBarProps> = ({
 
   const epochXP = user?.current_epoch_staking_xp_total || 0
 
-  const progressCalculated =
-    (epochs?.length &&
-      epochs[0]?.epoch_blocks_completed / epochs[0]?.epoch_blocks_total) *
-      100 || 0
+  const progressCalculated = currentEpoch?.perc_completed || 0
 
   return (
     <Container>
@@ -46,7 +51,13 @@ const ProgressBar: React.FC<ProgressBarProps> = ({
         <EpochLabel>epoch 2</EpochLabel>
       </ProgressHeader>
       <ProgressRow>
-        <ProgressTrack>
+        <ProgressTrack
+          onMouseOver={() => setShowModal(true)}
+          onMouseOut={() => setShowModal(false)}
+        >
+          {showModal && currentEpoch && (
+            <ProgressModal currentEpoch={currentEpoch} />
+          )}
           <ProgressFill width={progressCalculated} />
           <ClaimPeriodWrapper>
             <ClaimPeriod position={claimPosition}>cooldown</ClaimPeriod>
