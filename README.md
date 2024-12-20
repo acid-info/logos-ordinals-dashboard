@@ -1,6 +1,10 @@
 # Logos Ordinals
 
-Staging: [https://dev-dashboard.logos.co/](https://dev-dashboard.logos.co/)
+Dev : [https://logos-ordinals-dashboard.vercel.app/](https://logos-ordinals-dashboard.vercel.app/)
+
+Staging : [https://dev-dashboard.logos.co/](https://dev-dashboard.logos.co/)
+
+Prod : [https://dashboard.logos.co/](https://dashboard.logos.co/)
 
 ## How to Run Locally
 
