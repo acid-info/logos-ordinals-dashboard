@@ -7,7 +7,7 @@
   resolved "https://registry.yarnpkg.com/@aashutoshrathi/word-wrap/-/word-wrap-1.2.6.tgz#bd9154aec9983f77b3a034ecaa015c2e4201f6cf"
   integrity sha512-1Yjs2SvM8TflER/OD3cOjhWWOZb58A2t7wpE2S9XfBYTiIl+XFhQG2bjy4Pu1I+EAlCNUzRDYDdFwFYUKvXcIA==
 
-"@acid-info/lsd-react@^0.1.0-beta.3":
+"@acid-info/lsd-react@0.1.0-beta.3":
   version "0.1.0-beta.3"
   resolved "https://registry.yarnpkg.com/@acid-info/lsd-react/-/lsd-react-0.1.0-beta.3.tgz#2f211b647d68d6fce163afb60989494f555354be"
   integrity sha512-lD/x1BZyYdQCUmtMH3YpKSInEO73wRFRxUM6lzbz5UDDUnPfDpj/g4mQrXKL1keV3ujGJbMLaCC36cZT8VgNNw==

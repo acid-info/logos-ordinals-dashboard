@@ -3,10 +3,10 @@ import { MultipassHeader } from '@/components/Multipass/MultipassHeader'
 import styled from '@emotion/styled'
 import React from 'react'
 
-const MultipassClaimPage: React.FC = () => {
+const MultipassContainer: React.FC = () => {
   return (
     <Container>
-      <main className="claim-container">
+      <div className="claim-container">
         <MultipassHeader />
         <section className="claim-content">
           <p className="claim-description">
@@ -25,7 +25,7 @@ const MultipassClaimPage: React.FC = () => {
           {/* <DownloadSection /> */}
         </section>
         <Image src="/assets/multipass.png" alt="Multipass device" />
-      </main>
+      </div>
     </Container>
   )
 }
@@ -84,4 +84,4 @@ const Image = styled.img`
   }
 `
 
-export default MultipassClaimPage
+export default MultipassContainer

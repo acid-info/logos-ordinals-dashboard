@@ -13,12 +13,6 @@ const ExploreOperator: React.FC<ExploreOperatorProps> = ({ id }) => {
 
   const handleGoBack = () => {
     router.push('/')
-    // // if router has history, go back, else go to home
-    // if (router?.back) {
-    //   router.back()
-    // } else {
-    //   router.push('/')
-    // }
   }
 
   return (
